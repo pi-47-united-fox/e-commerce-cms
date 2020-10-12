@@ -2,7 +2,7 @@
 ### Bagus Rizki Setiawan - United Fox
 ---
 
-This Kanban App has:
+This cms App has:
 1. Restful endpoint for Product's CRUD operation
 2. Restful endpoint for User's R operation
 3. JSON formated responses
@@ -62,7 +62,7 @@ Response:
     }
     ```
 
-## Task Endpoints
+## Product Endpoints
 ---
 ### 1. GET /products
 description: 
@@ -79,18 +79,18 @@ Response:
     {
         "id": 1,
         "name": "<product_name:String>",
-        "image_url": "product_img_url:String",
-        "price": "product_price:Integer",
-        "stock": "product_stock:Integer",
+        "image_url": "<product_img_url:String>",
+        "price": "<product_price:Integer>",
+        "stock": "<product_stock:Integer>",
         "createdAt": "2020-10-06T12:47:21.254Z",
         "updatedAt": "2020-10-06T12:47:21.254Z"
     },
     {
         "id": 1,
         "name": "<product_name:String>",
-        "image_url": "product_img_url:String",
-        "price": "product_price:Integer",
-        "stock": "product_stock:Integer",
+        "image_url": "<product_img_url:String>",
+        "price": "<product_price:Integer>",
+        "stock": "<product_stock:Integer>",
         "createdAt": "2020-10-06T12:47:21.254Z",
         "updatedAt": "2020-10-06T12:47:21.254Z"
     },
@@ -114,9 +114,9 @@ Response:
 {
     "id": 1,
     "name": "<product_name:String>",
-    "image_url": "product_img_url:String",
-    "price": "product_price:Integer",
-    "stock": "product_stock:Integer",
+    "image_url": "<product_img_url:String>",
+    "price": "<product_price:Integer>",
+    "stock": "<product_stock:Integer>",
     "createdAt": "2020-10-06T12:47:21.254Z",
     "updatedAt": "2020-10-06T12:47:21.254Z"
 }
@@ -132,9 +132,9 @@ Request:
 ```json
 {
     "name": "<product_name:String>",
-    "image_url": "product_img_url:String",
-    "price": "product_price:Integer",
-    "stock": "product_stock:Integer",
+    "image_url": "<product_img_url:String>",
+    "price": "<product_price:Integer>",
+    "stock": "<product_stock:Integer>",
 }
 ```
 
@@ -147,9 +147,9 @@ Response:
 {
     "id": 1,
     "name": "<product_name:String>",
-    "image_url": "product_img_url:String",
-    "price": "product_price:Integer",
-    "stock": "product_stock:Integer",
+    "image_url": "<product_img_url:String>",
+    "price": "<product_price:Integer>",
+    "stock": "<product_stock:Integer>",
     "createdAt": "2020-10-06T12:47:21.254Z",
     "updatedAt": "2020-10-06T12:47:21.254Z"
 }
@@ -167,9 +167,9 @@ Request:
 ```json 
 {
     "name": "<product_name:String>",
-    "image_url": "product_img_url:String",
-    "price": "product_price:Integer",
-    "stock": "product_stock:Integer",
+    "image_url": "<product_img_url:String>",
+    "price": "<product_price:Integer>",
+    "stock": "<product_stock:Integer>",
 }
 ```
 
@@ -182,9 +182,9 @@ Response:
 {
     "id": 1,
     "name": "<product_name:String>",
-    "image_url": "product_img_url:String",
-    "price": "product_price:Integer",
-    "stock": "product_stock:Integer",
+    "image_url": "<product_img_url:String>",
+    "price": "<product_price:Integer>",
+    "stock": "<product_stock:Integer>",
     "createdAt": "2020-10-06T12:47:21.254Z",
     "updatedAt": "2020-10-06T12:47:21.254Z"
 }
