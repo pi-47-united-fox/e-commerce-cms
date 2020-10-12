@@ -12,8 +12,6 @@ Kanban App is an application to manage your Working. This app has :
 ### DELETE /task/:id
 ### POST /login
 
-
-
 #### POST /task
 > Create New Asset
 

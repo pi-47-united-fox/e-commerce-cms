@@ -17,7 +17,7 @@ const userData3 = {
 }
 
 // SUCCESS LOGIN
-describe.only("Login Succes", () => {
+describe("Login Succes", () => {
     it("login succes send json : status(201) & access_token admin", (done) => {
         request(app)
             .post("/login")

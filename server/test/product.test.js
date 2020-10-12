@@ -3,6 +3,8 @@ const request = require("supertest")
 const app = require("../app")
 const { User } = require("../models/index")
 const { signToken } = require("../helper/jwt")
+const { sequelize } = require("../models/index")
+const { queryInterface } = sequelize
 
 let access_token = ""
 const Product = {
@@ -14,9 +16,9 @@ const Product = {
 
 let Product2 = {
     id: "",
-    name: "imgae",
+    name: "Toracafe",
     image_url: "https://imgur.com/AU2NT88",
-    price: 12000,
+    price: 15000,
     stock: 10,
 }
 let ProductTestMinus = {
@@ -54,6 +56,17 @@ beforeAll((done) => {
         })
 })
 
+afterAll((done) => {
+    queryInterface.bulkDelete("Products")
+        .then(() => {
+            done()
+        })
+        .catch(err => {
+            console.log(err);
+            done()
+        })
+})
+
 // CREATE SUCCESS (done)
 describe("Create Success", () => {
     it("Create Success send json : status(201) ", (done) => {
@@ -61,7 +74,7 @@ describe("Create Success", () => {
             .post("/product")
             .set('Accept', 'application/json')
             .send(Product)
-            // .set('access_token', access_token)
+            .set('access_token', access_token)
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(201)
@@ -75,10 +88,10 @@ describe("Create Success", () => {
                 // console.log(body);
                 done()
             })
-        // .catch(err => {
-        //     console.log(err);
-        //     done()
-        // })
+            .catch(err => {
+                console.log(err);
+                done()
+            })
     })
 
 })
@@ -89,17 +102,17 @@ describe("Fecth Product Success", () => {
         request(app)
             .get("/product")
             .set('Accept', 'application/json')
-            // .set('access_token', access_token)
+            .set('access_token', access_token)
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(200)
-                expect(body).toHaveProperty([], expect.any(Number))
+                // expect(body).toHaveProperty([], expect.any(Number))
                 done()
             })
-        // .catch(err => {
-        //     console.log(err);
-        //     done()
-        // })
+            .catch(err => {
+                console.log(err);
+                done()
+            })
     })
 
 })
@@ -109,7 +122,7 @@ describe("Fecth Product Success", () => {
 describe("Update Success", () => {
     it("Update Success send json : status(201) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(Product)
             .set('Accept', 'application/json')
             .set('access_token', access_token)
@@ -130,29 +143,6 @@ describe("Update Success", () => {
     })
 
 })
-
-// DELETE SUCCESS
-describe("delete Success", () => {
-    it("delete Success send json : status(201) ", (done) => {
-        request(app)
-            .delete(`/product/1`)
-            .set('Accept', 'application/json')
-            .set('access_token', access_token)
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(201)
-                expect(body).toHaveProperty("message", "delete success")
-
-                done()
-            })
-            .catch(err => {
-                console.log(err);
-                done()
-            })
-    })
-
-})
-
 
 
 // CREATE FAILED (done)
@@ -269,7 +259,7 @@ describe("Update Failed", () => {
     // no token
     it("Update Failed no access Token send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(Product)
             .set('Accept', 'application/json')
             .then(response => {
@@ -286,14 +276,14 @@ describe("Update Failed", () => {
     // wrong token
     it("Update Failed not admin access Token send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(Product)
             .set('Accept', 'application/json')
             .set('access_token', "access_token_wrongtest")
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(400)
-                expect(body).toHaveProperty("errors", ["invalid token", "jwt malformed"])
+                expect(body).toHaveProperty("errors", ["jwt malformed"])
                 done()
             })
             .catch(err => {
@@ -304,7 +294,7 @@ describe("Update Failed", () => {
     // can'empty
     it("Update Failed empty required stock empty send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(ProductEmpty)
             .set('Accept', 'application/json')
             .set('access_token', access_token)
@@ -318,7 +308,7 @@ describe("Update Failed", () => {
                         "price can't be empty",
                         "price mush be number",
                         "stock can't be empty",
-                        "stock mush be number"
+                        "stock mush be number",
                     ])
                 done()
             })
@@ -331,7 +321,7 @@ describe("Update Failed", () => {
     // stock can't minus
     it("Update stock minus send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(ProductTestMinus)
             .set('Accept', 'application/json')
             .set('access_token', access_token)
@@ -350,7 +340,7 @@ describe("Update Failed", () => {
     // price can't minus
     it("Update stock minus send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(ProductTestMinus)
             .set('Accept', 'application/json')
             .set('access_token', access_token)
@@ -369,7 +359,7 @@ describe("Update Failed", () => {
     // stock & price not number
     it("Update not type data send json : status(400) ", (done) => {
         request(app)
-            .put(`/product/1`)
+            .put(`/product/${Product2.id}`)
             .send(ProductWrongFormat)
             .set('Accept', 'application/json')
             .set('access_token', access_token)
@@ -386,12 +376,34 @@ describe("Update Failed", () => {
     })
 })
 
-// DELETE FAILED
 
-describe.only("Update Failed", () => {
+// DELETE SUCCESS (done)
+describe("delete Success", () => {
+    it("delete Success send json : status(201) ", (done) => {
+        request(app)
+            .delete(`/product/${Product2.id}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(201)
+                expect(body).toHaveProperty("message", "delete success")
+
+                done()
+            })
+            .catch(err => {
+                console.log(err);
+
+            })
+    })
+
+})
+// DELETE FAILED(done)
+
+describe("Update Failed", () => {
     it("Create Failed no access Token send json : status(400) ", (done) => {
         request(app)
-            .delete(`/product/3`)
+            .delete(`/product/${Product2.id}`)
             .set('Accept', 'application/json')
             .then(response => {
                 const { status, body } = response
@@ -407,7 +419,7 @@ describe.only("Update Failed", () => {
 
     it("Create Failed not admin access Token send json : status(400) ", (done) => {
         request(app)
-            .delete(`/product/2`)
+            .delete(`/product/${Product2.id}`)
             .set('Accept', 'application/json')
             .set('access_token', "access_token_wrong")
             .then(response => {
@@ -423,6 +435,3 @@ describe.only("Update Failed", () => {
     })
 })
 
-// afterAll((done) => {
-
-// })
