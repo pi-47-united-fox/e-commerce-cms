@@ -10,5 +10,6 @@ router.use(authentication)
 router.get('/product', productController.listHandler)
 router.post('/product', productController.addHandler)
 router.put('/product/:id', productController.putHandler)
+router.delete('/product/:id', productController.deleteHandler)
 
 module.exports = router

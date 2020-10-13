@@ -1,5 +1,10 @@
 const errorHandler = (err, req, res, next) => {
     switch(err.name){
+        case 'SequelizeUniqueConstraintError':
+            res.status(400).json({
+                message: 'Email already registered'
+            })
+            break
         case 'Unauthorized':
             res.status(401).json({
                 name: 'Unauthorized',
@@ -9,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
         case 'SequelizeValidationError':
             res.status(400).json({
                 name: 'Bad Request',
-                message: [{message: err.message}]
+                message: err.errors[0].message
             })
             break
         case 'Forbidden':

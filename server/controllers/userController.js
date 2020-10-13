@@ -19,7 +19,7 @@ class userController {
                     email: obj.email
                 }
             })
-
+            console.log(data)
             if(!data || !Helper.comparePassword(obj.password, data.password)){
                 next({
                     name: "Unauthorized",

@@ -14,6 +14,7 @@ class productController{
             res.status(201).json(data)
         })
         .catch(err=>{
+            //console.log(JSON.stringify(err,null,2))
             next(err)
         })
     }
@@ -51,6 +52,23 @@ class productController{
                 res.status(200).json(await Product.findByPk(+req.params.id))
             }
         }   
+        catch(err){
+            next(err)
+        }
+    }
+
+    static async deleteHandler(req,res,next){
+        try{
+            const data = await Product.destroy({where:{id:+req.params.id}})
+
+            if(data){
+                res.status(200).json({message: "Product success to delete"})
+            } 
+            else{
+                next({name: 'Not Found', message: 'Data not found!'})
+            }
+
+        }
         catch(err){
             next(err)
         }
