@@ -3,6 +3,23 @@ const app = require('../app')
 const {sequelize} = require('../models')
 const {queryInterface} = sequelize
 
+beforeAll((done)=> {
+    const userData = {
+        email: 'admin@mail.com',
+        password: '1234'
+    }
+    request(app)
+    .post('/users/login')
+    .send(userData)
+    .set('Accept', 'application/json')
+    .end((err, response) => {
+        access_token = response.body.access_token
+        // console.log(access_token)
+        done()
+    })
+})
+
+var id
 var productData = {
     name: 'keyboard',
     image_url: 'https://www.goodgamingshop.com/wp-content/uploads/2019/10/14100407_71c5c640-9b84-43bf-b159-34b418https://d2pa5gi5n2e1an.cloudfront.net/webp/id/images/article/8771_ID/summary.jpg2c4762_2048_2048.jpg',
@@ -14,6 +31,7 @@ describe('Success case /postProduct', () => {
     test('Successfully Add Product', (done) => {
         request(app)
         .post('/products')
+        .set('access_token', access_token)
         .send(productData)
         .set('Accept', 'application/json')
         .then(response => {
@@ -21,6 +39,7 @@ describe('Success case /postProduct', () => {
             const {status,body} = response
             console.log(body);
             expect(status).toBe(201)
+            id = body.id
             expect(body).toHaveProperty('id', expect.any(Number))
             expect(body).toHaveProperty('name', expect.any(String))
             expect(body).toHaveProperty('image_url', expect.any(String))
@@ -38,6 +57,7 @@ describe('Success case /postProduct', () => {
         }
         request(app)
         .post('/products')
+        .set('access_token', access_token)
         .send(productData)
         .set('Accept', 'application/json')
         .then(response => {
@@ -48,31 +68,13 @@ describe('Success case /postProduct', () => {
             done()
         })
     })
-    test('Database Error', (done) => {
-        var productData = {
-            name: 'keyboard',
-            image_url: 'https://www.goodgamingshop.com/wp-content/uploads/2019/10/14100407_71c5c640-9b84-43bf-b159-34b418https://d2pa5gi5n2e1an.cloudfront.net/webp/id/images/article/8771_ID/summary.jpg2c4762_2048_2048.jpg',
-            price: 'abc',
-            stock: 10
-        }
-        request(app)
-        .post('/products')
-        .send(productData)
-        .set('Accept', 'application/json')
-        .then(response => {
-            // console.log(response);
-            const {status,body} = response
-            console.log(body);
-            expect(status).toBe(500)
-            done()
-        })
-    })
 })
 
 describe('Success Case /getProduct', () => {
     test('Successfully Get All Product', (done) => {
         request(app)
         .get('/products')
+        .set('access_token', access_token)
         .send(productData)
         .set('Accept', 'application/json')
         .then(response => {
@@ -97,7 +99,8 @@ describe('Success Case /putProduct', () => {
     }
     test('Successfully Update Product', (done) => {
         request(app)
-        .put('/products/1')
+        .put(`/products/${id}`)
+        .set('access_token', access_token)
         .send(productDataPut)
         .set('Accept', 'application/json')
         .then(response => {
@@ -112,7 +115,8 @@ describe('Success Case /putProduct', () => {
 describe('Success Case /deleteProduct', () => {
     test('Successfully Delete Product', (done) => {
         request(app)
-        .delete('/products/1')
+        .delete(`/products/${id}`)
+        .set('access_token', access_token)
         .set('Accept', 'application/json')
         .then(response => {
             const {status, body} = response

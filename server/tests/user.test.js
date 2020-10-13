@@ -14,7 +14,6 @@ describe('Testing register', () => {
         .post('/users/register')
         .send(userData)
         .set('Accept', 'application/json')
-        // .set('access_token', access_token)
         .then(response => {
             // console.log(response)
             const {status, body} = response
@@ -46,13 +45,13 @@ describe('Testing Login', ()=> {
         .set('Accept', 'application/json')
         .then(response => {
             const {status, body} = response
-            console.log(body, '<<<<<<')
+            // console.log(body, '<<<<<<')
             expect(status).toBe(201)
             expect(body).toHaveProperty('access_token', expect.any(String))
             done()
         })
     })
-    test('Wrong Email / Password', (done) => {
+    test('Empty Email / Password', (done) => {
         var userData = {
             email: '',
             password: ''
@@ -79,7 +78,7 @@ describe('Testing Login', ()=> {
         .set('Accept', 'application/json')
         .then(response => {
             const {status, body} = response
-            console.log(body, '<<<<<<')
+            // console.log(body, '<<<<<<')
             expect(status).toBe(401)
             expect(body).toHaveProperty('message', 'Invalid email / password')
             done()
