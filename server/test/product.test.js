@@ -222,7 +222,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -280,7 +280,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -303,7 +303,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -327,7 +327,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -351,7 +351,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -375,7 +375,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: 2,
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -399,7 +399,7 @@ describe("Testing Update Product Data", () => {
 			img_url: "https://avatars.dicebear.com/api/bottts/thinkpad-t14s.svg",
 			CategoryId: "Not a Number",
 		};
-		const id = 1;
+		const id = 9;
 
 		request(app)
 			.put(`/products/${id}`)
@@ -417,26 +417,15 @@ describe("Testing Update Product Data", () => {
 
 describe("Testing Delete Product Data", () => {
 	test("Update Product Success", (done) => {
-		const id = 1;
+		const id = 4; // need to change constantly
 
 		request(app)
-			.put(`/products/${id}`)
-			.send(productData)
-			.set("Accept", "application/json")
+			.delete(`/products/${id}`)
 			.set("access_token", process.env.ACCESS_TOKEN)
 			.then((res) => {
 				const { status, body } = res;
 				expect(status).toBe(200);
-				expect(body).toEqual(
-					expect.objectContaining({
-						id: id,
-						name: productData.name,
-						img_url: productData.img_url,
-						category_name: expect.any(String),
-						price: productData.price,
-						stock: productData.stock,
-					}),
-				);
+				expect(body).toHaveProperty("message", "Product is sucessfully deleted");
 				done();
 			});
 	});
@@ -446,13 +435,10 @@ describe("Testing Delete Product Data", () => {
 		const id = 1001;
 
 		request(app)
-			.put(`/products/${id}`)
-			.send(productData)
-			.set("Accept", "application/json")
+			.delete(`/products/${id}`)
 			.set("access_token", process.env.ACCESS_TOKEN)
 			.then((res) => {
 				const { status, body } = res;
-				console.log(status, body);
 				expect(status).toBe(404);
 				expect(body).toHaveProperty("message", "Product is not Found");
 				done();
@@ -461,12 +447,10 @@ describe("Testing Delete Product Data", () => {
 
 	//! NO ACCESS TOKEN
 	test("Update Product Failed, No access token", (done) => {
-		const id = 1;
+		const id = 9;
 
 		request(app)
-			.put(`/products/${id}`)
-			.send(productData)
-			.set("Accept", "application/json")
+			.delete(`/products/${id}`)
 			.then((res) => {
 				const { status, body } = res;
 				expect(status).toBe(401);
@@ -477,12 +461,10 @@ describe("Testing Delete Product Data", () => {
 
 	//! ACCESS TOKEN VALID, BUT NOT ADMIN
 	test("Update Product Failed, Access Token not admin", (done) => {
-		const id = 1;
+		const id = 8;
 
 		request(app)
-			.put(`/products/${id}`)
-			.send(productData)
-			.set("Accept", "application/json")
+			.delete(`/products/${id}`)
 			.set("access_token", process.env.ACCESS_TOKEN_NOT_ADMIN)
 			.then((res) => {
 				const { status, body } = res;

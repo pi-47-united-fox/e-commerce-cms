@@ -16,5 +16,6 @@ router.use(authentication);
 router.post("/products", ProductsController.createOne);
 router.get("/products", ProductsController.getAll);
 router.put("/products/:id", ProductsController.UpdateOne);
+router.delete("/products/:id", ProductsController.deleteOne);
 
 module.exports = router;

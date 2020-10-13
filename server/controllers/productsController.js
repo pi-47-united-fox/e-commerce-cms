@@ -77,6 +77,20 @@ class ProductsController {
 				next(err);
 			});
 	}
+
+	static deleteOne(req, res, next) {
+		Product.destroy({ where: { id: req.params.id } })
+			.then((result) => {
+				if (result) {
+					res.status(200).json({ message: "Product is sucessfully deleted" });
+				} else {
+					next({ name: "NotFound", message: "Product is not Found" });
+				}
+			})
+			.catch((err) => {
+				next(err);
+			});
+	}
 }
 
 module.exports = ProductsController;
