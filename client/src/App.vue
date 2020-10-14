@@ -1,9 +1,8 @@
 <template>
-  <div id="app" class="flex">
+  <div id="app">
     <div >
       <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" v-if="$store.state.authenticated == true">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Z-Commerce</a>
-        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Z-Commerce</a> 
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
             <a class="nav-link" href="#" @click.prevent="logout">Sign out</a>
@@ -12,7 +11,7 @@
       </nav>
     </div>
     <div class="container-fluid">
-      <div class="row flex">
+      <div class="row ">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar" v-if="$store.state.authenticated == true">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
