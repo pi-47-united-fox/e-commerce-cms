@@ -1,23 +1,20 @@
 const jwt = require('jsonwebtoken')
 const {User} = require('../models/index')
 
+let id
+
 const authentication = (req,res,next) =>{
     const {access_token} = req.headers
     if(access_token){
         const decode = jwt.verify(access_token, process.env.SECRET)
         req.userData = decode
+        id = req.userData.id
         User.findByPk(req.userData.id)
         .then(data=>{
             if(!data){
                 next({
                     name: "Not Found",
                     message: "Not Found"
-                })
-            }
-            else if(req.userData.role !== 'admin'){
-                next({
-                    name: "Unauthorized",
-                    message: "You are not an admin"
                 })
             }
             else{
@@ -33,6 +30,26 @@ const authentication = (req,res,next) =>{
     }
 }
 
+const authorization = async (req,res,next) =>{
+    try{
+        const user = await User.findOne({
+            where:{
+                id: +id
+            }
+        })
+        if(user && user.role === 'admin'){
+            next()
+        }else{
+            next({
+                name: "Forbidden"
+            })
+        }
+    }
+    catch(err){
+        return next(err)
+    }
+}
 
 
-module.exports = {authentication}
+
+module.exports = {authentication,authorization}

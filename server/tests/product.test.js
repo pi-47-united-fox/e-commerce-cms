@@ -89,8 +89,8 @@ describe('Testing Product', () => {
         const obj = {
             name: 'carvil bag',
             image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
-            price: 10,
-            stock: 0,
+            price: 100000,
+            stock: 10,
             category: 'fashion'
         }
         request(app)
@@ -101,6 +101,48 @@ describe('Testing Product', () => {
                 const { status, body } = response
                 expect(status).toBe(401)
                 expect(body).toHaveProperty('message', "You are not authenticated")
+                done()
+            })
+    })
+
+    test("Failed Add Data, Image URL is Empty", done => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: '',
+            price: 100000,
+            stock: 10,
+            category: 'fashion'
+        }
+        request(app)
+            .post('/product')
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                expect(body).toHaveProperty('message', "Image URL Can't Empty")
+                done()
+            })
+    })
+
+    test("Failed Add Data, Image URL is not URL Format", done => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'aaaaa',
+            price: 100000,
+            stock: 10,
+            category: 'fashion'
+        }
+        request(app)
+            .post('/product')
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                expect(body).toHaveProperty('message', "Must Be URL Format")
                 done()
             })
     })
@@ -120,17 +162,17 @@ describe('Testing Product', () => {
             .send(obj)
             .then(response => {
                 const { status, body } = response
-                expect(status).toBe(401)
-                expect(body).toHaveProperty('message', "You are not an admin")
+                expect(status).toBe(403)
+                expect(body).toHaveProperty('message', "You do not have access!")
                 done()
             })
     })
 
-    test("Failed Add Data, price and/or stock below 0", (done) => {
+    test("Failed Add Data, price stock is not higher than 0", (done) => {
         const obj = {
             name: 'carvil bag',
             image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
-            price: 10,
+            price: 100000,
             stock: 0,
             category: 'fashion'
         }
@@ -143,7 +185,77 @@ describe('Testing Product', () => {
                 //console.log(access_token)
                 const { status, body } = response
                 expect(status).toBe(400)
-                expect(body).toHaveProperty('message', body.message)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Validation min on stock failed")
+                done()
+            })
+    })
+
+    test("Failed Add Data, Category is empty", (done) => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 100000,
+            stock: 10,
+            category: ''
+        }
+        request(app)
+            .post('/product')
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Category Can't Empty")
+                done()
+            })
+    })
+
+    test("Failed Add Data, Name's Character is not more than 2", (done) => {
+        const obj = {
+            name: 'aa',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 100000,
+            stock: 10,
+            category: 'fashion'
+        }
+        request(app)
+            .post('/product')
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Character Must Be greater then 2")
+                done()
+            })
+    })
+
+    test("Failed Add Data, price stock is not higher than 100", (done) => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 10,
+            stock: 5,
+            category: 'fashion'
+        }
+        request(app)
+            .post('/product')
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Validation min on price failed")
                 done()
             })
     })
@@ -199,7 +311,6 @@ describe('Testing Product', () => {
         request(app)
             .get('/product')
             .set('Accept', 'application/json')
-            .set('access_token', access_token)
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(200)
@@ -278,8 +389,119 @@ describe('Testing Product', () => {
             .set('access_token', customer_access_token)
             .then(response => {
                 const { status, body } = response
-                expect(status).toBe(401)
-                expect(body).toHaveProperty('message', "You are not an admin")
+                expect(status).toBe(403)
+                expect(body).toHaveProperty('message', "You do not have access!")
+                done()
+            })
+    })
+
+    test("Failed Put Data, Image URL is Empty", done => {
+        const obj = {
+            name: 'carvil tas',
+            image_url: '',
+            price: 50000,
+            stock: 10,
+            category: 'fashion'
+        }
+        request(app)
+            .put(`/product/${idUpdate}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                expect(body).toHaveProperty('message', "Image URL Can't Empty")
+                done()
+            })
+    })
+
+    test("Failed Put Data, Image URL is not URL Format", done => {
+        const obj = {
+            name: 'carvil tas',
+            image_url: 'aaaaa',
+            price: 50000,
+            stock: 10,
+            category: 'fashion'
+        }
+        request(app)
+            .put(`/product/${idUpdate}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                expect(body).toHaveProperty('message', "Must Be URL Format")
+                done()
+            })
+    })
+
+    test("Failed Put Data, Category is empty", (done) => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 100000,
+            stock: 10,
+            category: ''
+        }
+        request(app)
+            .put(`/product/${idUpdate}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Category Can't Empty")
+                done()
+            })
+    })
+
+    test("Failed Put Data, price stock is not higher than 0", (done) => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 100000,
+            stock: 0,
+            category: 'fashion'
+        }
+        request(app)
+            .put(`/product/${idUpdate}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Validation min on stock failed")
+                done()
+            })
+    })
+
+    test("Failed Put Data, price stock is not higher than 100", (done) => {
+        const obj = {
+            name: 'carvil bag',
+            image_url: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2020/2/18/batch-upload/batch-upload_bd784ea6-18d2-4efa-9882-78ab2306a3d7.jpeg',
+            price: 10,
+            stock: 5,
+            category: 'fashion'
+        }
+        request(app)
+            .put(`/product/${idUpdate}`)
+            .set('Accept', 'application/json')
+            .set('access_token', access_token)
+            .send(obj)
+            .then(response => {
+                //console.log(access_token)
+                const { status, body } = response
+                expect(status).toBe(400)
+                console.log(body.message)
+                expect(body).toHaveProperty('message', "Validation min on price failed")
                 done()
             })
     })
@@ -355,7 +577,7 @@ describe('Testing Product', () => {
         request(app)
             .delete(`/product/${idUpdate}`)
             .set('Accept', 'application/json')
-            .set('access_token',access_token)
+            .set('access_token', access_token)
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(200)
@@ -382,11 +604,11 @@ describe('Testing Product', () => {
         request(app)
             .delete(`/product/${idUpdate}`)
             .set('Accept', 'application/json')
-            .set('access_token',customer_access_token)
+            .set('access_token', customer_access_token)
             .then(response => {
                 const { status, body } = response
-                expect(status).toBe(401)
-                expect(body).toHaveProperty('message', "You are not an admin")
+                expect(status).toBe(403)
+                expect(body).toHaveProperty('message', "You do not have access!")
                 done()
             })
     })

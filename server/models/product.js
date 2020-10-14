@@ -19,10 +19,24 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: "Name Can't Empty"
-        }
+        },
+        len:{
+          args:[3],
+          msg:'Character Must Be greater then 2'
+        },
       }
     },
-    image_url: DataTypes.STRING,
+    image_url: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty:{
+          msg:"Image URL Can't Empty"
+        },
+        isUrl:{
+          msg:"Must Be URL Format"
+        },
+      }
+    },
     price: {
       type: DataTypes.INTEGER,
       validate: {
@@ -47,7 +61,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    category: DataTypes.STRING
+    category: {
+      type: DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          msg: "Category Can't Empty"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',
