@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 class UserController{
-    static register(req,res){
+    static register(req,res,next){
         const userData = {
             email: req.body.email,
             password: req.body.password
@@ -16,10 +16,10 @@ class UserController{
             })
         })
         .catch(err=> {
-            res.status(500).json({message: err.errors[0].message})
+            next()
         })
     }
-    static login(req,res){
+    static login(req,res,next){
         const userData = {
             email: req.body.email,
             password: req.body.password
@@ -38,14 +38,13 @@ class UserController{
                 }, 
                 process.env.SECRET
                 )
-                res.status(201).json({access_token})
+                res.status(200).json({access_token, message: 'Successfully Login'})
             } else {
                 res.status(401).json({message: 'Invalid email / password'})
             }
         })
         .catch(err=> {
-            console.log(err)
-            res.status(500).json({message: err.message})
+            next()
         })
     }
 }

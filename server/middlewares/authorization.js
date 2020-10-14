@@ -5,7 +5,7 @@ const authorization = (req,res,next) => {
     .then(product => {
         if(!product) {
             res.status(404).json({message: 'Not Found'})
-        } else if (req.userData.id !== product.userId) {
+        } else if (req.userData.role !== 'admin') {
             res.status(401).json({message: 'You are not Authorized'})
         } else {
             next()

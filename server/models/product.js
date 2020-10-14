@@ -28,16 +28,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       validate: {
         notEmpty: true,
-        isNumeric: true
+        isNumeric: true,
+        min: 1
       }
     },
     stock: {
       type: DataTypes.INTEGER,
       validate: {
         notEmpty: true,
-        isNumeric: true
+        isNumeric: true,
+        min: 0
       }
     },
   }, {
