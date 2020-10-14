@@ -10,19 +10,12 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: {
-          args: true,
-          msg: "Email has been already registered. Please login or use another email"
-        }
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       role: {
         type: Sequelize.STRING,
-        allowNull: false
       },
       createdAt: {
         allowNull: false,

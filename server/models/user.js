@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Must be a valid email'
         },
-        allowNull: {
+        notEmpty: {
           args: false,
           msg: 'Email cannot be empty'
         }
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
           args: [4],
           msg: 'Password must be at least 4 characters'
         },
-        allowNull: {
+        notEmpty: {
           args: false,
           msg: 'Password cannot be empty'
         }
