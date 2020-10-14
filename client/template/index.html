@@ -51,22 +51,25 @@
     <!---NAVIGATION END-->
     <div class="columns" #main-dashboard-container>
         <!---SIDE MENU START-->
-        <aside class="menu column column is-2" id="dashboard-side-menu">
-            <p class="menu-label">
-                General
-            </p>
-            <ul class="menu-list">
-                <li><a>Dashboard</a></li>
-                <li><a>Customers</a></li>
-            </ul>
-            <p class="menu-label">
-                Product
-            </p>
-            <ul class="menu-list">
-                <li><a>Add Product</a></li>
-                <li><a>Show All Products</a></li>
-            </ul>
-        </aside>
+        <div class="column is-2">
+            <aside class="menu" id="dashboard-side-menu">
+                <p class="menu-label">
+                    General
+                </p>
+                <ul class="menu-list">
+                    <li><a><i class="fas fa-store"></i> Dashboard</a></li>
+                    <li><a><i class="fas fa-users"></i> Customers</a></li>
+                </ul>
+                <p class="menu-label">
+                    Product
+                </p>
+                <ul class="menu-list">
+                    <li><a><i class="fas fa-shopping-bag"></i> Show All Products</a></li>
+                    <li><a><i class="fas fa-plus-square"></i> Add a Product</a></li>
+                </ul>
+            </aside>
+        </div>
+        
         <!--SIDE MENU END-->
         <!--  MAIN DASHBOARD AREA START-->
         <div class="column" id="main-area">
@@ -158,18 +161,18 @@
                     <div class="field">
                         <label class="label">Product Name</label>
                         <p class="control has-icons-left">
-                            <input class="input" type="number" placeholder="Add a SEO friendly product name">
+                            <input class="input" type="text" placeholder="Add a SEO friendly product name">
                             <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-shopping-bag"></i> 
                             </span>
                         </p>
                     </div>
                     <div class="field">
                         <label class="label">Image URL</label>
                         <p class="control has-icons-left">
-                            <input class="input" type="number" placeholder="Insert an URL of an uploaded image">
+                            <input class="input" type="text" placeholder="Insert an URL of an uploaded image">
                             <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-link"></i>
                             </span>
                         </p>
                     </div>
@@ -178,7 +181,7 @@
                         <p class="control has-icons-left">
                             <input class="input" type="number" placeholder="Be competetive about the price">
                             <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-coins"></i>
                             </span>
                         </p>
                     </div>
@@ -187,7 +190,7 @@
                         <p class="control has-icons-left">
                             <input class="input" type="number" placeholder="How many is left in the store?">
                             <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
+                                <i class="fas fa-warehouse"></i>
                             </span>
                         </p>
                     </div>

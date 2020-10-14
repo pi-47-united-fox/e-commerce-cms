@@ -1,8 +1,8 @@
 #dashboard-side-menu {
     background-color: rgb(241, 239, 235);
     height: 100vh;
+    margin-left: 10px;
     border-top: 20px solid  rgb(241, 239, 235);
-    border-left: 10px solid  rgb(241, 239, 235);
 }
 
 #dashboard-top-menu {
