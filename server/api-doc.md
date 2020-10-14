@@ -10,9 +10,7 @@ This app has the following features:
 - POST /login
 - GET /stocks
 - POST /stocks
-- GET /stocks/:id
 - PUT /stocks/:id
-- PATCH /stocks/:id
 - DELETE /stocks/:id
 
 ### POST /login 
@@ -131,40 +129,6 @@ _Response (500 - Internal Server Error)_
 }
 ```
 
-### GET /stocks/:id
-> Get a particular stock from a given id
-
-_Request Header_
-```json
-{
-  "access_token": "<your access token>"
-}
-```
-
-_Request Params_
-```json
-{
-    "id": 3
-}
-```
-
-_Response (200)_
-```json
-{
-    "id": 3,
-    "name": "Air Jordan 5 Retro",
-    "image_url": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/604109fb-921a-444c-99c5-77d269781295/air-jordan-5-retro-shoe-x5LP1L.jpg",
-    "price": 3000000,
-    "stock": "5"
-}
-```
-
-_Response (404)_
-```json
-{
-  "message": "Error. Not found."
-}
-```
 ### PUT /stocks/:id
 > Update the whole attributes of a particular stock from a given id
 
@@ -200,55 +164,6 @@ _Response (200)_
     "image_url": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/604109fb-921a-444c-99c5-77d269781295/air-jordan-5-retro-shoe-x5LP1L.jpg",
     "price": 3500000,
     "stock": "10"
-}
-```
-
-_Response (400)_
-```json
-{
-  "message": "Validation error."
-}
-```
-
-_Response (500 - Internal Server Error)_
-```json
-{
-  "message": "Internal Server Error."
-}
-```
-
-### PATCH /stocks/:id
-> Update only 'status' attributes of a particular todo from a given id
-
-_Request Header_
-```json
-{
-  "access_token": "<your access token>"
-}
-```
-
-_Request Params_
-```json
-{
-    "id": 3
-}
-```
-
-_Request Body_
-```json
-{
-    "stock": "15"
-}
-```
-
-_Response (200)_
-```json
-{
-    "id": 3,
-    "name": "Air Jordan 5 Retro Limited Edition",
-    "image_url": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/604109fb-921a-444c-99c5-77d269781295/air-jordan-5-retro-shoe-x5LP1L.jpg",
-    "price": 3500000,
-    "stock": "15"
 }
 ```
 

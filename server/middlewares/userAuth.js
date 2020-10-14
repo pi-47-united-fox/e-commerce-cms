@@ -33,11 +33,11 @@ const authorization = (req, res, next) => {
         }
     })
         .then(result => {
-            if(result && result.email === 'admin'){
+            if(result && result.role === 'admin'){
                 next()
             }
-            else if(result && result.email !== 'admin'){
-                next({name:'Forbidden'})
+            else if(result && result.role !== 'admin'){
+                next({name:'Forbidden', message: "You are not authorized."})
             }
             else if(!result){
                 next({name:'Not Found', message: "User not found."})
