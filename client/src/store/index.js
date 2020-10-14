@@ -13,7 +13,13 @@ export default new Vuex.Store({
   mutations: {
     FETCH_PRODUCTS (state, payload) {
       state.products = payload
-    }
+    },
+    LOGIN (state) {
+      state.authenticated = true
+    },
+    LOGOUT (state) {
+      state.authenticated = false
+    },
   },
   actions: {
     login (context, payload) {
@@ -23,6 +29,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           localStorage.setItem('access_token', data.access_token)
+          context.commit('LOGIN')
           router.push("/")
         })
         .catch(console.log)

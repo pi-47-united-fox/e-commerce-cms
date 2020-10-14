@@ -15,7 +15,11 @@ export default {
     HelloWorld
   },
   methods: {
-    
+
+  },
+  created () {
+    console.log("loaded");
+    this.$emit("loggedIn")
   }
 }
 </script>

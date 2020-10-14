@@ -1,33 +1,43 @@
 <template>
-  <div id="app">
-    <div v-if="authenticated == true">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Z-Commerce</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link">
-                <router-link to="/">Home</router-link>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link">
-                <router-link to="/about">About</router-link>
-              </a>
-            </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0"> 
-            <button class="btn btn-outline-danger my-2 my-sm-0" @click="logout">Logout</button> 
-          </form>
-        </div>
-      </nav> 
+  <div id="app" class="flex">
+    <div >
+      <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" v-if="$store.state.authenticated == true">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Z-Commerce</a>
+        <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
+        <ul class="navbar-nav px-3">
+          <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#" @click.prevent="logout">Sign out</a>
+          </li>
+        </ul>
+      </nav>
     </div>
-
-    <router-view/>
+    <div class="container-fluid">
+      <div class="row flex">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" v-if="$store.state.authenticated == true">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Back Office</span> 
+              </h6>
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="homePage"> Products </a>
+              </li>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Front Office</span> 
+              </h6>
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="aboutPage">Banner</a>
+              </li> 
+            </ul>
+          </div>
+        </nav>
+        <main class="col" style="">
+          <div class="content-container">
+            <router-view/>
+          </div>
+        </main>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,19 +47,28 @@ import router from './router'
 export default {
   name: 'App',
   data () {
-    return {
-      authenticated: false
+    return { 
     }
   },
   methods:{
     logout () {
       localStorage.clear()
+      this.$store.commit('LOGOUT')
       router.push("Login")
+    },
+    aboutPage () {
+      // console.log($route.params);
+      router.push("About").catch(err => {})
+    },
+    homePage () {
+      // console.log($route.params);
+      router.push("/").catch(err => {})
     }
   },
-  created () {
-    if(localStorage.access_token) this.authenticated = true
-    else this.authenticated = false
+  created () { 
+    if(localStorage.access_token){
+      this.$store.commit('LOGIN')
+    }
   }
 }
 </script>
@@ -73,5 +92,10 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.content-container {
+  margin: 0;
+  /* overflow-y: scroll; */
+  height: 93vh;
 }
 </style>
