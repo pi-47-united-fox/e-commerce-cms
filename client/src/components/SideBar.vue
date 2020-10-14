@@ -17,7 +17,7 @@
           <li><a>Furniture</a></li>
         </ul>
       </li>
-      <li><a>Add Product</a></li>
+      <li><router-link to="/home/add">Add Product</router-link></li>
     </ul>
     <p class="menu-label">Banner</p>
     <ul class="menu-list">

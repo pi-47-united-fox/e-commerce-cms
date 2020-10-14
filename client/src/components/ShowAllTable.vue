@@ -19,10 +19,12 @@
           </tr>
         </tfoot>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td><a href="#">Thinkpad T14</a></td>
-            <td>Computer & Laptop</td>
+          <tr v-for="product in products" :key="product.id">
+            <th>{{ product.id }}</th>
+            <td>
+              <a href="#">{{ product.name }}</a>
+            </td>
+            <td>{{ product.category_name }}</td>
             <td>
               <a class="button is-warning is-small is-rounded">Edit</a>
               <a class="button is-danger is-small is-rounded">Delete</a>
@@ -62,8 +64,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    getProducts() {
+      this.$store.dispatch("getProducts");
+    }
+  },
+  computed: {
+    products() {
+      return this.$store.state.products.data;
+    }
+  },
+  created() {
+    this.getProducts();
+  }
+};
 </script>
 
-<style>
-</style>
+<style></style>
