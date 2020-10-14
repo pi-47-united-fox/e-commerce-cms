@@ -11,10 +11,8 @@ const authentication = (req, res, next) => {
 			.then((result) => {
 				if (!result) {
 					res.status(401).json({ message: "Failed to Authenticate" });
-				} else if (!req.userData.is_admin) {
-					res.status(401).json({ message: "Failed to Authenticate, Not an Admin" });
 				} else {
-					next()
+					next();
 				}
 			})
 			.catch((err) => {
@@ -25,6 +23,21 @@ const authentication = (req, res, next) => {
 	}
 };
 
+const authorization = (req, res, next) => {
+	User.findByPk(req.userData.id)
+		.then((result) => {
+			if (result.is_admin) {
+				next();
+			} else {
+				res.status(401).json({ message: "Failed to Authenticate, Not an Admin" });
+			}
+		})
+		.catch((err) => {
+			res.status(500).json({ message: err.message });
+		});
+};
+
 module.exports = {
 	authentication,
+	authorization,
 };
