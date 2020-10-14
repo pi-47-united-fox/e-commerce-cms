@@ -92,16 +92,16 @@
 
 <script>
 export default {
-    name: 'DashProduct',
-    data() {
-        return {
-            
-        }
-    },
-    methods: {
-        
-    },
-};
+  name: 'DashProduct',
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+
+  }
+}
 </script>
 
 <style></style>

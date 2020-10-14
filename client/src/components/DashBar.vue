@@ -42,7 +42,7 @@ export default {
       this.$emit('drawer')
     },
     signOut () {
-      console.log ('masuk')
+      console.log('masuk')
     },
     viewAbout () {
 
