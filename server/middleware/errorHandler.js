@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
         statusCode = 400
     } else if (err.name === "JsonWebTokenError") {
         errors.push(err.message)
-        statusCode = 400
+        statusCode = 401
     } else {
         errors.push(err.message || "internal server erros")
         statusCode = err.statusCode || 500

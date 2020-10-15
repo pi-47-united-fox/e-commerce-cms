@@ -1,5 +1,5 @@
-# KANBAN APP
-Kanban App is an application to manage your Working. This app has : 
+# E-COMMERCE CMS DASHBOARD
+e-commerce App is an application dasboard for manage item admin side. This app has : 
 * RESTful endpoint for asset's CRUD operation
 * JSON formatted response
 
@@ -77,7 +77,7 @@ _Request Header_
 
 
 
-_Response (201)_
+_Response (200)_
 ```json
 [
   {
@@ -243,7 +243,7 @@ _Request Body_
 
 ```
 
-_Response (201)_
+_Response (200)_
 ```json
 
 {

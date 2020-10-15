@@ -1,20 +1,19 @@
-require('dotenv').config()
-const request = require("supertest")
-const app = require("../app")
+const request = require("supertest");
+const app = require("../app");
 
 const userData = {
     email: "admin@mail.com",
-    password: "1234"
-}
+    password: "1234",
+};
 
 const userData2 = {
     email: "admin@mail.com",
-    password: "12345"
-}
+    password: "12345",
+};
 const userData3 = {
     email: "admin2@mail.com",
-    password: "1234"
-}
+    password: "1234",
+};
 
 // SUCCESS LOGIN
 describe("Login Succes", () => {
@@ -22,19 +21,19 @@ describe("Login Succes", () => {
         request(app)
             .post("/login")
             .send(userData)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(201)
-                expect(body).toHaveProperty("access_token", expect.any(String))
-                done()
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(201);
+                expect(body).toHaveProperty("access_token", expect.any(String));
+                done();
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
-                done()
-            })
-    })
-})
+                done();
+            });
+    });
+});
 
 // FAILED LOGIN
 describe("Login failed", () => {
@@ -42,40 +41,41 @@ describe("Login failed", () => {
         request(app)
             .post("/login")
             .send(userData2)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(400)
-                expect(body).toHaveProperty("errors", ["wrong email/password !"])
-                done()
-            })
-    })
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(400);
+                expect(body).toHaveProperty("errors", ["wrong email/password !"]);
+                done();
+            });
+    });
 
     it("no email in database", (done) => {
         request(app)
             .post("/login")
             .send(userData3)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(400)
-                expect(body).toHaveProperty("errors", ["wrong email/password !"])
-                done()
-            })
-    })
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(400);
+                expect(body).toHaveProperty("errors", ["wrong email/password !"]);
+                done();
+            });
+    });
 
     it("email & password empty", (done) => {
         request(app)
             .post("/login")
 
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(400)
-                expect(body).toHaveProperty("errors",
-                    ["name can't be empty",
-                        "password can't be empty"])
-                done()
-            })
-    })
-})
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(400);
+                expect(body).toHaveProperty("errors", [
+                    "name can't be empty",
+                    "password can't be empty",
+                ]);
+                done();
+            });
+    });
+});
