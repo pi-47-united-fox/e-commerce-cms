@@ -1,31 +1,65 @@
-const {Product} = require('../models');
+const { Product, Category, Banner } = require('../models');
 
 class AdminController {
+    // @todo menambah category
     static addProductC(req, res, next) {
-        Product.create({
-            name: req.body.name,
-            image_url: req.body.image_url,
-            price: +req.body.price,
-            stock: +req.body.stock
+        console.log ('data dari client: ', req.body)
+        if(req.body.categoryName === '') {
+            req.body.categoryName = 'Uncategorized'
+        }
+        
+        Category.findOne({
+            where: {
+                categoryName: req.body.categoryName
+            }
+        }).then (result => {
+            if (result) {
+                console.log ('masuk Category Find One')
+                return result
+            } else {
+                console.log ('masuk Category create')
+                return Category.create({
+                    categoryName: req.body.categoryName
+                })
+            }
+        }).then (category => {
+            console.log ('masuk Product Create', category)
+            return Product.create({
+                name: req.body.name,
+                image_url: req.body.image_url,
+                price: +req.body.price,
+                stock: +req.body.stock,
+                CategoryId: category.id
+            }, {
+                returning: true,
+                include: [{
+                    model: Category
+                }]
+            })
         }).then((result) => {
+            console.log ('Selesai Add')
             return res.status(201).json(result)
         }).catch((err) => {
+            console.log ('dari create data: ', err)
             next(err)
         });
     }
 
     static getAllProductC (req, res, next) {
-        Product.findAll()
-            .then((result) => {
+        Product.findAll({
+            include: [Category]
+        }).then((result) => {
                 return res.status(200).json(result)
-            }).catch((err) => {
-                next(err)
-            });
+        }).catch((err) => {
+            next(err)
+        });
     }
 
+    // @audit mungkin getOneProductC ini diganti di getter client - tanpa hit API
     static getOneProductC (req, res, next) {
-        Product.findByPk(+req.params.id)
-            .then((result) => {
+        Product.findByPk(+req.params.id, {
+            include: [Category]
+        }).then((result) => {
                 if (result === null) {
                     return next({
                         name: 'not found'
@@ -33,23 +67,38 @@ class AdminController {
                 } else {
                     return res.status(200).json(result)
                 }
-
             }).catch((err) => {
                 return next(err)
             });
     }
 
+    // @todo Update category
     static updateProductC (req, res, next) {
-        Product.update({
-            name: req.body.name,
-            image_url: req.body.image_url,
-            price: +req.body.price,
-            stock: +req.body.stock
-        }, {
+        Category.findOne({
             where: {
-                id: +req.params.id
-            },
-            returning: true
+                categoryName: req.body.categoryName
+            }
+        }).then (result => {
+            if (result) {
+                return result
+            } else {
+                return Category.create({
+                    categoryName: req.params.categoryName
+                })
+            }
+        }).then (category => {
+            return Product.update({
+                name: req.body.name,
+                image_url: req.body.image_url,
+                price: +req.body.price,
+                stock: +req.body.stock,
+                CategoryId: category.id
+            }, {
+                where: {
+                    id: +req.params.id
+                },
+                returning: true
+            })
         }).then((result) => {
             if (result[1].length == 0) {
                 return next({
@@ -76,6 +125,16 @@ class AdminController {
             } else {
                 return next({ name: 'not found' })
             }
+        }).catch((err) => {
+            next(err)
+        });
+    }
+
+    static getAllBanner (req, res, next) {
+        console.log ('seudah masuk controller')
+        Banner.findAll()
+        .then((result) => {
+            return res.status(200).json(result)
         }).catch((err) => {
             next(err)
         });

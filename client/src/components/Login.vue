@@ -67,7 +67,13 @@ export default {
   },
   methods: {
     submit () {
-      return this.$router.push('/dash')
+      // return this.$router.push('/dash')
+      return this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
+      }).then(() => {
+        this.$router.push('/dash')
+      })
     }
   },
   computed: {

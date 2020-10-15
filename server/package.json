@@ -6,8 +6,9 @@
   "scripts": {
     "test": "jest --runInBand --verbose --detectOpenHandles --forceExit",
     "start": "node app.js",
-    "dev": "nodemon ./bin/www",
-    "sq_test": "sequelize db:create --env=test"
+    "dev-test": "nodemon ./bin/www",
+    "sq-test": "sequelize db:create --env=test",
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "keywords": [
     "CMS",

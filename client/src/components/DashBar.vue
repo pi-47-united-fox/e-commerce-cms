@@ -1,28 +1,15 @@
 <template>
   <v-app-bar app flat>
+    <!-- SideBar Control Show Hide -->
     <v-app-bar-nav-icon @click="drawer"></v-app-bar-nav-icon>
     <!-- <v-toolbar-title>unShop</v-toolbar-title> -->
     <v-spacer></v-spacer>
 
+    <!-- Center Title -->
     <h2>unShop Admin Dashboard</h2>
 
     <v-spacer></v-spacer>
-
-    <v-menu left>
-
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn icon v-bind="attrs" v-on="on">
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item v-for="menu in menus" :key="menu.title" @click="menu.action" >
-          <v-list-item-title>{{ menu.title }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-
-    </v-menu>
+    <v-btn bottom @click="signOut">Sign Out</v-btn>
   </v-app-bar>
 </template>
 
@@ -42,10 +29,8 @@ export default {
       this.$emit('drawer')
     },
     signOut () {
-      console.log('masuk')
-    },
-    viewAbout () {
-
+      this.$store.commit('SIGN_OUT')
+      this.$router.replace('/')
     }
   }
 }

@@ -77,23 +77,36 @@ Response:
 ```json
 [
     {
-        "id": 1,
-        "name": "<product_name:String>",
-        "image_url": "<product_img_url:String>",
-        "price": "<product_price:Integer>",
-        "stock": "<product_stock:Integer>",
-        "createdAt": "2020-10-06T12:47:21.254Z",
-        "updatedAt": "2020-10-06T12:47:21.254Z"
-    },
-    {
-        "id": 1,
-        "name": "<product_name:String>",
-        "image_url": "<product_img_url:String>",
-        "price": "<product_price:Integer>",
-        "stock": "<product_stock:Integer>",
-        "createdAt": "2020-10-06T12:47:21.254Z",
-        "updatedAt": "2020-10-06T12:47:21.254Z"
-    },
+    "id": 2,
+    "name": "Tas",
+    "image_url": "https://cdn.elevenia.co.id/g/2/9/3/9/8/5/20293985_B.jpg",
+    "price": 300000,
+    "stock": 15,
+    "CategoryId": 1,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z",
+    "Category": {
+      "id": 1,
+      "categoryName": "Uncategorized",
+      "createdAt": "2020-10-14T05:19:52.468Z",
+      "updatedAt": "2020-10-14T05:19:52.468Z"
+    }
+  },{
+    "id": 1,
+    "name": "Sepatu",
+    "image_url": "https://cdn.elevenia.co.id/g/2/9/3/9/8/5/20293985_B.jpg",
+    "price": 700000,
+    "stock": 20,
+    "CategoryId": 2,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z",
+    "Category": {
+      "id": 2,
+      "categoryName": "Sepatu",
+      "createdAt": "2020-10-14T05:19:52.468Z",
+      "updatedAt": "2020-10-14T05:19:52.468Z"
+    }
+  }
 ]
 ```
 
@@ -112,13 +125,20 @@ Response:
 
 ```json
 {
-    "id": 1,
-    "name": "<product_name:String>",
-    "image_url": "<product_img_url:String>",
-    "price": "<product_price:Integer>",
-    "stock": "<product_stock:Integer>",
-    "createdAt": "2020-10-06T12:47:21.254Z",
-    "updatedAt": "2020-10-06T12:47:21.254Z"
+  "id": 3,
+  "name": "Kaos Polos",
+  "image_url": "https://www.konveksipadang.com/wp-content/uploads/2018/08/GROSIR-KAOS-POLOS-DI-PADANG-MURAH-DENGAN-KUALITAS-TERJAMIN-705x705.jpg",
+  "price": 80000,
+  "stock": 200,
+  "CategoryId": 3,
+  "createdAt": "2020-10-14T05:19:52.475Z",
+  "updatedAt": "2020-10-14T05:19:52.475Z",
+  "Category": {
+    "id": 3,
+    "categoryName": "Baju",
+    "createdAt": "2020-10-14T05:19:52.468Z",
+    "updatedAt": "2020-10-14T05:19:52.468Z"
+  }
 }
 ```
 
@@ -135,6 +155,7 @@ Request:
     "image_url": "<product_img_url:String>",
     "price": "<product_price:Integer>",
     "stock": "<product_stock:Integer>",
+    "categoryName": "<product_category_name:String>"
 }
 ```
 
@@ -146,12 +167,19 @@ Response:
 ```json
 {
     "id": 1,
-    "name": "<product_name:String>",
-    "image_url": "<product_img_url:String>",
-    "price": "<product_price:Integer>",
-    "stock": "<product_stock:Integer>",
-    "createdAt": "2020-10-06T12:47:21.254Z",
-    "updatedAt": "2020-10-06T12:47:21.254Z"
+    "name": "Sepatu",
+    "image_url": "https://cdn.elevenia.co.id/g/2/9/3/9/8/5/20293985_B.jpg",
+    "price": 700000,
+    "stock": 20,
+    "CategoryId": 2,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z",
+    "Category": {
+      "id": 2,
+      "categoryName": "Sepatu",
+      "createdAt": "2020-10-14T05:19:52.468Z",
+      "updatedAt": "2020-10-14T05:19:52.468Z"
+    }
 }
 ```
 
@@ -170,6 +198,7 @@ Request:
     "image_url": "<product_img_url:String>",
     "price": "<product_price:Integer>",
     "stock": "<product_stock:Integer>",
+    "categoryName": "<product_category_name:String>"
 }
 ```
 
@@ -181,13 +210,21 @@ Response:
 ```json
 {
     "id": 1,
-    "name": "<product_name:String>",
-    "image_url": "<product_img_url:String>",
-    "price": "<product_price:Integer>",
-    "stock": "<product_stock:Integer>",
-    "createdAt": "2020-10-06T12:47:21.254Z",
-    "updatedAt": "2020-10-06T12:47:21.254Z"
+    "name": "Sepatu",
+    "image_url": "https://cdn.elevenia.co.id/g/2/9/3/9/8/5/20293985_B.jpg",
+    "price": 700000,
+    "stock": 20,
+    "CategoryId": 2,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z",
+    "Category": {
+      "id": 2,
+      "categoryName": "Sepatu",
+      "createdAt": "2020-10-14T05:19:52.468Z",
+      "updatedAt": "2020-10-14T05:19:52.468Z"
+    }
 }
+```
 ```
 - status: 403
 - body:
@@ -212,6 +249,7 @@ Response:
 
 ```json
 {
+    "id": "<deleted product id>",
     "message": "Product: success deleted"
 }
 ```

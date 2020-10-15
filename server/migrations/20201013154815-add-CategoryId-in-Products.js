@@ -10,6 +10,7 @@ module.exports = {
      */
     await queryInterface.addColumn('Products', 'CategoryId', {
       type: Sequelize.INTEGER,
+      unique: false,
       references: {
         model: 'Categories',
         key: 'id'
