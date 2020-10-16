@@ -1,21 +1,59 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <!-- <router-link to="/">Home</router-link>
       <router-link to="/login">Login</router-link>
       <router-link to="/detail">Detail</router-link>
-      <router-link to="/notfound">404</router-link>
-
+      <router-link to="/notfound">404</router-link> -->
     </div>
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  namee: 'App',
+  components: {
+  },
+  data () {
+    return {
+      // isLogin: false
+    }
+  },
+  methods: {},
+  crreated () {
+    console.log('ini creaated <--------')
+  }
+}
+</script>
 
 <style>
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
 
+}
+.back-btn-c{
+ background-color: transparent;
+ border-width: 0px;
+}
+.back-btn{
+  height: 30px;
+}
+.nav-btn{
+  background-color: #5978d5;
+  color: white;
+  border-width: 0px;
+  font-size: 18px;
+  padding: 5px;
+}
+.nav-btn:hover{
+  background-color: white;
+  color:  #5978d5;
+}
+.menu{
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
 }
 .detail-text {
   background-color: #5978d5;
@@ -28,7 +66,7 @@ body {
 .detail-pic {
   height: 60vh;
 }
-.detail-item{
+.detail-item {
   padding: 50px;
 }
 .detail {
@@ -38,21 +76,21 @@ body {
   align-items: center;
   margin-top: 100px;
 }
-.cancel-btn{
-background-color:  #EA9292 ;
-color: white;
-margin: 5px;
-border-radius: 10px;
-border-width: 0px ;
-padding: 3px 10px 3px 10px;
+.cancel-btn {
+  background-color: #ea9292;
+  color: white;
+  margin: 5px;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 3px 10px 3px 10px;
 }
-.submit-btn{
-background-color:  #5978d5 ;
-color: white;
-margin: 5px;
-border-radius: 10px;
-border-width: 0px ;
-padding: 3px 10px 3px 10px;
+.submit-btn {
+  background-color: #5978d5;
+  color: white;
+  margin: 5px;
+  border-radius: 10px;
+  border-width: 0px;
+  padding: 3px 10px 3px 10px;
 }
 .btn-login {
   margin-top: 35px;
@@ -132,11 +170,12 @@ padding: 3px 10px 3px 10px;
   padding: 30px;
 }
 .update-btn {
-  padding: 2px;
+  padding: 5px;
   background-color: #5978d5;
   border-radius: 10px;
   color: white;
   border-width: 0;
+  margin-top: 2rem;
 }
 .add-btn {
   width: 130px;

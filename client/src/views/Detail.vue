@@ -1,9 +1,21 @@
 <template>
   <div class="detail">
       <div class="detail-img">
+        <div >
+          <button
+          class="back-btn-c"
+          @click="$router.push({name:'Home'})"
+          >
+          <img
+          class="back-btn"
+          src="../assets/circle-with-an-arrow-pointing-to-left.svg"
+          >
+          </button>
+        </div>
+        <br>
         <img
           class="detail-pic"
-          src="https://image.freepik.com/free-photo/woman-with-stylish-tracksuit-does-sports-does-exercises-yellow-tracksuit-blue-space_163305-7358.jpg"
+          src="https://www.wilton.com/dw/image/v2/AAWA_PRD/on/demandware.static/-/Sites-wilton-project-master/default/dw2e5ac60f/images/project/WLRECIP-420/2105-6818_TaPaHa_44211-1.jpg?sw=800&sh=800"
           alt=""
         />
       </div>
@@ -25,7 +37,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  created () {
+    console.log('ini di detail')
+  }
+}
 </script>
 
 <style>
