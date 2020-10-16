@@ -7,14 +7,18 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
+    oneProduct: [],
     category: [],
-    inputData: {}
+    inputData: []
   },
   mutations: {
     FETCH_PRODUCTS (state, payload) {
       this.state.products = payload
     },
-    ADD_DATA (state, payload) {
+    FETCH_ONE_PRODUCTS(state, payload) {
+      this.state.oneProduct = payload
+    },
+    ADD_PRODUCTS (state, payload) {
       this.state.inputData = payload
     }
   },
@@ -30,14 +34,40 @@ export default new Vuex.Store({
           console.log(err, 'err dari fetch data product')
         })
     },
-    addProducts (context, payload) {
-      axios
-        .post('http://localhost:3000/products')
+    fetchOneProducts(context, payload) {
+      const id = payload
+      console.log(id,'>>>>')
+      axios({
+        method: 'GET',
+        url: `http://localhost:3000/products/${payload}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
         .then(({ data }) => {
-          context.commit('ADD_DATA', data)
+          console.log(data,'dari axios actinon fetch by id')
+          context.commit('FETCH_ONE_PRODUCTS', data)
         })
         .catch(err => {
-          console.log(err, 'err add data uy!')
+        console.log(err, 'err fetch one products')
+      })
+    },
+    addProducts (context, payload) {
+      axios({
+        url: 'http://localhost:3000/products',
+        method: 'POST',
+        data: payload,
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+        .then(({ data }) => {
+          console.log(data)
+          console.log(data, 'success add data')
+        })
+        .catch(err => {
+          console.log(err, 'err add data!')
+          console.log('ini error adding data products >>>')
         })
     },
 
@@ -56,6 +86,23 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err, 'error dari login')
         })
+    },
+    deleteProducts(context, payload) {
+      const id = payload
+      axios({
+        method: "DELETE",
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then( data  => {
+        console.log(data,'data dari axios')
+        console.log(`success delete porduct wiht ${data} `)
+        })
+        .catch(err => {
+        console.log(err, err.message)
+      })
     }
   },
   getters: {

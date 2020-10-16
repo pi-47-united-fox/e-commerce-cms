@@ -2,24 +2,48 @@
   <!--Add task pop up-->
   <div class="add-task">
     <h2>Add Products</h2>
-    <form>
+    <form @submit.prevent="addProducts">
       <fieldset class="uk-fieldset">
         <legend class="uk-legend">Legend</legend>
 
         <div class="uk-margin">
-          <input class="uk-input" type="text" placeholder="Name" />
+          <input
+            class="uk-input"
+            type="text"
+            placeholder="Name"
+            v-model="name"
+          />
         </div>
 
         <div class="uk-margin">
-          <input class="uk-input" type="number" placeholder="Stock" />
+          <input
+            class="uk-input"
+            type="text"
+            placeholder="input an image url products here"
+            v-model="image_url"
+          />
         </div>
 
         <div class="uk-margin">
-          <input class="uk-input" type="number" placeholder=" Rp .Price" />
+          <input
+            class="uk-input"
+            type="number"
+            placeholder="Stock"
+            v-model="stock"
+          />
         </div>
 
         <div class="uk-margin">
-          <select class="uk-select">
+          <input
+            class="uk-input"
+            type="number"
+            placeholder=" Rp .Price"
+            v-model="price"
+          />
+        </div>
+
+        <div class="uk-margin">
+          <select class="uk-select" v-model="category">
             <option>All Mountain</option>
             <option>Cross Country</option>
             <option>City Bike</option>
@@ -31,11 +55,15 @@
             class="uk-textarea"
             rows="5"
             placeholder="Description"
+            v-model="description"
           ></textarea>
         </div>
       </fieldset>
+      <button type="submit" class="uk-button uk-button-secondary">
+        Add Data
+      </button>
     </form>
-    <button class="uk-button uk-button-secondary">Submit</button>
+    <button type="submit" class="uk-button uk-button-secondary">Submit</button>
     <button class="uk-button uk-button-default" @click="closePopAdd">
       Cancel
     </button>
@@ -44,22 +72,46 @@
 
 <script>
 export default {
-  name: 'PopAdd',
+  name: "PopAdd",
+  data() {
+    return {
+      name: "",
+      description: "",
+      image_url: "",
+      stock: "",
+      category: "",
+      price: "",
+    };
+  },
   methods: {
-    closePopAdd () {
-      console.log('emit shiow pop add dari CR')
-      this.$emit('emitClosePopAdd', false)
-    }
+    closePopAdd() {
+      console.log("emit shiow pop add dari CR");
+      this.$emit("emitClosePopAdd", false);
+    },
+    addProducts() {
+      console.log("submit pop add!");
+      const payload = {
+        name: this.name,
+        desctiption: this.desctiption,
+        stock: this.stock,
+        image_url: this.image_url,
+        category: this.category,
+        price: this.price,
+      };
+      this.$store.dispatch("addProducts", payload);
+      this.$store.dispatch("fetchProducts");
+      this.closePopAdd();
+    },
   },
   computed: {
-    products () {
-      return this.state.inputData
-    }
+    products() {
+      return this.state.addProducts;
+    },
   },
-  created () {
-    this.$store.dispatch('ADD_DATA')
-  }
-}
+  created() {
+    this.$store.dispatch("fetchProducts");
+  },
+};
 </script>
 
 <style>

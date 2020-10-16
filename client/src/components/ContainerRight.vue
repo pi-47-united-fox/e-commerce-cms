@@ -28,20 +28,28 @@
     <!-- main item fetch data -->
     <div class="main">
       <!-- itemCard -->
-      <ItemsCard :products="products" />
+      <ItemsCard
+        :products="products"
+        @emitFetchOneProducts="fetchOneProducts"
+      />
       <!-- itemCard end -->
+
       <div class="item-details">
         <div class="item-details-inner">
-          <h3>Name</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur, maiores blanditiis! Dignissimos quia voluptatem
-            corrupti pariatur odio, iusto, deserunt libero necessitatibus,
-            perferendis iste quaerat repellat saepe eos corporis rerum illo.
-          </p>
-          <p>stock : 10</p>
-          <p>category: All Mountain</p>
-          <p>Price : $1000000</p>
+          <div v-if="productId === 0">
+            Details Products <br />
+            <p>click name for details</p>
+          </div>
+          <div v-for="(product, i) in products.products" :key="i">
+            <div v-if="product.id == productId">
+              <h3>{{ product.name }}</h3>
+              <img :src="product.image_url" alt="" srcset="" />
+              <p>{{ product.description }}</p>
+              <p>stock : 10</p>
+              <p>category: All Mountain</p>
+              <p>Price : $1000000</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -49,32 +57,44 @@
 </template>
 
 <script>
-import ItemsCard from '@/components/ItemsCard.vue'
-import Spectators from '@/components/Spectators.vue'
+import ItemsCard from "@/components/ItemsCard.vue";
+import Spectators from "@/components/Spectators.vue";
 export default {
-  name: 'ContainerRight',
+  name: "ContainerRight",
+  data() {
+    return {
+      productId: 0,
+    };
+  },
   components: {
     ItemsCard,
-    Spectators
+    Spectators,
   },
   methods: {
-    showPopAdd () {
-      console.log('emit shiow pop add dari CR')
-      this.$emit('emitShowPopAdd', true)
+    showPopAdd() {
+      this.$emit("emitShowPopAdd", true);
     },
-    fetchProducts () {
-      this.$store.dispatch('FETCH_PRODUCTS')
-    }
+    fetchProducts() {
+      this.$store.dispatch("fetchProducts");
+    },
+    fetchOneProducts(value) {
+      console.log(value, "masuuuk angin pak haji?");
+      this.productId = value;
+      this.fetchProducts();
+    },
   },
   computed: {
-    products () {
-      return this.$store.state.products
-    }
+    products() {
+      return this.$store.state.products;
+    },
+    oneProducts() {
+      return this.$store.state.oneProducts;
+    },
   },
-  created () {
-    this.fetchProducts
-  }
-}
+  created() {
+    this.fetchProducts();
+  },
+};
 </script>
 
 <style >
@@ -132,7 +152,7 @@ p {
 
 .item-details {
   width: 29%;
-  height: 500px;
+  height: auto;
   display: flex;
   background: rgb(17, 17, 17);
   margin-top: 20px;
@@ -148,8 +168,10 @@ p {
   color: white;
   width: 90%;
   height: auto;
-  margin-top: 40px;
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .item-details-inner p {
@@ -164,6 +186,11 @@ p {
   font-weight: bold;
   text-align: left;
   color: white;
+}
+
+.item-details-inner img {
+  width: 90%;
+  height: auto;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

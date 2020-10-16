@@ -5,10 +5,11 @@
       <div class="item-card">
         <img :src="products.image_url" alt="" srcset="" />
         <div class="item-card-text">
-          <h3>{{ products.name }}</h3>
+          <h3 @click.prevent="getDetails(products.id)">{{ products.name }}</h3>
           <p>Stock : {{ products.stock }} items</p>
           <p>Category: {{ products.category }}</p>
-          <a href="">Edit</a> | <a href="">Delete</a>
+          <a href="">Edit</a> |
+          <a href="#" @click.prevent="deleteProduct(products.id)">Delete</a>
         </div>
       </div>
     </div>
@@ -17,24 +18,34 @@
 
 <script>
 export default {
-  name: 'ItemsCard',
-  props: ['products'],
+  name: "ItemsCard",
+  props: ["products"],
   methods: {
-    fetchProducts () {
-      this.$store.dispatch('fetchProducts')
-    }
+    fetchProducts() {
+      this.$store.dispatch("fetchProducts");
+    },
+    deleteProduct(id) {
+      console.log(id, ">> delete");
+      this.fetchProducts();
+      this.$store.dispatch("deleteProducts", id);
+    },
+    getDetails(data) {
+      console.log(data, "data product untuk details item card");
+      this.$store.dispatch("fetchOneProducts", data);
+      this.$emit("emitFetchOneProducts", data);
+    },
   },
-  created () {
-    this.fetchProducts()
-    console.log('DATA FETCH')
+  created() {
+    this.fetchProducts();
+    // console.log('DATA FETCH')
     // console.log(this.products.products[0].UserId)
     // console.log(this.products.products[0].name)
     // console.log(this.products.products[0].image_url)
     // console.log(this.products.products[0].category)
     // console.log(this.products.products[0].price)
     // console.log(this.products.products[0].stock)
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -76,5 +87,9 @@ export default {
 .item-card img {
   width: 30%;
   height: auto;
+}
+
+h3 {
+  cursor: pointer;
 }
 </style>

@@ -3,22 +3,22 @@ const { getToken } = require('../helpers/jwt')
 const { comparePassword } = require('../helpers/bcrypt')
 
 class userController{
-    // static register(req,res){
-    //     const input = {
-    //         username: req.body.username,
-    //         email: req.body.email,
-    //         password: req.body.password
-    //     }
+    static register(req,res){
+        const input = {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        }
 
-    //     User.create(input)
-    //     .then(user =>{
-    //         return res.status(201).json({id: user.id, username: user.username, email: user.email, password: user.password})
-    //     })
-    //     .catch(err => {
-    //         console.log(err, 'err dari register')
-    //         return res.status(500).json({message: err.message})
-    //     })
-    // }
+        User.create(input)
+        .then(user =>{
+            return res.status(201).json({id: user.id, username: user.username, email: user.email, password: user.password})
+        })
+        .catch(err => {
+            console.log(err, 'err dari register')
+            return res.status(500).json({message: err.message})
+        })
+    }
 
     static login(req, res) {
         let userLogin = {

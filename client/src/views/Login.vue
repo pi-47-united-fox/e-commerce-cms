@@ -38,21 +38,21 @@
 
 <script>
 export default {
-  name: 'Login',
-  data () {
+  name: "Login",
+  data() {
     return {
       payload: {
-        email: '',
-        password: ''
-      }
-    }
+        email: "",
+        password: "",
+      },
+    };
   },
   methods: {
-    login () {
-      this.$store.dispatch('login', this.payload)
-    }
-  }
-}
+    login() {
+      this.$store.dispatch("login", this.payload);
+    },
+  },
+};
 </script>
 
 <style>
