@@ -30,33 +30,6 @@
               <a class="button is-danger is-small is-rounded">Delete</a>
             </td>
           </tr>
-          <tr>
-            <th>2</th>
-            <td><a href="#">Thinkpad T14</a></td>
-            <td>Computer & Laptop</td>
-            <td>
-              <a class="button is-warning is-small is-rounded">Edit</a>
-              <a class="button is-danger is-small is-rounded">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td><a href="#">Thinkpad T14</a></td>
-            <td>Computer & Laptop</td>
-            <td>
-              <a class="button is-warning is-small is-rounded">Edit</a>
-              <a class="button is-danger is-small is-rounded">Delete</a>
-            </td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td><a href="#">Thinkpad T14</a></td>
-            <td>Computer & Laptop</td>
-            <td>
-              <a class="button is-warning is-small is-rounded">Edit</a>
-              <a class="button is-danger is-small is-rounded">Delete</a>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
@@ -68,16 +41,16 @@ export default {
   methods: {
     getProducts() {
       this.$store.dispatch("getProducts");
-    }
+    },
   },
   computed: {
     products() {
       return this.$store.state.products.data;
-    }
+    },
   },
   created() {
     this.getProducts();
-  }
+  },
 };
 </script>
 

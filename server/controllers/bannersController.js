@@ -38,7 +38,7 @@ class BannersController {
 						id,
 						name,
 						is_active,
-						img_url
+						img_url,
 					});
 				} else {
 					next({ name: "BadRequest", message: "Create Banner failed" });
@@ -67,7 +67,7 @@ class BannersController {
 					id,
 					name,
 					is_active,
-					img_url
+					img_url,
 				});
 			})
 			.catch((err) => {

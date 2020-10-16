@@ -15,10 +15,9 @@ const routes = [
   },
   {
     path: "/home",
-    name: "Home",
     component: Home,
     children: [
-      { path: "", name: "displayAll", component: DisplayAll },
+      { path: "", name: "DisplayAll", component: DisplayAll },
       { path: "add", name: "AddPage", component: AddPage }
     ]
   }
@@ -29,5 +28,18 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+//! navigation guard still broken
+// router.beforeEach((to, from, next) => {
+//   if (localStorage.getItem("access_token")) {
+//     if (to.path === "/") {
+//       next({ path: "/home" });
+//     } else {
+//       next();
+//     }
+//   } else {
+//     next({ path: "/" });
+//   }
+// });
 
 export default router;

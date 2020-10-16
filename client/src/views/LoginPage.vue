@@ -9,7 +9,7 @@
                 Welcome to E-commerce CMS
               </p>
               <p class="subtitle-5 has-text-centered mb-2">Please Login</p>
-              <form action="" class="box">
+              <form class="box" @submit.prevent="postLogin">
                 <div class="field">
                   <label for="" class="label">Email</label>
                   <div class="control has-icons-left">
@@ -18,6 +18,7 @@
                       placeholder="admin@mail.com"
                       class="input"
                       required
+                      v-model="email"
                     />
                     <span class="icon is-small is-left">
                       <i class="fa fa-envelope"></i>
@@ -32,6 +33,7 @@
                       placeholder="1234"
                       class="input"
                       required
+                      v-model="password"
                     />
                     <span class="icon is-small is-left">
                       <i class="fa fa-lock"></i>
@@ -39,7 +41,9 @@
                   </div>
                 </div>
                 <div class="field">
-                  <button class="button is-success">Login</button>
+                  <button type="submit" class="button is-success">
+                    Login
+                  </button>
                 </div>
               </form>
             </div>
@@ -53,6 +57,21 @@
 <script>
 export default {
   name: "LoginPage",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    postLogin() {
+      console.log(this.email, this.password);
+      this.$store.dispatch("postLogin", {
+        email: this.email,
+        password: this.password,
+      });
+    },
+  },
 };
 </script>
 
