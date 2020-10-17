@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: [],
-    display_name: ""
+    display_name: "",
+    banners: []
   },
   mutations: {
     GET_PRODUCTS(state, payload) {
@@ -19,6 +20,12 @@ export default new Vuex.Store({
     },
     UPDATE_PRODUCTS(state, payload) {
       state.products = [];
+    },
+    GET_BANNERS(state, payload) {
+      state.banners = payload;
+    },
+    UPDATE_BANNERS(state, payload) {
+      state.banners = [];
     }
   },
   actions: {
@@ -119,6 +126,87 @@ export default new Vuex.Store({
             router.push({ path: "/home" });
           } else {
             console.log("Wrong password/email");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    getBanners(context, payload) {
+      axios({
+        method: "GET",
+        url: "http://localhost:3000/banners",
+        headers: { access_token: localStorage.access_token }
+      })
+        .then(result => {
+          if (result.status === 200) {
+            context.commit("GET_BANNERS", result.data);
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    changeStatus(context, payload) {
+      console.log(payload);
+      axios({
+        method: "PATCH",
+        url: `http://localhost:3000/banners/${payload.id}`,
+        headers: {
+          "Content-type": "application/json",
+          access_token: localStorage.access_token
+        },
+        data: {
+          is_active: payload.data
+        }
+      })
+        .then(result => {
+          if (result.status === 200) {
+            context.commit("UPDATE_BANNERS");
+            context.dispatch("getBanners");
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    deleteBanner(context, payload) {
+      axios({
+        method: "DELETE",
+        url: `http://localhost:3000/banners/${payload}`,
+        headers: { access_token: localStorage.access_token }
+      })
+        .then(result => {
+          if (result.status === 200) {
+            context.commit("UPDATE_BANNERS");
+            context.dispatch("getBanners");
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    addBanner(context, payload) {
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/banners",
+        headers: {
+          "Content-type": "application/json",
+          access_token: localStorage.access_token
+        },
+        data: payload
+      })
+        .then(result => {
+          if (result.status === 201) {
+            router.push({ path: "/home/banners" });
+          } else {
+            console.log(result);
           }
         })
         .catch(err => {

@@ -4,7 +4,8 @@ import LoginPage from "../views/LoginPage.vue";
 import Home from "../views/Home.vue";
 import AddPage from "../views/AddPage.vue";
 import DisplayAll from "../views/DisplayAll.vue";
-// import EditPage from "../views/EditPage.vue";
+import DisplayBanners from "../views/DisplayBanners.vue";
+import AddBanner from "../views/AddBanner.vue";
 
 Vue.use(VueRouter);
 
@@ -25,7 +26,9 @@ const routes = [
         name: "EditPage",
         component: () =>
           import(/* webpackChunkName: "EditPage" */ "../views/EditPage.vue")
-      }
+      },
+      { path: "banners", name: "BannersPage", component: DisplayBanners },
+      { path: "banners/add", name: "AddBannersPage", component: AddBanner }
     ]
   }
 ];

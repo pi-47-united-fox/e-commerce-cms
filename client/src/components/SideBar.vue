@@ -21,7 +21,8 @@
     </ul>
     <p class="menu-label">Banner</p>
     <ul class="menu-list">
-      <li><a>See All Banner</a></li>
+      <li><router-link to="/home/banners">See all Banners</router-link></li>
+      <li><router-link to="/home/banners/add">Add Banners</router-link></li>
     </ul>
   </div>
 </template>
