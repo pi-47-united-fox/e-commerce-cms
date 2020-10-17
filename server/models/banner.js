@@ -34,7 +34,16 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    isActive: DataTypes.BOOLEAN
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Banner's status cannot be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'Banner',
