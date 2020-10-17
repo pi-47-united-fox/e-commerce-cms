@@ -30,7 +30,7 @@ export default {
     },
     signOut () {
       this.$store.commit('SIGN_OUT')
-      this.$router.replace('/')
+      this.$router.push('/')
     }
   }
 }

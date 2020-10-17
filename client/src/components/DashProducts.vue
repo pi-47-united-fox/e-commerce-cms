@@ -7,7 +7,6 @@
         label="Search"
         single-line
         hide-details
-        fixed-header
       ></v-text-field>
     </v-card-title>
     <v-data-table
@@ -15,7 +14,7 @@
       :search="search"
       :headers="headers"
       :items="products"
-      :items-per-page="10"
+      :items-per-page="15"
       :single-select="singleSelect"
       item-key="id"
       show-select
@@ -30,12 +29,12 @@
             class="mt-5"
           ></v-switch>
           <v-spacer></v-spacer>
-          <v-toolbar-title>All Product</v-toolbar-title>
+          <v-toolbar-title>Total: {{products.length}} Products</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New Item
+                Add Product
               </v-btn>
             </template>
             <v-card>
@@ -61,7 +60,7 @@
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.Category.categoryName"
-                        label="CategoryId"
+                        label="Category"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
@@ -96,7 +95,7 @@
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="headline"
-                >Are you sure you want to delete this item?</v-card-title
+                >Are you sure you want to delete this product from list?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -134,6 +133,25 @@
         <!-- {{ item.id }} -->
       </template>
     </v-data-table>
+
+    <v-snackbar
+      v-model="snackbar"
+      timeout=5000
+      color="primary"
+      right
+    >
+      {{ infoSnack }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -142,6 +160,8 @@ export default {
   name: 'Products',
   data () {
     return {
+      snackbar: false,
+      infoSnack: '',
       dialog: false,
       dialogDelete: false,
       loading: true,
@@ -204,8 +224,12 @@ export default {
     },
     deleteItemConfirm () {
       this.$store.dispatch('deleteProduct', this.editedItem.id)
-      this.products.splice(this.editedIndex, 1)
-      this.closeDelete()
+        .then(() => {
+          this.closeDelete()
+          this.infoSnack = 'Product Deleted'
+          this.snackbar = true
+        })
+      // this.products.splice(this.editedIndex, 1) moved to vuex
     },
     deleteItem (item) {
       this.editedIndex = this.products.indexOf(item)
@@ -214,13 +238,15 @@ export default {
       this.dialogDelete = true
     },
     editItem (item) {
+      console.log(item)
       this.editedIndex = this.products.indexOf(item)
       this.editedItem = Object.assign({}, item)
+      console.log('this.editedItem', this.editedItem)
       this.dialog = true
     },
     close () {
       this.dialog = false
-      this.$nextTick(() => {
+      this.$nextTick(() => { // for update DOM
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
       })
@@ -234,13 +260,23 @@ export default {
     },
     save () {
       if (this.editedIndex > -1) {
-        this.$store.dispatch('editProduct', this.editItem)
-        // Object.assign(this.products[this.editedIndex], this.editedItem);
+        // console.log ('if', this.editItem)
+        this.$store.dispatch('editProduct', this.editedItem)
+          .then(() => {
+            this.close()
+            this.infoSnack = 'Success Edited Product'
+            this.snackbar = true
+          })
       } else {
+        // console.log ('else', this.editedItem)
         this.$store.dispatch('addProduct', this.editedItem)
-        // this.products.push(this.editedItem);
+          .then(() => {
+            this.close()
+            this.infoSnack = 'Success Added Product'
+            this.snackbar = true
+          })
       }
-      this.close()
+      // this.close()
     }
   },
   created () {

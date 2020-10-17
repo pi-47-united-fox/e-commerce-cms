@@ -11,7 +11,9 @@
           type="success"
           >Welcome Back Admin</v-alert
         >
-      <router-view />
+        <transition name="fade" mode="out-in">
+          <router-view transition="slide-x-transition" />
+        </transition>
       </v-container>
     </v-main>
   </v-app>
@@ -40,4 +42,21 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.router-link-active {
+  color: red;
+}
+
+.fade-enter {
+  transform: scale(0);
+}
+
+.fade-enter-active {
+  transition: transform 0.2s ease;
+}
+
+.fade-leave-active {
+  transition: transform 0.2s ease;
+  transform: scale(0);
+}
+</style>
