@@ -1,4 +1,7 @@
-require("dotenv").config()
+if(process.env.NODE_ENV === 'development'){
+    require("dotenv").config()
+}
+
 const express = require('express')
 const app = express()
 const routes = require('./routes')
@@ -17,8 +20,8 @@ app.get('/', function(req, res) {
 app.use(routes)
 app.use(errorHandler)
 
-// app.listen(port , () => {
-//     console.log(`app listen on ${port}`)
-// })
+app.listen(port , () => {
+    console.log(`app listen on ${port}`)
+})
    
 module.exports = app
