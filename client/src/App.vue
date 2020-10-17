@@ -217,13 +217,14 @@ body {
   height: 40px;
   width: 100%;
   background-color: #5978d5;
-  border-radius: 0;
+  border-width: 0;
   color:white ;
 }
 .btn-lgt:hover {
   background: rgb(245, 245, 244);
   color: darkgray;
-  font-weight: ;
+  font-weight: bold;
+
 }
 
 /* -------SIDEBAR-------- */
