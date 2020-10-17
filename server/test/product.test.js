@@ -358,7 +358,7 @@ describe("Testing Update Product Data", () => {
 });
 
 describe("Testing Delete Product Data", () => {
-	test("Update Product Success", (done) => {
+	test("Delete Product Success", (done) => {
 		request(app)
 			.delete(`/products/${id}`)
 			.set("access_token", process.env.ACCESS_TOKEN)
@@ -371,7 +371,7 @@ describe("Testing Delete Product Data", () => {
 	});
 
 	//! PRODUCT ID DOESN'T EXIST
-	test("Update Product Failed, product ID doesn't exist", (done) => {
+	test("Delete Product Failed, product ID doesn't exist", (done) => {
 		request(app)
 			.delete(`/products/100001`)
 			.set("access_token", process.env.ACCESS_TOKEN)
@@ -384,7 +384,7 @@ describe("Testing Delete Product Data", () => {
 	});
 
 	//! NO ACCESS TOKEN
-	test("Update Product Failed, No access token", (done) => {
+	test("Delete Product Failed, No access token", (done) => {
 		request(app)
 			.delete(`/products/${id}`)
 			.then((res) => {
