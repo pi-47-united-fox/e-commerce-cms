@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Template</title>
+    <style>
+        .bg {
+            /* The image used */
+            /* background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg"); */
+            background-color: #282828;
+            /* Half height */
+            height: 50%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="bg py-3">
+            <!-- navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-5 fixed-top">
+                <a class="navbar-brand text-white" href="#">E-commerce CMS</a>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="#" id="DashboardNav"
+                                v-on:click="dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="#" id="LoginNav"
+                                v-on:click="showLoginForm">Login</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link text-white" href="#" id="AddNav"
+                                v-on:click="showAddForm">Add</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#" id="logout"
+                                v-on:click="logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+    
+            <!-- form login admin -->
+            <div class="container my-5 py-3 border border-light rounded bg-light" style="width: 25%;" v-if="page==='login'">
+                <div class="container" id="login">
+                    <img src="https://images.unsplash.com/photo-1536560035542-1326fab3a507?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+                        alt="welcome" class="img-fluid rounded">
+                    <form id="loginForm" class="my-3">
+                        <div class="container">
+                            <h3 class="text-center">Login</h3>
+                        </div>
+                        <div class="form-group">
+                          <label for="input_email">Email address</label>
+                          <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                          <label for="input_password">Password</label>
+                          <input type="password" class="form-control" id="input_password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;" v-on:click="login">Login</button>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- content -->
+            <div class="container">
+    
+                <table class="table text-white">
+                    <caption>List of products</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Stock(s)</th>
+                        <th class="text-center" scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Adidas Yeezy</td>
+                            <td>url</td>
+                            <td>Rp 2.000.000 </td>
+                            <td>5</td>
+                            <td class="text-center"><button type="button" class="btn btn-success mr-2">Edit</button><button type="button" class="btn btn-danger">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Nike</td>
+                            <td>url</td>
+                            <td>Rp 2.000.000 </td>
+                            <td>5</td>
+                            <td class="text-center"><button type="button" class="btn btn-success mr-2">Edit</button><button type="button" class="btn btn-danger">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Champions</td>
+                            <td>url</td>
+                            <td>Rp 2.000.000 </td>
+                            <td>5</td>
+                            <td class="text-center"><button type="button" class="btn btn-success mr-2">Edit</button><button type="button" class="btn btn-danger">Delete</button></td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+    
+            <!-- add form -->
+            <div class="container my-5 py-3 border border-dark rounded bg-secondary text-white" style="width: 30%;">
+                <div class="container" id="addTask">
+                    <form id="addTaskForm" v-on:submit.prevent="addTask">
+                        <img src="https://images.unsplash.com/photo-1522273400909-fd1a8f77637e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+                            alt="products" class="img-fluid rounded">
+                        <div class="container my-1">
+                            <h3 class="text-center">Add a new product</h3>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Product's name" v-model="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="image_url">Image URL</label>
+                            <textarea class="form-control" id="image_url" rows="1" placeholder="Product's image" v-model="image_url"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" class="form-control" name="price" id="price" placeholder="Price should be greater than 0." v-model="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock(s)</label>
+                            <input type="number" class="form-control" id="stock" placeholder="Do not input negative value." v-model="stock">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Add</button>
+                        <button type="button" class="btn btn-danger my-2" style="width: 100%;" v-on:click.prevent="returnHome">Cancel</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
