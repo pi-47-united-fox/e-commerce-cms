@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     postLogin() {
-      console.log(this.email, this.password);
       this.$store.dispatch("postLogin", {
         email: this.email,
         password: this.password,

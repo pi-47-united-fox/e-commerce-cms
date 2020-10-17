@@ -37,16 +37,12 @@ const router = new VueRouter({
 });
 
 //! navigation guard still broken
-// router.beforeEach((to, from, next) => {
-//   if (localStorage.getItem("access_token")) {
-//     if (to.path === "/") {
-//       next({ path: "/home" });
-//     } else {
-//       next();
-//     }
-//   } else {
-//     next({ path: "/" });
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (!localStorage.getItem("access_token")) {
+    to.path === "/" ? next() : next("/");
+  } else {
+    to.path === "/" ? next("/home") : next();
+  }
+});
 
 export default router;
