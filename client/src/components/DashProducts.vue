@@ -44,6 +44,14 @@
 
               <v-card-text>
                 <v-container>
+                  <v-alert
+                    v-if="invalidInput"
+                    dense
+                    outlined
+                    type="error"
+                  >
+                    Input <strong>Price</strong> or <strong>Stock</strong> Invalid
+                  </v-alert>
                   <v-row>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
@@ -160,6 +168,7 @@ export default {
   name: 'Products',
   data () {
     return {
+      invalidInput: false,
       snackbar: false,
       infoSnack: '',
       dialog: false,
@@ -246,6 +255,7 @@ export default {
     },
     close () {
       this.dialog = false
+      this.invalidInput = false
       this.$nextTick(() => { // for update DOM
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
@@ -261,20 +271,29 @@ export default {
     save () {
       if (this.editedIndex > -1) {
         // console.log ('if', this.editItem)
-        this.$store.dispatch('editProduct', this.editedItem)
-          .then(() => {
-            this.close()
-            this.infoSnack = 'Success Edited Product'
-            this.snackbar = true
-          })
+        if (this.editedItem.price < 0 || this.editedItem.stock < 0) {
+          this.invalidInput = true
+        } else {
+          this.$store.dispatch('editProduct', this.editedItem)
+            .then(() => {
+              this.invalidInput = false
+              this.close()
+              this.infoSnack = 'Success Edited Product'
+              this.snackbar = true
+            })
+        }
       } else {
         // console.log ('else', this.editedItem)
-        this.$store.dispatch('addProduct', this.editedItem)
-          .then(() => {
-            this.close()
-            this.infoSnack = 'Success Added Product'
-            this.snackbar = true
-          })
+        if (this.editedItem.price < 0 || this.editedItem.stock < 0) {
+          this.invalidInput = true
+        } else {
+          this.$store.dispatch('addProduct', this.editedItem)
+            .then(() => {
+              this.close()
+              this.infoSnack = 'Success Added Product'
+              this.snackbar = true
+            })
+        }
       }
       // this.close()
     }
