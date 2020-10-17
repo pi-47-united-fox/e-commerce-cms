@@ -22,7 +22,7 @@ export default new Vuex.Store({
     login (context, payload) {
       axios({
         method: 'post',
-        url: `http://localhost:3000/login`,
+        url: `https://e-commerce-cms-uwu.herokuapp.com/login`,
         data: payload
         })
         .then(({ data }) => {
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
     fetchProducts (context) {
       axios({
-        url: 'http://localhost:3000/stocks',
+        url: 'https://e-commerce-cms-uwu.herokuapp.com/stocks',
         method: 'get',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -50,7 +50,7 @@ export default new Vuex.Store({
     addProduct (context, payload) {
       axios({
         method: 'post',
-        url: `http://localhost:3000/stocks`,
+        url: `https://e-commerce-cms-uwu.herokuapp.com/stocks`,
         data: payload,
         headers: {
             access_token: localStorage.getItem('access_token')
@@ -66,7 +66,7 @@ export default new Vuex.Store({
     deleteProduct (context, payload) {
       axios({
         method: 'delete',
-        url: `http://localhost:3000/stocks/${payload}`,
+        url: `https://e-commerce-cms-uwu.herokuapp.com/stocks/${payload}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -82,7 +82,7 @@ export default new Vuex.Store({
     fetchProductById (context, payload) {
       axios({
         method: 'get',
-        url: `http://localhost:3000/stocks/${payload}`,
+        url: `https://e-commerce-cms-uwu.herokuapp.com/stocks/${payload}`,
         headers: {
             access_token: localStorage.getItem('access_token')
         }
@@ -101,7 +101,7 @@ export default new Vuex.Store({
       delete payload.id
       axios({
         method: 'put',
-        url: `http://localhost:3000/stocks/${productId}`,
+        url: `https://e-commerce-cms-uwu.herokuapp.com/stocks/${productId}`,
         data: payload,
         headers: {
             access_token: localStorage.getItem('access_token')
