@@ -18,8 +18,8 @@ app.use(cors());
 app.use("/", router);
 app.use(errorHandler);
 
-// app.listen(port, () => {
-// 	console.log(`Listening in port: ${port}`);
-// });
+app.listen(port, () => {
+	console.log(`Listening in port: ${port}`);
+});
 
 module.exports = app;
