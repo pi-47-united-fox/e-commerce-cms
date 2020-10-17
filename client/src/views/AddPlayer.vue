@@ -1,23 +1,17 @@
 <template>
   <form
     class="bg-dark mx-auto text-primary my-5 py-5 px-3"
-    @submit.prevent="editPlayer"
+    @submit.prevent="addPlayer"
   >
     <div class="form-group">
       <label for="name">Player Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        v-model="name"
-      />
+      <input type="text" class="form-control" id="name" v-model="name" />
     </div>
     <div class="form-group">
       <label for="image_url">Image</label>
       <input
         type="text"
         class="form-control"
-
         id="image_url"
         v-model="image_url"
       />
@@ -33,35 +27,35 @@
         v-model="category"
       />
     </div>
-    <button type="submit" class="btn btn-primary">Edit Player</button>
+    <button type="submit" class="btn btn-primary">Add Player</button>
   </form>
 </template>
 
 <script>
 export default {
-  name: "editPlayer",
+  name: "addPlayer",
   data() {
     return {
       name: "",
       image_url: "",
-      price: 0,
+      price: null,
       category: "",
     };
   },
   methods: {
-    editPlayer() {
+    addPlayer() {
       let input = {
-        id: this.player.id,
         name: this.name,
         image_url: this.image_url,
         price: this.price,
         category: this.category,
       };
-      this.$store.dispatch("editPlayer", input);
+      this.$store.dispatch("addPlayer", input);
       this.$router.push({ path: "/footballPlayers" });
     },
   },
 };
 </script>
+
 <style>
 </style>

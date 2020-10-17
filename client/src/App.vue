@@ -22,18 +22,7 @@ export default {
       page: 'login'
     }
   },
-  methods: {
-    login () {
-      let input = {
-        email: this.email,
-        password: this.password
-      }
-      this.$store.dispatch('login',input)
-      .then (()=> {
-        this.$router.push({path:"/home"})
-      })
-    },
-  }
+
 };
 </script>
 

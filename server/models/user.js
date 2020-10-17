@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     email: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         isEmail: {
           args: true,
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     password: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         len: {
           args: [6],
@@ -34,17 +34,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     role: DataTypes.STRING
-  }, { 
-    hooks:{
-      beforeCreate(user){
+  }, {
+    hooks: {
+      beforeCreate(user) {
         user.password = hashPassword(user.password)
-        if(user.email === 'admin@jmail.com') {
+        if (user.email === 'admin@jmail.com') {
           user.role = 'admin'
         } else {
           user.role = 'customer'
+        }
       }
-    }
-  },
+    },
     sequelize,
     modelName: 'User',
   });

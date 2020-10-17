@@ -15,38 +15,43 @@ module.exports = (sequelize, DataTypes) => {
   };
   Product.init({
     name: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true
       }
     },
     image_url: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true
       }
     },
     price: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true,
-        min:0
+        min: 0
       }
     },
     stock: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true,
         min: 0
       }
     },
     category: {
-      type:DataTypes.STRING,
+      type: DataTypes.STRING,
       validate: {
         notEmpty: true
       }
     }
   }, {
+    hooks: {
+      beforeCreate(user) {
+        user.stock = 1
+      }
+    },
     sequelize,
     modelName: 'Product',
   });

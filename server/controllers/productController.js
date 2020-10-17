@@ -20,7 +20,6 @@ class ProductController {
     static async listProducts(req, res, next) {
         try{
             const data = await Product.findAll()
-            console.log(data)
             res.status(200).json(data)
         } catch(err) {
             res.status(500).json(err)
