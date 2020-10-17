@@ -1,11 +1,9 @@
 <template>
   <!--Add task pop up-->
   <div class="add-task">
-    <h2>Add Products</h2>
-    <form @submit.prevent="addProducts">
+    <h2>Edit Products</h2>
+    <form @submit.prevent="editProducts">
       <fieldset class="uk-fieldset">
-        <legend class="uk-legend">Legend</legend>
-
         <div class="uk-margin">
           <input
             class="uk-input"
@@ -53,7 +51,7 @@
       <button type="submit" class="uk-button uk-button-secondary">
         Add Data
       </button>
-      <button class="uk-button uk-button-default" @click="closePopAdd">
+      <button class="uk-button uk-button-default" @click="closePopEdit">
         Cancel
       </button>
     </form>
@@ -62,9 +60,10 @@
 
 <script>
 export default {
-  name: "PopAdd",
+  name: "PopEdit",
   data() {
     return {
+      id: 58,
       name: "",
       image_url: "",
       stock: "",
@@ -73,32 +72,48 @@ export default {
     };
   },
   methods: {
-    closePopAdd() {
-      console.log("emit shiow pop add dari CR");
-      this.$emit("emitClosePopAdd", false);
+    closePopEdit() {
+      this.$emit("emitClosePopEdit", false);
     },
-    addProducts() {
-      console.log("submit pop add!");
+    editProducts() {
+      console.log("edit products jalanin action");
       const payload = {
+        id: this.productsId,
         name: this.name,
         stock: this.stock,
         image_url: this.image_url,
         category: this.category,
         price: this.price,
       };
-      this.$store.dispatch("addProducts", payload);
-      this.$store.dispatch("fetchProducts");
-      // this.$emit("reload_page");
-      this.closePopAdd();
-    },
-  },
-  computed: {
-    products() {
-      return this.state.addProducts;
+      this.$store.dispatch("editProducts", payload);
+      this.closePopEdit();
     },
   },
   created() {
-    this.$store.dispatch("fetchProducts");
+    this.$store.dispatch("fetchOneProducts", this.productsId);
+  },
+  watch: {
+    oneProduct() {
+      this.id = 58;
+      this.name = this.oneProduct.name;
+      this.description = this.oneProduct.description;
+      this.image_url = this.oneProduct.image_url;
+      this.stock = this.oneProduct.stock;
+      this.category = this.oneProduct.category;
+      this.price = this.oneProduct.price;
+    },
+  },
+  computed: {
+    productsById() {
+      console.log("masuk computed");
+      return this.$store.state.oneProduct;
+    },
+    productsId() {
+      return this.$store.state.idProducts;
+    },
+    oneProduct() {
+      return this.$store.state.oneProduct;
+    },
   },
 };
 </script>

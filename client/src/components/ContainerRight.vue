@@ -31,6 +31,7 @@
       <ItemsCard
         :products="products"
         @emitFetchOneProducts="fetchOneProducts"
+        @emitEditProducts="emitEditProducts"
       />
       <!-- itemCard end -->
 
@@ -42,12 +43,17 @@
           </div>
           <div v-for="(product, i) in products.products" :key="i">
             <div v-if="product.id == productId">
-              <h3>{{ product.name }}</h3>
               <img :src="product.image_url" alt="" srcset="" />
-              <p>{{ product.description }}</p>
-              <p>stock : 10</p>
-              <p>category: All Mountain</p>
-              <p>Price : $1000000</p>
+              <div class="uk-animation-toggle" tabindex="0">
+                <div class="uk-card uk-card-body uk-animation-slide-left">
+                  <!-- details  -->
+                  <h3>{{ product.name }}</h3>
+                  <p>stock : 10</p>
+                  <p>category: All Mountain</p>
+                  <p>Price : $1000000</p>
+                  <!-- details end -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -78,9 +84,12 @@ export default {
       this.$store.dispatch("fetchProducts");
     },
     fetchOneProducts(value) {
-      console.log(value, "masuuuk angin pak haji?");
+      // console.log(value, "masuuuk angin pak haji?");
       this.productId = value;
       this.fetchProducts();
+    },
+    emitEditProducts(value) {
+      this.$emit("emitEditProducts", value);
     },
   },
   computed: {
@@ -92,7 +101,7 @@ export default {
     },
   },
   created() {
-    this.fetchProducts();
+    // this.fetchProducts();
   },
 };
 </script>
@@ -151,10 +160,10 @@ p {
 }
 
 .item-details {
-  width: 29%;
+  width: 40%;
   height: auto;
   display: flex;
-  background: rgb(17, 17, 17);
+  /* background: rgb(17, 17, 17); */
   margin-top: 20px;
   margin-left: 20px;
   border-radius: 10px;
@@ -169,9 +178,9 @@ p {
   width: 90%;
   height: auto;
   display: flex;
-  justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-left: 20px;
 }
 
 .item-details-inner p {
@@ -191,6 +200,7 @@ p {
 .item-details-inner img {
   width: 90%;
   height: auto;
+  border-radius: 10px;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

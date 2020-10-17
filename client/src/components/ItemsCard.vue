@@ -4,11 +4,12 @@
     <div v-for="products in products.products" :key="products.id">
       <div class="item-card">
         <img :src="products.image_url" alt="" srcset="" />
+
         <div class="item-card-text">
           <h3 @click.prevent="getDetails(products.id)">{{ products.name }}</h3>
           <p>Stock : {{ products.stock }} items</p>
           <p>Category: {{ products.category }}</p>
-          <a href="">Edit</a> |
+          <a href="#" @click.prevent="editProducts(products.id)">Edit</a> |
           <a href="#" @click.prevent="deleteProduct(products.id)">Delete</a>
         </div>
       </div>
@@ -25,25 +26,27 @@ export default {
       this.$store.dispatch("fetchProducts");
     },
     deleteProduct(id) {
-      console.log(id, ">> delete");
-      this.fetchProducts();
+      // this.fetchProducts();
       this.$store.dispatch("deleteProducts", id);
     },
     getDetails(data) {
-      console.log(data, "data product untuk details item card");
       this.$store.dispatch("fetchOneProducts", data);
       this.$emit("emitFetchOneProducts", data);
+    },
+    editProducts(id) {
+      this.$emit("emitEditProducts", true);
+      this.$store.dispatch("idProducts", id);
+      console.log("id dari item card >>> ", id);
+    },
+  },
+  computed: {
+    productId() {
+      // console.log("computed id >>>", this.$store.state.idProducts);
+      return this.$store.state.idProducts;
     },
   },
   created() {
     this.fetchProducts();
-    // console.log('DATA FETCH')
-    // console.log(this.products.products[0].UserId)
-    // console.log(this.products.products[0].name)
-    // console.log(this.products.products[0].image_url)
-    // console.log(this.products.products[0].category)
-    // console.log(this.products.products[0].price)
-    // console.log(this.products.products[0].stock)
   },
 };
 </script>
@@ -59,7 +62,7 @@ export default {
 }
 
 .item-card {
-  width: 90%;
+  width: 100%;
   height: 200px;
   display: flex;
   border-radius: 10px;

@@ -9,7 +9,8 @@ export default new Vuex.Store({
     products: [],
     oneProduct: [],
     category: [],
-    inputData: []
+    inputData: [],
+    idProducts: null,
   },
   mutations: {
     FETCH_PRODUCTS (state, payload) {
@@ -20,9 +21,17 @@ export default new Vuex.Store({
     },
     ADD_PRODUCTS (state, payload) {
       this.state.inputData = payload
+    },
+    ID_PRODUCTS(state, payload) {
+      this.state.idProducts = payload
+      console.log(this.state.idProducts,'test ini nilai state')
     }
   },
   actions: {
+    idProducts(context, payload) {
+      context.commit('ID_PRODUCTS', payload)
+    },
+
     fetchProducts (context, payload) {
       console.log('ini dispacth dari CR')
       axios
@@ -36,7 +45,7 @@ export default new Vuex.Store({
     },
     fetchOneProducts(context, payload) {
       const id = payload
-      console.log(id,'>>>>')
+      console.log(id,'>>>> fetch by id')
       axios({
         method: 'GET',
         url: `http://localhost:3000/products/${payload}`,
@@ -52,7 +61,7 @@ export default new Vuex.Store({
         console.log(err, 'err fetch one products')
       })
     },
-    addProducts (context, payload) {
+    addProducts ({commit,dispatch}, payload) {
       axios({
         url: 'http://localhost:3000/products',
         method: 'POST',
@@ -62,8 +71,10 @@ export default new Vuex.Store({
         },
       })
         .then(({ data }) => {
+          dispatch("fetchProducts");
           console.log(data)
           console.log(data, 'success add data')
+         
         })
         .catch(err => {
           console.log(err, 'err add data!')
@@ -87,7 +98,34 @@ export default new Vuex.Store({
           console.log(err, 'error dari login')
         })
     },
-    deleteProducts(context, payload) {
+
+    editProducts({commit,dispatch}, payload) {
+      console.log(payload)
+      console.log(payload.id)
+      axios({
+        method: "PUT",
+        url: `http://localhost:3000/products/${payload.id}`,
+        data: {
+          name: payload.name,
+          stock: payload.stock,
+          image_url: payload.image_url,
+          category: payload.category,
+          price: payload.price
+        },
+        headers: {
+          access_token : localStorage.getItem('access_token')
+        },
+      })
+        .then(({ data }) => {
+          console.log(`success edit data`, data)
+          dispatch('fetchProducts')
+        })
+        .catch(err => {
+        console.log(`failed to edit data`, err)
+      })
+    },
+
+    deleteProducts({dispatch}, payload) {
       const id = payload
       axios({
         method: "DELETE",
@@ -97,7 +135,7 @@ export default new Vuex.Store({
         }
       })
         .then( data  => {
-        console.log(data,'data dari axios')
+        dispatch('fetchProducts')
         console.log(`success delete porduct wiht ${data} `)
         })
         .catch(err => {
