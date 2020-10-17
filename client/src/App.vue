@@ -12,8 +12,7 @@
 <script>
 export default {
   namee: 'App',
-  components: {
-  },
+  components: {},
   data () {
     return {
       // isLogin: false
@@ -30,27 +29,28 @@ export default {
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
+  overflow-x: hidden;
+}
 
+.back-btn-c {
+  background-color: transparent;
+  border-width: 0px;
 }
-.back-btn-c{
- background-color: transparent;
- border-width: 0px;
-}
-.back-btn{
+.back-btn {
   height: 30px;
 }
-.nav-btn{
+.nav-btn {
   background-color: #5978d5;
   color: white;
   border-width: 0px;
   font-size: 18px;
   padding: 5px;
 }
-.nav-btn:hover{
+.nav-btn:hover {
   background-color: white;
-  color:  #5978d5;
+  color: #5978d5;
 }
-.menu{
+.menu {
   justify-content: space-between;
   display: flex;
   flex-direction: column;
@@ -146,7 +146,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
 }
-.sidenavbar {
+.sidebar {
   background-color: #5978d5;
   width: 10%;
   height: 100vh;
@@ -175,7 +175,14 @@ body {
   border-radius: 10px;
   color: white;
   border-width: 0;
-  margin-top: 2rem;
+}
+.delete-btn {
+  margin-top: 10px;
+  padding: 5px;
+  background-color: #ea9292;
+  border-radius: 10px;
+  color: white;
+  border-width: 0;
 }
 .add-btn {
   width: 130px;
@@ -187,9 +194,19 @@ body {
   font-size: 14px;
   position: fixed;
 }
+.card-img-top{
+  height: 200px;
+  width:fit-content;
+}
+.card-img{
+  height: 200px;
+}
 .content {
   display: flex;
   width: 100vw;
   flex-direction: column;
+  min-height: 100vh;
 }
+/* -------SIDEBAR-------- */
+
 </style>

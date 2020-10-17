@@ -5,7 +5,6 @@
         <div style="margin-top: 20px">
           <img src="../assets/zambanlogo.svg" alt="" />
         </div>
-        <h3 style="margin-top: 20px">Admin Login</h3>
         <div style="margin-top: 10px">
           <div class="input">
             <input
@@ -23,10 +22,14 @@
               v-model="password"
             />
           </div>
-          <div></div>
-          <button class="btn-login" @click.prevent="login">
-            login
-          </button>
+          <button class="btn-login" @click.prevent="login">login</button>
+          <div>
+            <img
+              src="../assets/www.zamban.co.id.svg"
+              alt=""
+              width="100px margin-top=30px"
+            />
+          </div>
         </div>
       </div>
     </center>
@@ -34,7 +37,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   nama: 'LoginPage',
   data () {
@@ -45,20 +47,11 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        method: 'POST',
-        url: 'http://localhost:3000/login',
-        data: {
-          email: this.email,
-          password: this.password
-        }
+      // console.log(this.email, this.password, '<----ini dari view login')
+      this.$store.dispatch('login', {
+        email: this.email,
+        password: this.password
       })
-        .then(({ data }) => {
-          localStorage.access_token = data.access_token
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   }
 }

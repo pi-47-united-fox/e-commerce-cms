@@ -2,22 +2,22 @@
   <b-modal
     id="modal-prevent-closing"
     ref="modal"
-    title="Submit Your Name"
+    title="Submit Your Product"
     @show="resetModal"
     @hidden="resetModal"
     @ok="handleOk"
   >
     <form ref="form" @submit.stop.prevent="handleSubmit">
       <b-form-group
-        :state="titleState"
-        label="Title"
-        label-for="title-input"
+        :state="nameState"
+        label="Name"
+        label-for="name-input"
         invalid-feedback="Product title is required"
       >
         <b-form-input
           id="title-input"
-          v-model="title"
-          :state="titleState"
+          v-model="name"
+          :state="nameState"
           required
         ></b-form-input>
       </b-form-group>
@@ -68,9 +68,9 @@
 export default {
   data () {
     return {
-      title: '',
-      titleState: null,
-      submittedTitle: [],
+      name: '',
+      nameState: null,
+      submittedName: [],
       imageurl: '',
       imageurlState: null,
       submittedImageurl: [],
@@ -86,7 +86,7 @@ export default {
     checkFormValidity () {
       const valid = this.$refs.form.checkValidity()
       console.log(valid)
-      this.titleState = valid
+      this.nameState = valid
       // this.imageurlState = valid
       // this.priceState = valid
       // this.stockState = valid
@@ -94,8 +94,8 @@ export default {
     },
 
     resetModal () {
-      this.title = ''
-      this.titleState = null
+      this.name = ''
+      this.nameState = null
       // this.imageurl = ''
       // this.imageurlState = null
       // this.price = ''
@@ -110,12 +110,19 @@ export default {
       this.handleSubmit()
     },
     handleSubmit () {
+      // console.log(this.name, this.image_eurl, this.price, this.stock)
       // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return
-      }
+      // if (!this.checkFormValidity()) {
+      //   return
+      // }
       // Push the name to submitted names
-      this.submittedTitle.push(this.title)
+      this.$store.dispatch('addData', {
+        name: this.name,
+        imageurl: this.imageurl,
+        price: this.price,
+        stock: this.stock
+      })
+      this.submittedName.push(this.name)
       // this.submittedImageurl.push(this.imageurl)
       // this.submittedPrice.push(this.price)
       // this.submittedStock.push(this.stock)
