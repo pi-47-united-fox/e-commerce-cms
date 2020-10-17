@@ -9,7 +9,16 @@
           dense
           text
           type="success"
+          timeout="5000"
           >Welcome Back Admin</v-alert
+        >
+        <v-alert
+          dismissible
+          dense
+          text
+          timeout="5000"
+          type="success"
+          >Open tab Product to see the Product list</v-alert
         >
         <transition name="fade" mode="out-in">
           <router-view transition="slide-x-transition" />

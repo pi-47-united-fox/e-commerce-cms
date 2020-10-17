@@ -3,6 +3,8 @@
     <v-card width="500px" class="mx-auto mt-5">
       <v-card-title primary-title>
         Login to unShop Dashboard
+        <v-spacer></v-spacer>
+        <ChangeTheme />
       </v-card-title>
       <v-container>
         <v-form>
@@ -43,6 +45,7 @@
             class="mt-5"
             color="primary"
             @click="submit"
+            :loading="loading"
             :disabled="email == '' || password == ''"
           >
             Submit
@@ -55,11 +58,16 @@
 </template>
 
 <script>
+import ChangeTheme from '@/components/ChangeTheme.vue'
 
 export default {
   name: 'Login',
+  components: {
+    ChangeTheme
+  },
   data () {
     return {
+      loading: false,
       showPassword: false,
       email: '',
       password: '',
@@ -71,22 +79,26 @@ export default {
         required: value => !!value || 'Password Tidak Boleh kosong.',
         emailMatch: () => ('Email atau password yang dimasukkan salah')
       },
-      formHasErrors: false,
+      formHasErrors: false
 
     }
   },
   methods: {
     submit () {
       // return this.$router.push('/dash')
+      this.formHasErrors = false
+      this.loading = !this.loading
       return this.$store.dispatch('login', {
         email: this.email,
         password: this.password
       }).then((result) => {
         if (result == undefined) {
+          this.loading = !this.loading
           this.$router.push('/dash')
         } else {
+          this.loading = !this.loading
           this.formHasErrors = true
-          console.log ('masuk')
+          console.log('masuk')
         }
       })
     }

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    themeDark: false,
     adminEmail: '',
     isLogedIn: false,
     products: [],
@@ -13,6 +14,9 @@ export default new Vuex.Store({
     banners: []
   },
   mutations: {
+    SWITCH_THEME (state) {
+      state.themeDark = !state.themeDark
+    },
     LOGIN (state, token) {
       state.isLogedIn = true
       localStorage.setItem('access_token', token)

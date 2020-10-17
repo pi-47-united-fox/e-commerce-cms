@@ -10,6 +10,7 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
+      :loading="loading"
       :search="search"
       :headers="headers"
       :items="banners"
@@ -142,6 +143,7 @@ export default {
   name: 'Banners',
   data () {
     return {
+      loading: true,
       snackbar: false,
       infoSnack: '',
       search: '',
@@ -197,6 +199,9 @@ export default {
   methods: {
     fetchBanners () {
       this.$store.dispatch('fetchBanners')
+        .then(() => {
+          this.loading = false
+        })
     },
     deleteItemConfirm () { // call vuex
       this.$store.dispatch('deleteBanner', this.editedItem.id)

@@ -9,13 +9,19 @@
     <h2>unShop Admin Dashboard</h2>
 
     <v-spacer></v-spacer>
+    <ChangeTheme />
     <v-btn bottom @click="signOut">Sign Out</v-btn>
   </v-app-bar>
 </template>
 
 <script>
+import ChangeTheme from '@/components/ChangeTheme.vue'
+
 export default {
   name: 'DasboardBar',
+  components: {
+    ChangeTheme
+  },
   data () {
     return {
       menus: [
