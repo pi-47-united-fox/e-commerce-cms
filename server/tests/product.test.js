@@ -82,10 +82,7 @@ describe('Product', () => {
                 test_product = body
                 done()
             })
-            // .catch(err => {
-            //     console.log(err)
-            //     done(err)
-            // })
+
     })
 
     // Fail cases
@@ -530,7 +527,7 @@ describe('Product Delete', () => {
 
     test('User is not admin', (done) => {
         request(app)
-            .put(`/products/${test_product.id}`)
+            .delete(`/products/${test_product.id}`)
             .set('access_token', customer_access_token)
             .then(response => {
                 const { status, body } = response
@@ -543,21 +540,18 @@ describe('Product Delete', () => {
             })
     }) 
 
-    test('Succesfully edit a product', (done) => {
+    test('Succesfully delete a product', (done) => {
         request(app)
-            .put(`/products/${test_product.id}`)
+            .delete(`/products/${test_product.id}`)
             .set('access_token', access_token)
             .then(response => {
                 const { status, body } = response
                 expect(status).toBe(200)
-                expect(body).toHaveProperty('message', "Product has been successfully updated.")
+                expect(body).toHaveProperty('message', "Product has been successfully deleted.")
                 done()
             })
 
     })
-
-    
-
     
 })
 

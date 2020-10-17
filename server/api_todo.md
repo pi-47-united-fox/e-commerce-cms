@@ -25,9 +25,11 @@
 
 - Response (400 - Bad Request)
 {
-  "message": "Invalid request"
+  "message": "Wrong email/password"
 }
-
+{
+  "message": "Please fill the form carefully"
+}
 
 ## GET /products
 - Request header:
@@ -59,14 +61,13 @@ not needed
         "updatedAt": "2020-03-20T07:15:12.149Z"
     }
 ]
-- Response (400 - Bad Request)
+- Response (401)
 {
-  "message": "Invalid request"
+    "message" : "Token is expired. Please relogin."
 }
-- Response (500 - Internal Server Error)
-{
-  "message": "Something wrong with the server"
-}
+
+
+
 
 ## POST /products
 - Request header:
@@ -84,16 +85,37 @@ not needed
 
 - Response(200)
     {
-        "message": "A new product has been successfully added.",
-        "id": 2,
-        "name": "Traditional Table Lamps Set of 2 Classic Design Nightstand Table Lamps Set",
-        "image_url": "https://images-na.ssl-images-amazon.com/images/I/71T7QixaIjL._AC_SL1500_.jpg",
-        "price": 3700000,
-        "stock": 9
+        "message": "A new product has been successfully added."
     }
 - Response (400 - Bad Request)
 {
-  "message": "Invalid request"
+  "message": ""Validation error: Product name cannot be empty""
+}
+{
+  "message": "Validation error: Image URL cannot be empty"
+}
+{
+  "message": "Validation error: Price must be number"
+}
+{
+  "message": "Validation error: Stock must be number"
+}
+{
+  "message": "Validation error: Price must be positive"
+}
+{
+  "message": "Validation error: Stock must be positive"
+}
+{
+  "message": "Validation error: Price must be number"
+}
+{
+  "message": "Validation error: Price must be positive"
+}
+
+- Response (401)
+{
+    "message" : "Token is expired. Please relogin."
 }
 - Response (500 - Internal Server Error)
 {
@@ -112,18 +134,14 @@ id = +req.params.id
 
 - Response(200)
 { 
-    "message": "Delete success"
+    "message": "Product has been successfully deleted."
 }
 
-- Response (404 - Not Found)
+- Response (404 - Not Authorized)
 {
-  "message": "Data Not Found"
+  "message": "You do not have an access"
 }
 
-- Response (500 - Internal Server Error)
-{
-  "message": "Something wrong with the server"
-}
 
 
 ## PUT /products/:id
@@ -146,15 +164,31 @@ id = +req.params.id
     }
 - Response (400 - Bad Request)
 {
-  "message": "Invalid request"
+  "message": ""Validation error: Product name cannot be empty""
+}
+{
+  "message": "Validation error: Image URL cannot be empty"
+}
+{
+  "message": "Validation error: Price must be number"
+}
+{
+  "message": "Validation error: Stock must be number"
+}
+{
+  "message": "Validation error: Price must be positive"
+}
+{
+  "message": "Validation error: Stock must be positive"
+}
+{
+  "message": "Validation error: Price must be number"
+}
+{
+  "message": "Validation error: Price must be positive"
 }
 
-- Response (404 - Not Found)
+- Response (401)
 {
-  "message": "Data Not Found"
-}
-
-- Response (500 - Internal Server Error)
-{
-  "message": "Something wrong with the server"
+    "message" : "Token is expired. Please relogin."
 }
