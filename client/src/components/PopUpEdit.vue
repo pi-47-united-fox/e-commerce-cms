@@ -60,62 +60,62 @@
 
 <script>
 export default {
-  name: "PopEdit",
-  data() {
+  name: 'PopEdit',
+  data () {
     return {
       id: 58,
-      name: "",
-      image_url: "",
-      stock: "",
-      category: "",
-      price: "",
-    };
+      name: '',
+      image_url: '',
+      stock: '',
+      category: '',
+      price: ''
+    }
   },
   methods: {
-    closePopEdit() {
-      this.$emit("emitClosePopEdit", false);
+    closePopEdit () {
+      this.$emit('emitClosePopEdit', false)
     },
-    editProducts() {
-      console.log("edit products jalanin action");
+    editProducts () {
+      console.log('edit products jalanin action')
       const payload = {
         id: this.productsId,
         name: this.name,
         stock: this.stock,
         image_url: this.image_url,
         category: this.category,
-        price: this.price,
-      };
-      this.$store.dispatch("editProducts", payload);
-      this.closePopEdit();
-    },
+        price: this.price
+      }
+      this.$store.dispatch('editProducts', payload)
+      this.closePopEdit()
+    }
   },
-  created() {
-    this.$store.dispatch("fetchOneProducts", this.productsId);
+  created () {
+    this.$store.dispatch('fetchOneProducts', this.productsId)
   },
   watch: {
-    oneProduct() {
-      this.id = 58;
-      this.name = this.oneProduct.name;
-      this.description = this.oneProduct.description;
-      this.image_url = this.oneProduct.image_url;
-      this.stock = this.oneProduct.stock;
-      this.category = this.oneProduct.category;
-      this.price = this.oneProduct.price;
-    },
+    oneProduct () {
+      this.id = 58
+      this.name = this.oneProduct.name
+      this.description = this.oneProduct.description
+      this.image_url = this.oneProduct.image_url
+      this.stock = this.oneProduct.stock
+      this.category = this.oneProduct.category
+      this.price = this.oneProduct.price
+    }
   },
   computed: {
-    productsById() {
-      console.log("masuk computed");
-      return this.$store.state.oneProduct;
+    productsById () {
+      console.log('masuk computed')
+      return this.$store.state.oneProduct
     },
-    productsId() {
-      return this.$store.state.idProducts;
+    productsId () {
+      return this.$store.state.idProducts
     },
-    oneProduct() {
-      return this.$store.state.oneProduct;
-    },
-  },
-};
+    oneProduct () {
+      return this.$store.state.oneProduct
+    }
+  }
+}
 </script>
 
 <style>

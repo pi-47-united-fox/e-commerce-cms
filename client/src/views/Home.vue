@@ -15,38 +15,38 @@
 
 <script>
 // @ is an alias to /src
-import Login from "../views/Login";
-import ContainerLeft from "@/components/ContainerLeft.vue";
-import ContainerRight from "@/components/ContainerRight.vue";
-import PopUpAdd from "@/components/PopUpAdd.vue";
-import PopUpEdit from "@/components/PopUpEdit.vue";
+// import Login from '../views/Login'
+import ContainerLeft from '@/components/ContainerLeft.vue'
+import ContainerRight from '@/components/ContainerRight.vue'
+import PopUpAdd from '@/components/PopUpAdd.vue'
+import PopUpEdit from '@/components/PopUpEdit.vue'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    Login,
+    // Login,
     ContainerLeft,
     ContainerRight,
     PopUpAdd,
-    PopUpEdit,
+    PopUpEdit
   },
-  data() {
+  data () {
     return {
       showPopUpAdd: false,
-      showPopUpEdit: false,
-    };
+      showPopUpEdit: false
+    }
   },
   methods: {
-    popAddStatus(status) {
-      console.log(status);
-      this.showPopUpAdd = status;
+    popAddStatus (status) {
+      console.log(status)
+      this.showPopUpAdd = status
     },
-    popEditStatus(status) {
-      console.log(status);
-      this.showPopUpEdit = status;
-    },
-  },
-};
+    popEditStatus (status) {
+      console.log(status)
+      this.showPopUpEdit = status
+    }
+  }
+}
 </script>
 
 <style>

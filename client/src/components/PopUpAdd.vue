@@ -62,45 +62,45 @@
 
 <script>
 export default {
-  name: "PopAdd",
-  data() {
+  name: 'PopAdd',
+  data () {
     return {
-      name: "",
-      image_url: "",
-      stock: "",
-      category: "",
-      price: "",
-    };
+      name: '',
+      image_url: '',
+      stock: '',
+      category: '',
+      price: ''
+    }
   },
   methods: {
-    closePopAdd() {
-      console.log("emit shiow pop add dari CR");
-      this.$emit("emitClosePopAdd", false);
+    closePopAdd () {
+      console.log('emit shiow pop add dari CR')
+      this.$emit('emitClosePopAdd', false)
     },
-    addProducts() {
-      console.log("submit pop add!");
+    addProducts () {
+      console.log('submit pop add!')
       const payload = {
         name: this.name,
         stock: this.stock,
         image_url: this.image_url,
         category: this.category,
-        price: this.price,
-      };
-      this.$store.dispatch("addProducts", payload);
-      this.$store.dispatch("fetchProducts");
+        price: this.price
+      }
+      this.$store.dispatch('addProducts', payload)
+      this.$store.dispatch('fetchProducts')
       // this.$emit("reload_page");
-      this.closePopAdd();
-    },
+      this.closePopAdd()
+    }
   },
   computed: {
-    products() {
-      return this.state.addProducts;
-    },
+    products () {
+      return this.state.addProducts
+    }
   },
-  created() {
-    this.$store.dispatch("fetchProducts");
-  },
-};
+  created () {
+    this.$store.dispatch('fetchProducts')
+  }
+}
 </script>
 
 <style>

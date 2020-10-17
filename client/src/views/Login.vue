@@ -38,25 +38,25 @@
 
 <script>
 export default {
-  name: "Login",
-  data() {
+  name: 'Login',
+  data () {
     return {
       payload: {
-        email: "",
-        password: "",
-      },
-    };
+        email: '',
+        password: ''
+      }
+    }
   },
   methods: {
-    login() {
-      this.$store.dispatch("login", this.payload);
-      this.loginRouter();
+    login () {
+      this.$store.dispatch('login', this.payload)
+      this.loginRouter()
     },
-    loginRouter() {
-      this.$router.push({ path: "/" });
-    },
-  },
-};
+    loginRouter () {
+      this.$router.push({ path: '/' })
+    }
+  }
+}
 </script>
 
 <style>

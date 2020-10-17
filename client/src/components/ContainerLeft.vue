@@ -22,15 +22,15 @@
 
 <script>
 export default {
-  name: "ContainerLeft",
+  name: 'ContainerLeft',
   methods: {
-    logout() {
-      localStorage.clear();
-      console.log("test logout");
-      this.$router.push({ path: "/login" });
-    },
-  },
-};
+    logout () {
+      localStorage.clear()
+      console.log('test logout')
+      this.$router.push({ path: '/login' })
+    }
+  }
+}
 </script>
 
 <style>

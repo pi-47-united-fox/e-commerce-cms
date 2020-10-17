@@ -10,25 +10,25 @@ export default new Vuex.Store({
     oneProduct: [],
     category: [],
     inputData: [],
-    idProducts: null,
+    idProducts: null
   },
   mutations: {
     FETCH_PRODUCTS (state, payload) {
       this.state.products = payload
     },
-    FETCH_ONE_PRODUCTS(state, payload) {
+    FETCH_ONE_PRODUCTS (state, payload) {
       this.state.oneProduct = payload
     },
     ADD_PRODUCTS (state, payload) {
       this.state.inputData = payload
     },
-    ID_PRODUCTS(state, payload) {
+    ID_PRODUCTS (state, payload) {
       this.state.idProducts = payload
-      console.log(this.state.idProducts,'test ini nilai state')
+      console.log(this.state.idProducts, 'test ini nilai state')
     }
   },
   actions: {
-    idProducts(context, payload) {
+    idProducts (context, payload) {
       context.commit('ID_PRODUCTS', payload)
     },
 
@@ -43,9 +43,9 @@ export default new Vuex.Store({
           console.log(err, 'err dari fetch data product')
         })
     },
-    fetchOneProducts(context, payload) {
+    fetchOneProducts (context, payload) {
       const id = payload
-      console.log(id,'>>>> fetch by id')
+      console.log(id, '>>>> fetch by id')
       axios({
         method: 'GET',
         url: `http://localhost:3000/products/${payload}`,
@@ -54,27 +54,26 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data,'dari axios actinon fetch by id')
+          console.log(data, 'dari axios actinon fetch by id')
           context.commit('FETCH_ONE_PRODUCTS', data)
         })
         .catch(err => {
-        console.log(err, 'err fetch one products')
-      })
+          console.log(err, 'err fetch one products')
+        })
     },
-    addProducts ({commit,dispatch}, payload) {
+    addProducts ({ commit, dispatch }, payload) {
       axios({
         url: 'http://localhost:3000/products',
         method: 'POST',
         data: payload,
         headers: {
-          access_token: localStorage.getItem("access_token"),
-        },
+          access_token: localStorage.getItem('access_token')
+        }
       })
         .then(({ data }) => {
-          dispatch("fetchProducts");
+          dispatch('fetchProducts')
           console.log(data)
           console.log(data, 'success add data')
-         
         })
         .catch(err => {
           console.log(err, 'err add data!')
@@ -82,7 +81,7 @@ export default new Vuex.Store({
         })
     },
 
-    login ({dispatch}, payload) {
+    login ({ dispatch }, payload) {
       return axios({
         method: 'POST',
         url: 'http://localhost:3000/login',
@@ -101,11 +100,11 @@ export default new Vuex.Store({
         })
     },
 
-    editProducts({commit,dispatch}, payload) {
+    editProducts ({ commit, dispatch }, payload) {
       console.log(payload)
       console.log(payload.id)
       axios({
-        method: "PUT",
+        method: 'PUT',
         url: `http://localhost:3000/products/${payload.id}`,
         data: {
           name: payload.name,
@@ -115,34 +114,34 @@ export default new Vuex.Store({
           price: payload.price
         },
         headers: {
-          access_token : localStorage.getItem('access_token')
-        },
+          access_token: localStorage.getItem('access_token')
+        }
       })
         .then(({ data }) => {
-          console.log(`success edit data`, data)
+          console.log('success edit data', data)
           dispatch('fetchProducts')
         })
         .catch(err => {
-        console.log(`failed to edit data`, err)
-      })
+          console.log('failed to edit data', err)
+        })
     },
 
-    deleteProducts({dispatch}, payload) {
+    deleteProducts ({ dispatch }, payload) {
       const id = payload
       axios({
-        method: "DELETE",
+        method: 'DELETE',
         url: `http://localhost:3000/products/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then( data  => {
-        dispatch('fetchProducts')
-        console.log(`success delete porduct wiht ${data} `)
+        .then(data => {
+          dispatch('fetchProducts')
+          console.log(`success delete porduct wiht ${data} `)
         })
         .catch(err => {
-        console.log(err, err.message)
-      })
+          console.log(err, err.message)
+        })
     }
   },
   getters: {

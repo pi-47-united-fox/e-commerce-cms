@@ -19,36 +19,36 @@
 
 <script>
 export default {
-  name: "ItemsCard",
-  props: ["products"],
+  name: 'ItemsCard',
+  props: ['products'],
   methods: {
-    fetchProducts() {
-      this.$store.dispatch("fetchProducts");
+    fetchProducts () {
+      this.$store.dispatch('fetchProducts')
     },
-    deleteProduct(id) {
+    deleteProduct (id) {
       // this.fetchProducts();
-      this.$store.dispatch("deleteProducts", id);
+      this.$store.dispatch('deleteProducts', id)
     },
-    getDetails(data) {
-      this.$store.dispatch("fetchOneProducts", data);
-      this.$emit("emitFetchOneProducts", data);
+    getDetails (data) {
+      this.$store.dispatch('fetchOneProducts', data)
+      this.$emit('emitFetchOneProducts', data)
     },
-    editProducts(id) {
-      this.$emit("emitEditProducts", true);
-      this.$store.dispatch("idProducts", id);
-      console.log("id dari item card >>> ", id);
-    },
+    editProducts (id) {
+      this.$emit('emitEditProducts', true)
+      this.$store.dispatch('idProducts', id)
+      console.log('id dari item card >>> ', id)
+    }
   },
   computed: {
-    productId() {
+    productId () {
       // console.log("computed id >>>", this.$store.state.idProducts);
-      return this.$store.state.idProducts;
-    },
+      return this.$store.state.idProducts
+    }
   },
-  created() {
-    this.fetchProducts();
-  },
-};
+  created () {
+    this.fetchProducts()
+  }
+}
 </script>
 
 <style>

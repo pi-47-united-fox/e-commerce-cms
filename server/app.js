@@ -1,4 +1,7 @@
+
+if (process.env.NODE_ENV === 'development') {
 require('dotenv').config()
+}
 const express = require('express')
 const app = express()
 const routes = require('./routes/index')
@@ -16,11 +19,11 @@ app.use(routes)
 app.use(errorHandler)
 
 app.get('/',(req, res )=> {
-    res.status(200).send({name: "test"})
+    res.status(200).send({name: "hello"})
 })
 
-// app.listen(port, ()=>{
-//     console.log(`app running on port ${port}`)
-// })
+app.listen(port, ()=>{
+    console.log(`app running on port ${port}`)
+})
 
 module.exports = app

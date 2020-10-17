@@ -63,47 +63,47 @@
 </template>
 
 <script>
-import ItemsCard from "@/components/ItemsCard.vue";
-import Spectators from "@/components/Spectators.vue";
+import ItemsCard from '@/components/ItemsCard.vue'
+// import Spectators from '@/components/Spectators.vue'
 export default {
-  name: "ContainerRight",
-  data() {
+  name: 'ContainerRight',
+  data () {
     return {
-      productId: 0,
-    };
+      productId: 0
+    }
   },
   components: {
-    ItemsCard,
-    Spectators,
+    ItemsCard
+    // Spectators
   },
   methods: {
-    showPopAdd() {
-      this.$emit("emitShowPopAdd", true);
+    showPopAdd () {
+      this.$emit('emitShowPopAdd', true)
     },
-    fetchProducts() {
-      this.$store.dispatch("fetchProducts");
+    fetchProducts () {
+      this.$store.dispatch('fetchProducts')
     },
-    fetchOneProducts(value) {
+    fetchOneProducts (value) {
       // console.log(value, "masuuuk angin pak haji?");
-      this.productId = value;
-      this.fetchProducts();
+      this.productId = value
+      this.fetchProducts()
     },
-    emitEditProducts(value) {
-      this.$emit("emitEditProducts", value);
-    },
+    emitEditProducts (value) {
+      this.$emit('emitEditProducts', value)
+    }
   },
   computed: {
-    products() {
-      return this.$store.state.products;
+    products () {
+      return this.$store.state.products
     },
-    oneProducts() {
-      return this.$store.state.oneProducts;
-    },
+    oneProducts () {
+      return this.$store.state.oneProducts
+    }
   },
-  created() {
+  created () {
     // this.fetchProducts();
-  },
-};
+  }
+}
 </script>
 
 <style >
