@@ -43,8 +43,8 @@ afterAll((done) => {
 })
 
 let newProduct = {
-    name: 'xbox s',
-    image_url: 'google.com',
+    name: 'Hampton Hill Prague Table Lamp',
+    image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
     price: 3000000,
     stock: 7
 }
@@ -91,6 +91,184 @@ describe('Product', () => {
             })
             .catch(err => {
                 done(err)
+            })
+    }) 
+
+    test('Validation error: empty name', (done) => {
+        let newProduct = {
+            name: '',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: 3000000,
+            stock: 7
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: empty URL image', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: '',
+            price: 3000000,
+            stock: 7
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: empty price', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: '',
+            stock: 7
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: empty stock', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: 3000000,
+            stock: ''
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: price negative', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: -3000000,
+            stock: 7
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: stock negative', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: -3000000,
+            stock: -1
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: price not number', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: 'sejuta',
+            stock: -1
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('Validation error: stock not number', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: 3000000,
+            stock: 'satu'
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(400)
+                done()
+            })
+    })
+
+    test('SequelizeDatabaseError: price is null', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            stock: 1
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(500)
+                done()
+            })
+    })
+
+    test('SequelizeDatabaseError: stock is null', (done) => {
+        let newProduct = {
+            name: 'Hampton Hill Prague Table Lamp',
+            image_url: 'https://m.media-amazon.com/images/I/61Ux05f-0wL._AC_UL320_.jpg',
+            price: 3400000,
+        }
+        request(app)
+            .post('/products')
+            .set('access_token', access_token)
+            .send(newProduct)
+            .then(response => {
+                const { status, body } = response
+                expect(status).toBe(500)
+                done()
             })
     })
 })

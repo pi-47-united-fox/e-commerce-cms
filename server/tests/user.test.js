@@ -4,6 +4,7 @@ const app = require("../app")
 
 let access_token = ''
 
+// admin@mail.com sudah terdaftar ketika seeding
 let userData = [
     {
         email: 'admin@mail.com',
