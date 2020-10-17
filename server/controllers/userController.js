@@ -34,7 +34,8 @@ class UserController{
             if(user && bcrypt.compareSync(userData.password, user.password)){
                 const access_token = jwt.sign({
                     id: user.id,
-                    email: user.email
+                    email: user.email,
+                    role: user.role
                 }, 
                 process.env.SECRET
                 )

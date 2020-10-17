@@ -33,7 +33,6 @@ _Response (200)_
     "image_url": "string",
     "price": "integer",
     "stock" : "integer",
-    "UserId": 1
   },
   {
     "id": 2,
@@ -41,9 +40,14 @@ _Response (200)_
     "image_url": "string",
     "price": "integer",
     "stock" : "integer",
-    "UserId": 1
   }
 ]
+```
+_Response (401 - Unauthorized)_
+```json
+{
+  "message": "Unauthorized
+}
 ```
 
 _Response (500 - Internal Server Error)_
@@ -70,8 +74,8 @@ _Request Body_
     "name": "string",
     "image_url": "string",
     "price": "integer",
-    "stock" : "integer",
-    "UserId": 1
+    "stock" : "integer",,
+    "role": "string"
 }
 ```
 
@@ -84,9 +88,9 @@ _Response (201 - Created)_
     "image_url": "string",
     "price": "integer",
     "stock" : "integer",
-    "UserId": 1,
     "createdAt": "new Date()",
-    "updatedAt": "new Date()"
+    "updatedAt": "new Date()",
+    "role": "string"
     }
 ]
 ```
@@ -95,6 +99,12 @@ _Response (400 - Bad Request)_
 ```json
 {
   "message": "Invalid Input"
+}
+```
+_Response (401 - Unauthorized)_
+```json
+{
+  "message": "Unauthorized"
 }
 ```
 
@@ -117,7 +127,7 @@ _Request Body_
     "image_url": "string",
     "price": "integer",
     "stock" : "integer",
-    "UserId": 1
+    "role": "string"
 }
 ```
 
@@ -129,9 +139,9 @@ _Response (200 - OK)_
     "image_url": "string",
     "price": "integer",
     "stock" : "integer",
-    "UserId": 1,
     "createdAt": "new Date()",
     "updatedAt": "new Date()",
+    "role": "string"
 }
 ```
 
@@ -139,6 +149,12 @@ _Response (400 - Bad Request)_
 ```json
 {
   "message": "Invalid Request"
+}
+```
+_Response (401 - Unauthorized)_
+```json
+{
+  "message": "Unauthorized"
 }
 ```
 _Response (404 - Not Found)_
@@ -179,12 +195,20 @@ _Response (200 - OK)_
 }
 ```
 
+_Response (401 - Unauthorized)_
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
 _Response (404 - Not Found)_
 ```json
 {
   "message": "Data Not Found"
 }
 ```
+
 _Response (500 - Internal Server Error)_
 ```json
 {
@@ -213,9 +237,9 @@ _Response (200 - AccessToken)_
 }
 ```
 
-_Response (400 - Bad Request)_
+_Response (401 - Bad Request)_
 ```json
 {
-  "message": "Invalid Input"
+  "message": "Invalid email / password"
 }
 ```

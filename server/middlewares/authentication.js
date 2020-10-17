@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const authentication = (req,res,next) => {
     const decoded = jwt.verify(req.headers.access_token, process.env.SECRET)
+    // console.log(decoded)
     User.findOne({
         where: {
             email: decoded.email
