@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "name": "Goalkeeper",
+        "image_url": "https://ae01.alicdn.com/kf/HTB1P2GlSXXXXXbEapXXq6xXFXXXT/24cm-Height-Soccer-Football-Resin-Goalkeeper-Gloves-De-Golden-Award-World-Cup-Trophy-Goalkeeper-Award-Fans.jpg_640x640.jpg",
+        "price": 130000000,
+        "stock": 2,
+        "category": "Key Player"
+    },
+    {
+        "id": 2,
+        "name": "Middfilder",
+        "image_url": "https://www.massorders.com/images/Brillantelv/Trophy_Boots1_02_600.JPG",
+        "price": 80000000,
+        "stock": 4,
+        "category": "First Team"
+    },
+    {
+        "id": 3,
+        "name": "attacker",
+        "image_url": "https://ae01.alicdn.com/kf/HTB13ir.NpXXXXb2aXXXq6xXFXXXt/Large-golden-shoes-European-Golden-Boot-Award-Football-souvenirs-soccer-trophy-World-Cup-wood-Resin.jpg_640x640.jpg",
+        "price": 400000000,
+        "stock": 3,
+        "category": "rotation"
+    },
+    {
+        "id": 4,
+        "name": "Middfilder",
+        "image_url": "https://www.massorders.com/images/Brillantelv/Trophy_Boots1_02_600.JPG",
+        "price": 35000000,
+        "stock": 4,
+        "category": "Rotation"
+    },
+    {
+        "id": 5,
+        "name": "attacker",
+        "image_url": "https://ae01.alicdn.com/kf/HTB13ir.NpXXXXb2aXXXq6xXFXXXt/Large-golden-shoes-European-Golden-Boot-Award-Football-souvenirs-soccer-trophy-World-Cup-wood-Resin.jpg_640x640.jpg",
+        "price": 90000000,
+        "stock": 3,
+        "category": "First Team"
+    },
+    {
+        "id": 6,
+        "name": "Middfilder",
+        "image_url": "https://www.massorders.com/images/Brillantelv/Trophy_Boots1_02_600.JPG",
+        "price": 150000000,
+        "stock": 1,
+        "category": "Key Player"
+    }
+
+]
