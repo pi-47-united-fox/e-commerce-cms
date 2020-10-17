@@ -20,6 +20,7 @@ const { Jwt }                      = require('../helpers');
 const { User, Product, sequelize } = require('../models');
 const { queryInterface }           = sequelize
 let access_token;
+let idProduct;
 
 // * Access token Dari sini
 beforeAll (done => {
@@ -43,15 +44,18 @@ describe("Product - Admin Case Add", () => {
                 name: "Sepatu",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: 1000000,
-                stock: 70
+                stock: 70,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
+                idProduct = body.id
                 expect(status).toBe(201)
                 expect(body).toHaveProperty('name', "Sepatu")
                 expect(body).toHaveProperty('image_url', "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000")
                 expect(body).toHaveProperty('price', 1000000)
                 expect(body).toHaveProperty('stock', 70)
+                expect(body).toHaveProperty('CategoryId')
                 done()
             })
     })
@@ -64,7 +68,8 @@ describe("Product - Admin Case Add", () => {
                 name: "Sepatu",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: -1000,
-                stock: 0
+                stock: 0,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -81,7 +86,8 @@ describe("Product - Admin Case Add", () => {
                 name: "",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: 1000000,
-                stock: 70
+                stock: 70,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -111,7 +117,7 @@ describe("Product - Admin and User Case Fetch", () => {
     // @note Success - Fetch One Data
     test("Success: Fetch One Data", done => {
         request(app)
-            .get('/products/1')
+            .get('/products/' + idProduct)
             .set('access_token', access_token)
             .then(response => {
                 const {status, body} = response
@@ -167,13 +173,14 @@ describe("Product - Admin Case Update Data", () => {
     // @note Success - Update Data
     test("Success: Edit/Update One Data", done => {
         request(app)
-            .put('/products/1')
+            .put('/products/' + idProduct)
             .set('access_token', access_token)
             .send({
                 name: "Sepatu Jordan",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: 2000000,
-                stock: 40
+                stock: 40,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -182,19 +189,21 @@ describe("Product - Admin Case Update Data", () => {
                 expect(body).toHaveProperty('image_url', "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000")
                 expect(body).toHaveProperty('price', 2000000)
                 expect(body).toHaveProperty('stock', 40)
+                expect(body).toHaveProperty('CategoryId')
                 done()
             })
     })
     // @note Failed - Update Data
     test("Failed: Edit/Udate but Price and/or Stock below 0", done => {
         request(app)
-            .put('/products/1')
+            .put('/products/' + idProduct)
             .set('access_token', access_token)
             .send({
                 name: "Sepatu",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: -1000,
-                stock: -1
+                stock: -1,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -206,13 +215,14 @@ describe("Product - Admin Case Update Data", () => {
     })
     test("Failed: Edit/Update One Data but field input (name, price, stock) set to empty value", done => {
         request(app)
-            .put('/products/1')
+            .put('/products/' + idProduct)
             .set('access_token', access_token)
             .send({
                 name: "",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: 0,
-                stock: 0
+                stock: 0,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -230,7 +240,8 @@ describe("Product - Admin Case Update Data", () => {
                 name: "Sepatu Jordan",
                 image_url: "https://stockx-360.imgix.net//Air-Jordan-1-Mid-Chicago-Toe/Images/Air-Jordan-1-Mid-Chicago-Toe/Lv2/img01.jpg?auto=format,compress&q=90&updated_at=1596134467&w=1000",
                 price: 2000000,
-                stock: 40
+                stock: 40,
+                categoryName: 'Uncategorized'
             })
             .then(response => {
                 const {status, body} = response
@@ -246,7 +257,7 @@ describe("Product - Admin Case Delete Data", () => {
     // @note Success - Delete Data
     test("Success: Delete One Data", done => {
         request(app)
-            .delete('/products/1')
+            .delete('/products/' + idProduct)
             .set('access_token', access_token)
             .then(response => {
                 const {status, body} = response
@@ -259,7 +270,7 @@ describe("Product - Admin Case Delete Data", () => {
     // @note Failed - Delete Data
     test("Failed: Delete One Data but role didn't have authorization", done => {
         request(app)
-            .delete('/products/2')
+            .delete('/products/' + idProduct)
             .set('access_token', 'wr0n6_acc33ss_t0k3n')
             .then(response => {
                 const {status, body} = response
