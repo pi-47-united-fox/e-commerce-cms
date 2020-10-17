@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <FormAdd v-if="this.$store.state.addForm == true" />
+    <FormEdit v-if="this.$store.state.editForm == true" />
     <div >
       <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" v-if="$store.state.authenticated == true">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Z-Commerce</a> 
@@ -20,7 +22,7 @@
               </h6>
               <li class="nav-item">
                 <a class="nav-link" href="#" @click.prevent="homePage"> Products </a>
-              </li>
+              </li><hr>
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>Front Office</span> 
               </h6>
@@ -42,12 +44,19 @@
 
 <script>
 import router from './router'
+import FormAdd from '@/components/FormAdd.vue'
+import FormEdit from '@/components/FormEdit.vue'
 
 export default {
   name: 'App',
   data () {
     return { 
     }
+  },
+  components: {
+    FormAdd,
+    FormEdit
+
   },
   methods:{
     logout () {
@@ -94,7 +103,8 @@ export default {
 }
 .content-container {
   margin: 0;
-  /* overflow-y: scroll; */
-  height: 93vh;
+  overflow-y: scroll;
+  height: 95vh;
+  width:100%;
 }
 </style>

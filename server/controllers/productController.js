@@ -1,11 +1,11 @@
-const {Product} = require("../models")
+const {Product,Category} = require("../models")
 
 class ProductController{
 
     static postProduct(req,res,next){
-        const {name,image_url,price,stock} = req.body 
+        const {name,image_url,price,stock,CategoryId} = req.body 
         console.log(req.body);
-        Product.create({name,image_url,price,stock})
+        Product.create({name,image_url, price ,stock,CategoryId})
             .then(result=>{
                 res.status(201).json(result)
             })
@@ -23,6 +23,16 @@ class ProductController{
             .catch(err=>{
                 next(err)
             })
+    }
+
+    static getCategories(req,res,next) {
+        Category.findAll()
+        .then(result=>{
+            res.status(200).json(result)
+        })
+        .catch(err=>{
+            next(err)
+        })
     }
 
     static putProduct(req,res,next){ 

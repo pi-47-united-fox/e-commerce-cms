@@ -1,13 +1,16 @@
 <template>
-  <div class="home container mt-5"> 
-    <h2>List of Products</h2> 
-
+  <div class="home "> 
+    <hr>
+    <h2 class="">List of Products</h2> 
+    <hr>
+      <button class="float-right m-2 btn btn-info" @click="openForm">Add New Product</button>
     <table class="table">
       <thead class="thead-light">
         <tr>
           <th scope="col">No</th>
           <th scope="col">Image</th>
           <th scope="col">Name</th>
+          <th scope="col">Category</th>
           <th scope="col">Price</th>
           <th scope="col">Stock</th>
           <th scope="col">Action</th>
@@ -30,14 +33,20 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 import TableRow from '@/components/RowTableProduct.vue'
 
+
 export default {
   name: 'Home',
   components: { 
     TableRow
   },
   methods: {
+    openForm () {
+      // console.log("open Add Form");
+      this.$store.commit('TOGGLE_ADDFORM')
+    }
   },
   created () { 
+    this.$store.dispatch('fetchCategories')
     this.$store.dispatch('fetchProducts')
   },
   computed: {
@@ -49,5 +58,7 @@ export default {
 </script>
 
 <style scoped>
-
+.home {
+  height: 98%; 
+}
 </style>

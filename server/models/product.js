@@ -33,7 +33,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Product's name cannot be empty"
         }
       }
-      
     },
     price: {
       type: DataTypes.INTEGER,
@@ -44,8 +43,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Input price cannot be empty"
         },
         min: {
-          args: 0,
-          msg: "Price cannot be less than zero"
+          args: [1],
+          msg: "Price cannot be less than one"
         }
       }
     },
@@ -58,11 +57,25 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Input stock cannot be empty"
         },
         min: {
-          args: 0,
+          args: [0],
           msg: "Stock cannot be less than zero"
         }
       }
     },
+    CategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "Category cannot be empty"
+        }, 
+        min: {
+          args: [1],
+          msg: "Stock cannot be less than one"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Product',
