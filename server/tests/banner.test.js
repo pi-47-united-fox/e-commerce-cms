@@ -15,7 +15,6 @@ let bannerId
 
 beforeAll((done) => {
     access_token = sign(userData)
-    console.log(access_token); 
     done()
 })
 
@@ -25,7 +24,6 @@ afterAll((done) => {
         done()
     })
     .catch(err => {
-        console.log(err)
         done()
     })
 })
@@ -166,7 +164,6 @@ describe('Success Update banner',()=>{
             // console.log(response);
             const {status, body} = response
             expect(status).toBe(200)
-            console.log(body); 
             expect(body).toHaveProperty('msg', 'Updated Successfully') 
             done()
         })
@@ -186,26 +183,12 @@ describe('Fail Update banner',()=>{
             done()
         })
     })
-    
-    it('wrong parameter id, should return 401', (done) => {
-        request(app)
-        .put(`/banner/0`)
-        .set('access_token', access_token)
-        .send(bannerData2) 
-        .then(response => { 
-            // console.log(response);
-            const {status, body} = response
-            expect(status).toBe(401) 
-            expect(body).toHaveProperty('msg', 'Unauthenticated. You need to login first')  
-            done()
-        })
-    })
 
     let data8 = {...bannerData2,name:''} 
     it('no name input, should return 400', (done) => {
         request(app)
         .put(`/banner/${bannerId}`)
-        // .set('access_token', access_token)
+        .set('access_token', access_token)
         .send(data8) 
         .then(response => { 
             // console.log(response);

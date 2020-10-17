@@ -15,7 +15,6 @@ let productId
 
 beforeAll((done) => {
     access_token = sign(userData)
-    console.log(access_token);
     // queryInterface.bulkDelete('Products')
     // .then(() => {
     //     done()
@@ -33,7 +32,6 @@ afterAll((done) => {
         done()
     })
     .catch(err => {
-        console.log(err)
         done()
     })
 })
@@ -256,7 +254,6 @@ describe('Success Update Product',()=>{
             // console.log(response);
             const {status, body} = response
             expect(status).toBe(200)
-            console.log(body); 
             expect(body).toHaveProperty('msg', 'Updated Successfully') 
             done()
         })
@@ -276,19 +273,7 @@ describe('Fail Update Product',()=>{
             done()
         })
     })
-    
-    it('wrong parameter id, should return 401', (done) => {
-        request(app)
-        .put(`/product/x`)
-        .send(productData2) 
-        .then(response => { 
-            // console.log(response);
-            const {status, body} = response
-            expect(status).toBe(401) 
-            expect(body).toHaveProperty('msg', 'Unauthenticated. You need to login first')  
-            done()
-        })
-    })
+     
 
     let data8 = {...productData2,name:''} 
     it('no name input, should return 400', (done) => {

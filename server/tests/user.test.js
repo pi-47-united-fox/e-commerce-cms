@@ -65,7 +65,6 @@ describe('Failed Login - admin', () => {
         .then(response => { 
             const {status, body} = response
             // console.log(response);
-            console.log(body);
             expect(status).toBe(404) 
             expect(body).toHaveProperty('msg', 'Wrong Email or Password')
             done()
