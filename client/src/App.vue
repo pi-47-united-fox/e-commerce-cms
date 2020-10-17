@@ -34,4 +34,10 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.logout {
+  padding: 30px;
+  font-weight: bold;
+  color: #2c3e50;
+}
 </style>

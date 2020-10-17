@@ -9,7 +9,7 @@
               class="img-fluid d-block mx-auto mb-3"
             />
             <h1>
-              <a href="" class="text-dark" @click="toDetailPage(allData.name)">{{ allData.name }}</a>
+              <a href="" class="text-dark" @click.prevent="toDetailPage(allData.name)">{{ allData.name }}</a>
             </h1>
             <ul class="list-inline small">
               <li class="list-inline-item m-0">
@@ -32,11 +32,12 @@
               type="button"
               class="btn btn-primary"
               style="margin-right: 3px"
-              @click="toEditPage(allData.id)"
+              @click.prevent="toEditPage(allData.id)"
             >
               Edit
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger"
+            @click.prevent="deleteHandler(allData.id)">
               Delete
             </button>
           </div>
@@ -56,6 +57,9 @@ export default {
     },
     toDetailPage (name) {
       this.$router.push({ path: `/detail/${name}` })
+    },
+    deleteHandler (id) {
+      this.$store.dispatch('deleteHandler', id)
     }
   }
 }

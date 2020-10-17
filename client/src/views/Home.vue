@@ -26,6 +26,11 @@ export default {
   components: {
     Card
   },
+  data () {
+    return {
+      isLogin: true
+    }
+  },
   methods: {
     fetchAll () {
       this.$store.dispatch('fetchAll')
