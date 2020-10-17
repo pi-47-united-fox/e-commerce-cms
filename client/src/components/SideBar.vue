@@ -11,10 +11,10 @@
       <li>
         <a>Filter by Categories</a>
         <ul>
-          <li><a>Fashion</a></li>
-          <li><a>Computer & Laptop</a></li>
-          <li><a>Phone & Tablet</a></li>
-          <li><a>Furniture</a></li>
+          <li><router-link to="/home/Fashion/filter">Fashion</router-link></li>
+          <li><router-link to="/home/Computer & Laptop/filter">Computer & Laptop</router-link></li>
+          <li><router-link to="/home/HandPhone & Tablet/filter">HandPhone & Tablet</router-link></li>
+          <li><router-link to="/home/Makanan & Minuman/filter">Makanan & Minuman</router-link></li>
         </ul>
       </li>
       <li><router-link to="/home/add">Add Product</router-link></li>

@@ -27,6 +27,14 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "EditPage" */ "../views/EditPage.vue")
       },
+      {
+        path: ":category/filter",
+        name: "ProductFilter",
+        component: () =>
+          import(
+            /* webpackChunkName: "ProductFilter" */ "../views/ProductFilter.vue"
+          )
+      },
       { path: "banners", name: "BannersPage", component: DisplayBanners },
       { path: "banners/add", name: "AddBannersPage", component: AddBanner }
     ]

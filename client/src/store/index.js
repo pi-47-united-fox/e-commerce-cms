@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     products: [],
     display_name: "",
-    banners: []
+    banners: [],
+    filteredProduct: []
   },
   mutations: {
     GET_PRODUCTS(state, payload) {
@@ -26,6 +27,14 @@ export default new Vuex.Store({
     },
     UPDATE_BANNERS(state, payload) {
       state.banners = [];
+    },
+    FILTER_PRODUCT(state, payload) {
+      state.filteredProduct = [];
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].category_name === payload) {
+          state.filteredProduct.push(state.products[i]);
+        }
+      }
     }
   },
   actions: {
@@ -212,6 +221,10 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err);
         });
+    },
+    filterProduct(context, payload) {
+      context.dispatch("getProducts");
+      context.commit("FILTER_PRODUCT", payload)
     }
   },
   getters: {},
