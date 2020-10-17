@@ -39,6 +39,12 @@ This cms App has:
   4. PUT /products/:id
   5. DELETE /products/:id
 
+#### Banners Endpoints:
+  1. GET /banners
+  2. POST /banners/
+  3. PUT /banners/:id
+  4. DELETE /banners/:id
+
 &nbsp;
 
 ## User Endpoints
@@ -234,7 +240,7 @@ Response:
 }
 ```
 
-### 5. DELETE /todos/:id
+### 5. DELETE /products/:id
 description:
   delete products by id
 
@@ -251,6 +257,146 @@ Response:
 {
     "id": "<deleted product id>",
     "message": "Product: success deleted"
+}
+```
+
+- status: 403
+- body:
+```json
+{
+    "message": "You dont have access"
+}
+```
+
+
+## Banners Endpoints
+---
+### 1. GET /banners
+description: 
+  show all banners
+
+Request:
+- headers: access_token (string)
+
+Response:
+- status: 200
+- body:
+```json
+[
+  {
+    "id": 1,
+    "title": "Special Offers - Big Sale",
+    "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg",
+    "description": "Up To 50% Off",
+    "isActive": true,
+    "createdAt": "2020-10-17T09:23:15.518Z",
+    "updatedAt": "2020-10-17T09:23:15.518Z"
+  },
+    {
+    "id": 2,
+    "title": "Special Offers - Big Sale",
+    "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg",
+    "description": "Up To 50% Off",
+    "isActive": true,
+    "createdAt": "2020-10-17T09:23:15.518Z",
+    "updatedAt": "2020-10-17T09:23:15.518Z"
+  }
+]
+```
+
+### 2. POST /banners
+description: 
+  add banner (only admin) 
+
+Request:
+- headers: access_token (string)
+- body: 
+```json
+{
+      "title": "Special Offers - Big Sale",
+      "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg',
+      description: 'Up To 50% Off",
+      "isActive": true,
+}
+```
+
+Response:
+
+- status: 201
+- body:
+
+```json
+{
+    "id": 1,
+    "title": "Special Offers - Big Sale",
+    "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg',
+    description: 'Up To 50% Off",
+    "isActive": true,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z",
+}
+```
+
+## 3. PUT /banners/:id
+description: 
+  edit/update banner (only admin)
+
+Request:
+- headers: access_token (string)
+- params: 
+  - id: "integer" required
+- body: 
+```json 
+{
+    "title": "Special Offers - Big Sale",
+    "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg',
+    description: 'Up To 50% Off",
+    "isActive": true,
+}
+```
+
+Response:
+
+- status: 201
+- body:
+
+```json
+{
+    "id": 1,
+    "title": "Special Offers - Big Sale",
+    "image_url": "https://image.freepik.com/free-vector/special-offer-big-sale-background_1361-2651.jpg',
+    description: 'Up To 50% Off",
+    "isActive": true,
+    "createdAt": "2020-10-14T05:19:52.475Z",
+    "updatedAt": "2020-10-14T05:19:52.475Z"
+}
+```
+```
+- status: 403
+- body:
+```json
+{
+  "message": "You dont have access"
+}
+```
+
+### 4. DELETE /banners/:id
+description:
+  delete banners by id
+
+Request:
+- headers: access_token (string)
+- params: 
+  - id: "integer" required
+
+Response:
+- status: 200
+- body:
+
+```json
+{
+    "id": "<deleted banner id>",
+    "message": "Banners: success deleted"
 }
 ```
 

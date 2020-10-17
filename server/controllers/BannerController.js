@@ -56,7 +56,7 @@ class BannerController {
         }).then((result) => {
             if (result == 1) {
                 return res.status(200).json({
-                    message: 'Product: success deleted'
+                    message: 'Banner: success deleted'
                 })
             } else {
                 return next({ name: 'not found' })
