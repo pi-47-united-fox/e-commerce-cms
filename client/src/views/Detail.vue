@@ -55,7 +55,7 @@ export default {
       this.$store.dispatch('editData', {
         id:this.id,
         name: this.name,
-        imageurl: this.imageurl,
+        image_url: this.image_url,
         price: this.price,
         stock: this.stock
       })

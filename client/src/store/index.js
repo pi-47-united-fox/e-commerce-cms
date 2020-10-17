@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from '../router'
+import Swal from "sweetalert2";
+
 
 Vue.use(Vuex)
 
@@ -80,14 +82,14 @@ export default new Vuex.Store({
         })
     },
     editData({ dispatch }, payload) {
-      const { id,name, imageurl, price, stock } = payload
-      console.log(id);
+      const { id, name, image_url, price, stock } = payload
+      console.log(image_url);
       Axios({
         method: 'PUT',
         url: `http://localhost:3000/products/${payload.id} `,
         data: {
           name: name,
-          image_url: imageurl,
+          image_url: image_url,
           price: price,
           stock: stock
         },
@@ -96,6 +98,11 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
+          Swal.fire(
+            'yes!!!',
+            'yor product has been updated',
+            // 'question'
+          )
           dispatch('fetchData')
         })
         .catch(err => {
