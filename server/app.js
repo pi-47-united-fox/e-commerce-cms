@@ -4,7 +4,7 @@ const app = express();
 const route = require("./routes/index")
 const cors = require('cors');
 const { errorHandler } = require("./middleware/errorHandler")
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -18,8 +18,8 @@ app.use(route)
 
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`masuk ke sokin ni ${port}`)
+app.listen(PORT, () => {
+    console.log(`masuk ke sokin ni ${PORT}`)
 })
 
 module.exports = app

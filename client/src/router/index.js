@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Product from '../views/Product.vue'
 import Login from '../views/LoginForm.vue'
 import editPage from '../views/EditForm.vue'
 
@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/Product',
     name: 'Product',
-    component: Home
+    component: Product
   },
   {
     path: '/login',
@@ -39,10 +39,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path === "/login" && localStorage.access_token) {
-    next({ path: "/Product" })
-  } else if (to.name !== "Login" && !localStorage.access_token) {
-    next({ name: "Login" })
+  if (to.path === '/login' && localStorage.access_token) {
+    next({ path: '/Product' })
+  } else if (to.name !== 'Login' && !localStorage.access_token) {
+    next({ name: 'Login' })
   } else {
     next()
   }

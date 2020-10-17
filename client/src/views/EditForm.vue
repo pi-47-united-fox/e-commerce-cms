@@ -21,34 +21,34 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 export default {
- name: 'editProduct',
+  name: 'editProduct',
   components: {
     Navbar
   },
   computed: {
-      dataEdit () {
-          return this.$store.state.dataEdit
-      }
+    dataEdit () {
+      return this.$store.state.dataEdit
+    }
   },
   methods: {
-      editProduct () {
-          let payload = {
-              id: this.$route.params.id,
-              name: this.dataEdit.name,
-              image_url: this.dataEdit.image_url,
-              price: this.dataEdit.price,
-              stock: this.dataEdit.stock
-          }
-          console.log(payload);
-          this.$store.dispatch('editPage', payload)
-           .then(({ data }) => {
-          this.$router.push({path: "/Product"})
+    editProduct () {
+      const payload = {
+        id: this.$route.params.id,
+        name: this.dataEdit.name,
+        image_url: this.dataEdit.image_url,
+        price: this.dataEdit.price,
+        stock: this.dataEdit.stock
+      }
+      console.log(payload)
+      this.$store.dispatch('editPage', payload)
+        .then(({ data }) => {
+          this.$router.push({ path: '/Product' })
         })
         .catch(err => {
-        console.log(err.response.data.errors);
+          // const msg = err.response.data.errors
+          console.log(err.response.data.errors)
         })
-
-      }
+    }
   }
 }
 </script>

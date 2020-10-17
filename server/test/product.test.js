@@ -436,7 +436,7 @@ describe("delete Success", () => {
             .set("access_token", access_token)
             .then((response) => {
                 const { status, body } = response;
-                expect(status).toBe(201);
+                expect(status).toBe(200);
                 expect(body).toHaveProperty("message", "delete success");
 
                 done();

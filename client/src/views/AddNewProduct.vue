@@ -30,22 +30,25 @@ export default {
       name: '',
       image_url: '',
       price: '',
-      stock: '',
+      stock: ''
     }
   },
   methods: {
     addProduct () {
-      console.log(this.name, this.image_url, this.price, this.stock);
-      let payload = {
+      const payload = {
         name: this.name,
         image_url: this.image_url,
         price: this.price,
-        stock: this.stock,
+        stock: this.stock
       }
-      this.$store.dispatch("addProduct", payload)
-      .then(() => {
-        this.$router.push({path: "/Product"})
-      })
+      this.$store.dispatch('addProduct', payload)
+        .then(() => {
+
+        })
+        .catch(err => {
+          // const msg = err.response.data.errors
+          console.log(err.response.data.errors)
+        })
     }
   }
 }

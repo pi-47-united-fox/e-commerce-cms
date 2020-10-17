@@ -66,14 +66,12 @@ describe("Login failed", () => {
     it("email & password empty", (done) => {
         request(app)
             .post("/login")
-
             .set("Accept", "application/json")
             .then((response) => {
                 const { status, body } = response;
-                expect(status).toBe(400);
+                expect(status).toBe(500);
                 expect(body).toHaveProperty("errors", [
-                    "name can't be empty",
-                    "password can't be empty",
+                    "WHERE parameter \"email\" has invalid \"undefined\" value"
                 ]);
                 done();
             });

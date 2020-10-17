@@ -8,10 +8,14 @@
     <br />
     <form @submit.prevent="login">
       <div class="login">
-        <input type="email" v-model="email" placeholder="email"/><br />
-        <input type="password" v-model="password" placeholder="password"/><br />
+        <input type="email" v-model="email" placeholder="email" /><br />
+        <input
+          type="password"
+          v-model="password"
+          placeholder="password"
+        /><br />
         <input type="submit" value="Login" />
-        <!-- <p v-text="errMessage"></p> -->
+        <p v-text="errMessage" class="text-light"></p>
       </div>
     </form>
   </div>
@@ -23,28 +27,24 @@ export default {
     return {
       email: '',
       password: '',
-      // errMessage:'',
+      errMessage: ''
     }
   },
   methods: {
     login () {
-      let payload = {
+      const payload = {
         email: this.email,
         password: this.password
       }
-     this.$store.dispatch("login",payload)
-     .then(() => {
-        // let msg = ""
-        // context.commit('LOGIN', msg)
-        this.$router.push({path: "/Product"})
-        // localStorage.setItem("access_token", data.access_token)
+      this.$store.dispatch('login', payload)
+        .then(() => {
+          this.$router.push({ path: '/Product' })
         })
-    //  this.errMessage = this.$store.state.errMessage
-      
+        .catch((err) => {
+          const msg = err.response.data.errors[0]
+          this.errMessage = msg
+        })
     }
-  },
-  created () {
-    // this.$store.dispatch('login')
   }
 }
 </script>
@@ -71,7 +71,7 @@ body {
   width: auto;
   height: auto;
   background-image: url("https://images.unsplash.com/photo-1525881157111-2379cbebbf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80");
-  background-size:cover;
+  background-size: cover;
   /* -webkit-filter: blur(1px); */
   z-index: 0;
 }

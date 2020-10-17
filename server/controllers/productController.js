@@ -67,7 +67,7 @@ class ProductController {
                     statusCode: 400
                 })
             } else {
-                return res.status(201).json({ message: "delete success" })
+                return res.status(200).json({ message: "delete success" })
             }
         } catch (err) {
             next(err)
