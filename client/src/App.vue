@@ -11,18 +11,18 @@
 </template>
 <script>
 export default {
-  namee: 'App',
+  namee: "App",
   components: {},
-  data () {
+  data() {
     return {
       // isLogin: false
-    }
+    };
   },
   methods: {},
-  crreated () {
-    console.log('ini creaated <--------')
-  }
-}
+  crreated() {
+    console.log("ini creaated <--------");
+  },
+};
 </script>
 
 <style>
@@ -136,7 +136,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
 }
-
 .card {
   margin: 20px;
   border-radius: 10px;
@@ -144,12 +143,12 @@ body {
 .cardcontent {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .sidebar {
   background-color: #5978d5;
-  width: 10%;
-  height: 100vh;
+  width: 11%;
+  min-height: 100vh;
   position: fixed;
 }
 .content {
@@ -159,6 +158,8 @@ body {
   padding: 30px;
   display: flex;
   justify-content: center;
+  margin-bottom: 300px;
+  height: 50vh;
 }
 .home {
   display: flex;
@@ -194,11 +195,13 @@ body {
   font-size: 14px;
   position: fixed;
 }
-.card-img-top{
+.card-img-top {
+  width: 100%;
   height: 200px;
-  width:fit-content;
+  width: fit-content;
 }
-.card-img{
+.card-img {
+  width: 100%;
   height: 200px;
 }
 .content {
@@ -207,6 +210,21 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
-/* -------SIDEBAR-------- */
 
+.btn-lgt {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  width: 100%;
+  background-color: #5978d5;
+  border-radius: 0;
+  color:white ;
+}
+.btn-lgt:hover {
+  background: rgb(245, 245, 244);
+  color: darkgray;
+  font-weight: ;
+}
+
+/* -------SIDEBAR-------- */
 </style>

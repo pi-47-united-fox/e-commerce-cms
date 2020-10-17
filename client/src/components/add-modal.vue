@@ -96,12 +96,12 @@ export default {
     resetModal () {
       this.name = ''
       this.nameState = null
-      // this.imageurl = ''
-      // this.imageurlState = null
-      // this.price = ''
-      // this.priceState = null
-      // this.stock = ''
-      // this.stockState = null
+      this.imageurl = ''
+      this.imageurlState = null
+      this.price = ''
+      this.priceState = null
+      this.stock = ''
+      this.stockState = null
     },
     handleOk (bvModalEvt) {
       // Prevent modal from closing

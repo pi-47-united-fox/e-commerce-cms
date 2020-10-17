@@ -7,17 +7,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    dataEdit: {}
   },
   mutations: {
-    FETCH_DATA (state, payload) {
+    FETCH_DATA(state, payload) {
       state.products = payload
+    },
+    POLULATE_DATA_EDIT(state,payload){
+      state.dataEdit=payload
     }
   },
   actions: {
-    login (context, payload) {
+    login(context, payload) {
       const { email, password } = payload
-      console.log(payload, '<---ini payload login store')
+      // console.log(payload, '<---ini payload login store')
       Axios({
         method: 'POST',
         url: 'http://localhost:3000/login',
@@ -27,7 +31,7 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data, '<---ini data di login store')
+          // console.log(data, '<---ini data di login store')
           localStorage.setItem('access_token', data.access_token)
           context.dispatch('fetchData')
           router.push('/')
@@ -36,8 +40,8 @@ export default new Vuex.Store({
           console.log(err.response)
         })
     },
-    fetchData (context) {
-      console.log('ini fetch data')
+    fetchData(context) {
+      // console.log('ini fetch data')
       Axios({
         method: 'GET',
         url: 'http://localhost:3000/products',
@@ -53,9 +57,8 @@ export default new Vuex.Store({
           console.log(err.response)
         })
     },
-    addData ({ dispatch }, payload) {
+    addData({ dispatch }, payload) {
       const { name, imageurl, price, stock } = payload
-
       Axios({
         method: 'POST',
         url: 'http://localhost:3000/products ',
@@ -69,8 +72,37 @@ export default new Vuex.Store({
           access_token: localStorage.access_token
         }
       })
+        .then(data => {
+          dispatch('fetchData')
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
     },
-    deleteData ({ commit, dispatch }, payload) {
+    editData({ dispatch }, payload) {
+      const { id,name, imageurl, price, stock } = payload
+      console.log(id);
+      Axios({
+        method: 'PUT',
+        url: `http://localhost:3000/products/${payload.id} `,
+        data: {
+          name: name,
+          image_url: imageurl,
+          price: price,
+          stock: stock
+        },
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(data => {
+          dispatch('fetchData')
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
+    },
+    deleteData({ commit, dispatch }, payload) {
       console.log(payload, '<----ini id di store')
       Axios({
         method: 'DELETE',
@@ -80,7 +112,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           dispatch('fetchData')
         })
         .catch(err => {

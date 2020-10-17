@@ -1,5 +1,5 @@
 <template>
-  <div class="card sm" style="width: 18rm">
+  <div class="card lm" style="width: 18rm">
     <div class="card-img">
       <img
         class="card-img-top"
@@ -17,12 +17,7 @@
         </div>
         <div style="display=flex   flex-direction: row;">
           <div>
-            <button
-              class="update-btn"
-              @click.prevent="$router.push({ path: 'Detail' })"
-            >
-              Update
-            </button>
+            <button class="update-btn" @click.prevent="editProduct()">Update</button>
           </div>
           <div>
             <button
@@ -39,28 +34,42 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 export default {
-  props: ['products'],
+  props: ["products"],
   methods: {
-    deleteProduct (id) {
+    deleteProduct(id) {
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
-        iconColor: '#ea9292',
+        icon: "warning",
+        iconColor: "#ea9292",
         showCancelButton: true,
-        confirmButtonColor: '#ea9292',
-        cancelButtonColor: ' #7453b8;',
-        confirmButtonText: 'Yes, deleted it!'
+        confirmButtonColor: "#ea9292",
+        cancelButtonColor: " #7453b8;",
+        confirmButtonText: "Yes, deleted it!",
       }).then((data) => {
-        console.log(id, '<------ini id delete')
-        this.$store.dispatch('deleteData', id)
-        Swal.fire('Deleted!', 'Your file has been deleted.', 'Succedd')
-      })
-    }
-  }
-}
+        if (data.isConfirmed) {
+          console.log(id, "<------ini id delete");
+          this.$store.dispatch("deleteData", id);
+          Swal.fire("Deleted!", "Your file has been deleted.", "Succedd");
+        }
+      });
+    },
+    editProduct() {
+      let newData = {
+        id: this.products.id,
+        name: this.products.name,
+        image_url: this.products.image_url,
+        price: this.products.price,
+        stock: this.products.stock,
+      }
+      console.log(newData)
+      this.$store.commit('POLULATE_DATA_EDIT', newData)
+      this.$router.push({ path: "Detail" })
+    },
+  },
+};
 </script>
 
 <style>

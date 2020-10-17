@@ -1,76 +1,79 @@
-
-const request = require('supertest')
-const app = require('../app')
-const { sequelize } = require('../models')
-const { queryInterface } = sequelize
+const request = require("supertest");
+const app = require("../app");
 
 const userData = {
-    role:'admin',
-    email: 'reyand@mail.com',
-    password: '12345678'
-}
+    email: "admin@mail.com",
+    password: "1234",
+};
 
 const userData2 = {
-    role:'admin',
-    email: 'reyand@mail.com',
-    password: '123456783'
-}
+    email: "admin@mail.com",
+    password: "12345",
+};
+const userData3 = {
+    email: "admin2@mail.com",
+    password: "1234",
+};
 
-afterAll((done) => {
-    queryInterface.bulkDelete('Users')
-        .then(() => {
-            done()
-        })
-        .catch(err => {
-            console.log(err);
-        })
-})
-describe('Testing register', function () {
-    test('Successfully register', function (done) {
+// SUCCESS LOGIN
+describe("Login Succes", () => {
+    it("login succes send json : status(201) & access_token admin", (done) => {
         request(app)
-            .post('/register')
+            .post("/login")
             .send(userData)
-            .set('Accept', 'application/json')
-            .then(response => {
-                //resonse{status, body}
-                const { status, body } = response
-                expect(status).toBe(201)
-                expect(body).toHaveProperty('role', userData.role)
-                expect(body).toHaveProperty('email', userData.email)
-                expect(body).toHaveProperty('id', expect.any(Number))
-                done()
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(201);
+                expect(body).toHaveProperty("access_token", expect.any(String));
+                done();
             })
+            // .catch((err) => {
+            //     console.log(err);
+            //     done();
+            // });
+    });
+});
 
-    })
-})
-
-
-describe('Testing login', function () {
-    test('Successfully login', function (done) {
+// FAILED LOGIN
+describe("Login failed", () => {
+    it("email done password worong", (done) => {
         request(app)
-            .post('/login')
-            .send(userData)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(201)
-                expect(body).toHaveProperty('access_token', expect.any(String))
-                done()
-            })
-    })
-    test('Invalid role/email/password', function (done) {
-        request(app)
-            .post('/login')
+            .post("/login")
             .send(userData2)
-            .set('Accept', 'application/json')
-            .then(response => {
-                const { status, body } = response
-                expect(status).toBe(401)
-                expect(body).toHaveProperty("message", "Invalid password/email/role")
-                done()
-            })
-    })
-})
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(400);
+                expect(Array.isArray(body)).toBeFalsy();
+                done();
+            });
+    });
 
+    it("no email in database", (done) => {
+        request(app)
+            .post("/login")
+            .send(userData3)
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(400);
+                expect(Array.isArray(body)).toBeFalsy();
+                done();
+            });
+    });
 
-
+    it("email & password empty", (done) => {
+        request(app)
+            .post("/login")
+            .set("Accept", "application/json")
+            .then((response) => {
+                const { status, body } = response;
+                expect(status).toBe(500);
+                expect(body).toHaveProperty("errors", [
+                    "WHERE parameter \"email\" has invalid \"undefined\" value"
+                ]);
+                done();
+            });
+    });
+});

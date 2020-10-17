@@ -18,7 +18,7 @@ class ProductCOntroller {
     static listProduct(req, res, next) {
         Product.findAll()
             .then(data => {
-                return res.status(201).json(data)
+                return res.status(200).json(data)
             })
             .catch(err => {
                 return next(err)
@@ -50,7 +50,7 @@ class ProductCOntroller {
         })
             .then(data => {
                 if (data) {
-                    return res.status(201).json({
+                    return res.status(200).json({
                         message: 'Deleted successfully'
                     })
                 } else {

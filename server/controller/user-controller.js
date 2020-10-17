@@ -36,9 +36,9 @@ class UserController {
                 // console.log(SECRET, data);
                 if (data && bcrypt.compareSync(user.password, data.password)) {
                     let access_token = jwt.sign({ id: data.id, email: data.email }, SECRET)
-                    return res.status(200).json({ access_token })
+                    return res.status(201).json({ access_token })
                 } else {
-                    return res.status(400).json({ message: `Invalaid email or password` })
+                    return res.status(400).json({ messege: `Invalaid email or password` })
                 }
             })
             .catch(err => {

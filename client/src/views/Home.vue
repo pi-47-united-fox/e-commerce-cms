@@ -4,10 +4,7 @@
       <div class="logo">
         <img src="../assets/zambanlogo.svg" />
       </div>
-      <ul>
-        <li>sidebar</li>
-      </ul>
-      <button class="logout-btn" @click="logOut">Logout</button>
+      <button class="btn-lgt" @click="logOut">Logout</button>
     </div>
     <div class="content">
       <div class="he-r">
@@ -21,7 +18,7 @@
             <Card
               v-for="product in this.$store.state.products"
               :key="product.id"
-              :products='product'
+              :products="product"
               class="col-3"
             ></Card>
           </div>
@@ -34,25 +31,25 @@
 </template>
 
 <script>
-import Modal from '../components/add-modal'
-import Card from '../components/card'
-import router from '../router'
+import Modal from "../components/add-modal";
+import Card from "../components/card";
+import router from "../router";
 export default {
-  name: 'Home',
-  props: ['product'],
+  name: "Home",
+  props: ["product"],
   components: {
     Card,
-    Modal
+    Modal,
   },
   methods: {
-    logOut () {
-      localStorage.clear()
-      router.push({ path: 'Login' })
-    }
+    logOut() {
+      localStorage.clear();
+      router.push({ path: "Login" });
+    },
   },
-  created () {
-    console.log('ini di home')
-    this.$store.dispatch('fetchData')
-  }
-}
+  created() {
+    console.log("ini di home");
+    this.$store.dispatch("fetchData");
+  },
+};
 </script>

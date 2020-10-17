@@ -15,31 +15,53 @@
         <br>
         <img
           class="detail-pic"
-          src="https://www.wilton.com/dw/image/v2/AAWA_PRD/on/demandware.static/-/Sites-wilton-project-master/default/dw2e5ac60f/images/project/WLRECIP-420/2105-6818_TaPaHa_44211-1.jpg?sw=800&sh=800"
+          :src="image_url"
           alt=""
         />
       </div>
       <div></div>
       <div class="detail-item">
         <h1>Update Product</h1>
-        <h4>Title</h4>
-        <input type="text" class="detail-text">
-        <h4>Image</h4>
-        <input type="text" class="detail-text">
+        <h4>Name</h4>
+        <input type="text" class="detail-text" v-model="name">
+        <h4>Image_url</h4>
+        <input type="text" class="detail-text" v-model="image_url">
         <h4>Price</h4>
-        <input type="text" class="detail-text">
+        <input type="text" class="detail-text" v-model="price">
         <h4>Stock</h4>
-        <input type="text" class="detail-text">
+        <input type="text" class="detail-text" v-model="stock">
       </div>
-      <button class="cancel-btn">Delete</button>
-      <button class="submit-btn">Submit</button>
+      <button class="submit-btn" @click.prevent="editData()">Submit</button>
   </div>
 </template>
 
 <script>
 export default {
+  props: ["products"],
+  data(){
+    return{
+      id:this.$store.state.dataEdit.id,
+      name:this.$store.state.dataEdit.name,
+      image_url:this.$store.state.dataEdit.image_url,
+      price:this.$store.state.dataEdit.price,
+      stock:this.$store.state.dataEdit.stock,
+    }
+  },
   created () {
     console.log('ini di detail')
+  },
+  methods: {
+    editData(){
+      this.$store.dispatch('editData', {
+        id:this.id,
+        name: this.name,
+        imageurl: this.imageurl,
+        price: this.price,
+        stock: this.stock
+      })
+      this.$router.push({ name: "Home" })
+
+    }
   }
 }
 </script>
