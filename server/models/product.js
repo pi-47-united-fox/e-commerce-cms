@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      // Product.belongsTo(models.Category, {foreignKey:'CategoryId'})
       // define association here
     }
   };
@@ -30,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "Product's name cannot be empty"
+          msg: "Product's image cannot be empty"
         }
       }
     },
@@ -69,11 +70,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: "Category cannot be empty"
-        }, 
-        min: {
-          args: [1],
-          msg: "Stock cannot be less than one"
-        }
+        },
       }
     }
   }, {

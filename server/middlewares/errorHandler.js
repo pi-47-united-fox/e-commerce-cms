@@ -13,7 +13,7 @@ function errorHandler (err, req, res, next) {
             break;
 
         case 'Wrong Email or Password':
-            code = 400
+            code = 404
             msg = 'Wrong Email or Password'
             break
             

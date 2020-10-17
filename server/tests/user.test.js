@@ -53,7 +53,7 @@ describe('Failed Login - admin', () => {
             // console.log(response);
             // console.log(body);
             expect(status).toBe(404) 
-            expect(body).toHaveProperty('message', 'Wrong Email or Password')
+            expect(body).toHaveProperty('msg', 'Wrong Email or Password')
             done()
         })
     })
@@ -67,7 +67,7 @@ describe('Failed Login - admin', () => {
             // console.log(response);
             console.log(body);
             expect(status).toBe(404) 
-            expect(body).toHaveProperty('message', 'Wrong Email or Password')
+            expect(body).toHaveProperty('msg', 'Wrong Email or Password')
             done()
         })
     })
@@ -81,7 +81,7 @@ describe('Failed Login - admin', () => {
             // console.log(response);
             // console.log(body);
             expect(status).toBe(404) 
-            expect(body).toHaveProperty('message', 'Wrong Email or Password')
+            expect(body).toHaveProperty('msg', 'Wrong Email or Password')
             done()
         })
     })

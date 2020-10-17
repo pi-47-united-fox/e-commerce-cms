@@ -223,3 +223,176 @@ List of available endpoints:
     }
 ```
 ---
+
+## POST /banner
+​
+- Request Header
+```json
+    {
+        "access_token":"<access_token>"
+    }
+```
+- Request Body
+```json
+    {
+        "name": "harmony-week",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoEUiQ_9nPbjyYw5pKlxV9BtQ7GbAdrnMUDQ&usqp=CAU",
+        "isActive": true, 
+    }
+```
+
+### Success Response :
+- Response (200 - OK)
+```json
+    {
+        "id": 1,
+        "name": "harmony-week",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoEUiQ_9nPbjyYw5pKlxV9BtQ7GbAdrnMUDQ&usqp=CAU",
+        "isActive": true, 
+        "createdAt": "2020-10-14T02:43:20.068Z",
+        "updatedAt": "2020-10-14T02:43:20.068Z"
+    }
+```
+
+### Failed Response :
+- Response 400: Bad Request
+```json
+    {
+        "msg": "banner's name cannot be empty"
+    }
+```
+
+- Response 403: Not Authorized
+```json
+    {
+        "msg": "You are not Authorized"
+    }
+```
+
+- Response 500: Internal server error
+```json
+    {
+        "type": "Internal Server Error"
+    }
+```
+---
+### GET /banners
+
+- Request Header
+```json
+    {
+        "access_token":"<access_token>"
+    }
+```
+- Request Body
+
+```
+    not needed
+```
+
+### Success Response :
+- Response 200: OK
+```json
+[
+    {
+        "id": 1,
+        "name": "harmony-week",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoEUiQ_9nPbjyYw5pKlxV9BtQ7GbAdrnMUDQ&usqp=CAU",
+        "isActive": true, 
+        "createdAt": "2020-10-14T02:43:20.068Z",
+        "updatedAt": "2020-10-14T02:43:20.068Z"
+    }
+]
+```
+
+### Failed Response :
+- Response 500: Internal server error
+```json
+    {
+        "type": "Internal Server Error"
+    }
+```
+---
+### PUT /banner/:id
+​
+- Request Header
+```json
+    {
+        "access_token":"<access_token>"
+    }
+```
+- Request Body
+```json
+    {
+        "name": "harmony-week2",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSoEUiQ_9nPbjyYw5pKlxV9BtQ7GbAdrnMUDQ&usqp=CAU",
+        "isActive": true, 
+    }
+```
+​
+### Success Response :
+- Response 200: OK
+```json
+    {
+        "msg": "Updated Successfully"
+    }
+```
+
+### Failed Response :
+- Response 400: Bad Request
+```json
+    {
+        "msg": "banner's name cannot be empty"
+    }
+```
+
+- Response 403: Not Authorized
+```json
+    {
+        "msg": "You are not Authorized"
+    }
+```
+
+- Response 500: Internal server error
+```json
+    {
+        "type": "Internal Server Error"
+    }
+```
+---
+### DELETE /banner/:id
+
+- Request Header
+```json
+    {
+        "access_token":"<access_token>"
+    }
+```
+- Request Body
+```
+    not needed
+```
+​
+### Success Response :
+- Response 200: OK
+```json
+    {
+        "msg": "Deleted Successfully"
+    }
+```
+
+### Failed Response :
+- Response 403: Not Authorized
+```json
+    {
+        "msg": "You are not Authorized"
+    }
+```
+
+- Response 500: Internal server error
+```json
+    {
+        "type": "Internal Server Error"
+    }
+```
+---
