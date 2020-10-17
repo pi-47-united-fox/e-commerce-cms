@@ -50,6 +50,10 @@ export default {
   methods: {
     login() {
       this.$store.dispatch("login", this.payload);
+      this.loginRouter();
+    },
+    loginRouter() {
+      this.$router.push({ path: "/" });
     },
   },
 };

@@ -82,7 +82,7 @@ export default new Vuex.Store({
         })
     },
 
-    login (context, payload) {
+    login ({dispatch}, payload) {
       return axios({
         method: 'POST',
         url: 'http://localhost:3000/login',
@@ -92,7 +92,9 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
+          console.log('success login')
           localStorage.setItem('access_token', data.access_token)
+          dispatch('fetchProducts')
         })
         .catch(err => {
           console.log(err, 'error dari login')
