@@ -28,6 +28,16 @@
             :rules="[rules.required]"
           ></v-text-field>
           <v-divider></v-divider>
+
+          <v-alert
+            v-if="formHasErrors"
+            dense
+            outlined
+            type="error"
+          >
+            Wrong <strong>Email</strong> or <strong>Password</strong>
+          </v-alert>
+
           <v-card-actions>
           <v-btn
             class="mt-5"
@@ -61,7 +71,7 @@ export default {
         required: value => !!value || 'Password Tidak Boleh kosong.',
         emailMatch: () => ('Email atau password yang dimasukkan salah')
       },
-      formHasErrors: false
+      formHasErrors: false,
 
     }
   },
@@ -71,8 +81,13 @@ export default {
       return this.$store.dispatch('login', {
         email: this.email,
         password: this.password
-      }).then(() => {
-        this.$router.push('/dash')
+      }).then((result) => {
+        if (result == undefined) {
+          this.$router.push('/dash')
+        } else {
+          this.formHasErrors = true
+          console.log ('masuk')
+        }
       })
     }
   },

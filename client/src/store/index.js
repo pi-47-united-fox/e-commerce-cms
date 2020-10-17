@@ -95,11 +95,9 @@ export default new Vuex.Store({
           email: input.email,
           password: input.password
         }).then(({ data }) => {
-          console.log('success -> response: ', data)
-          console.log('access_token', data.access_token)
           commit('LOGIN', data.access_token)
         }).catch(err => {
-          console.log('error -> ', err)
+          return err
         })
     },
     fetchProducts ({ commit }) {
