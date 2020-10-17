@@ -6,5 +6,5 @@ const port = 3000
 app.set('port', port);
 
 server.listen(port, ()=>{
-    console.log(`app listen on port ${port}`)
+    console.log(`app is listening on port ${port}`)
 });

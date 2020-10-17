@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Product.belongsTo
     }
   };
   Product.init({
@@ -27,6 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           msg: "Please insert a url link."
+        }
+      }
+    },
+    category: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: "Please insert a name."
         }
       }
     },
@@ -53,6 +62,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Please input positive value."
         }
       }
+    },
+    UserId: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,

@@ -26,8 +26,10 @@ class ProductController{
         let obj = {
             name: req.body.name,
             image_url: req.body.image_url,
+            category: req.body.category,
             price: req.body.price,
             stock: req.body.stock,
+            UserId: req.userData.id
         }
 
         Product.create(obj)
@@ -39,12 +41,32 @@ class ProductController{
             })
     }
 
+    static findOneProduct(req, res, next){
+        Product.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+        .then(result => {
+            if(result){
+                res.status(200).json(result)
+            }
+            else{
+                next({name: 'Not Found', message: 'Data not found!'})
+            }
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
     static updateProduct(req, res, next){
         let obj = {
             name: req.body.name,
             image_url: req.body.image_url,
+            category: req.body.category,
             price: req.body.price,
-            stock: req.body.stock,
+            stock: req.body.stock
         }
 
         Product.update(obj, {

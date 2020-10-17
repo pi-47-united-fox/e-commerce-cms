@@ -43,6 +43,7 @@ beforeAll(done => {
 let product_data = {
     name: "Adidas Yeezy",
     image_url: "https://static.shop.adidas.co.id/media/wysiwyg/sold_out/DESKTOP_YEEZY_QNTM_SOLD_OUT_1.jpg",
+    category: 'shoes',
     price: 3000000,
     stock: 5
 }
@@ -50,6 +51,7 @@ let product_data = {
 let update_product = {
     name: "Adidas Yeezy",
     image_url: "https://static.shop.adidas.co.id/media/wysiwyg/sold_out/DESKTOP_YEEZY_QNTM_SOLD_OUT_1.jpg",
+    category: 'shoes',
     price: 3500000,
     stock: 10
 }
@@ -66,6 +68,7 @@ describe('POST /stocks', () => {
             expect(status).toBe(201)
             expect(body).toHaveProperty('name', expect.any(String))
             expect(body).toHaveProperty('image_url', expect.any(String))
+            expect(body).toHaveProperty('category', expect.any(String))
             expect(body).toHaveProperty('price', expect.any(Number))
             expect(body).toHaveProperty('stock', expect.any(Number))
             stock_id = body.id
@@ -122,6 +125,21 @@ describe('POST /stocks', () => {
 
     test('Failed in creating stock because of empty image url column', done => {
         let obj = {...product_data, image_url: ''}
+        request(app)
+        .post('/stocks')
+        .send(obj)
+        .set("access_token", access_token_admin)
+        .then(response => {
+            const {status, body} = response
+            console.log(body)
+            expect(status).toBe(400)
+            expect(body).toHaveProperty('name', 'Bad Request')
+            done()
+        }) 
+    })
+
+    test('Failed in creating stock because of empty category column', done => {
+        let obj = {...product_data, category: ''}
         request(app)
         .post('/stocks')
         .send(obj)
@@ -305,6 +323,21 @@ describe('PUT /stocks/:id', () => {
 
     test('Failed in updating stock because of empty image url column', done => {
         let obj = {...update_product, image_url: ''}
+        request(app)
+        .put(`/stocks/${stock_id}`)
+        .send(obj)
+        .set("access_token", access_token_admin)
+        .then(response => {
+            const {status, body} = response
+            console.log(body)
+            expect(status).toBe(400)
+            expect(body).toHaveProperty('name', 'Bad Request')
+            done()
+        }) 
+    })
+
+    test('Failed in updating stock because of empty category column', done => {
+        let obj = {...update_product, category: ''}
         request(app)
         .put(`/stocks/${stock_id}`)
         .send(obj)

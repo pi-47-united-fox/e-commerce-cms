@@ -10,22 +10,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Welcome',
+    name: 'Login',
     component: Login
   },
   {
     path: '/home',
     name: 'Home',
-    component: Home,
-    // beforeEnter: (to, from, next) => {
-    //   if (to.name !== 'Login' && !localStorage.access_token) next({ name: 'Login' })
-    //   else next()
-    // }
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    component: Home
   },
   {
     path: '/add-product',
@@ -43,6 +34,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach ((to, from, next) => {
+  if((to.name === 'Login') && localStorage.access_token){
+    next({path:'/home'})
+  }
+  else if((to.name !== 'Login') && !localStorage.access_token){
+    next({path:'/'})
+  }
+  else{
+    next()
+  }
 })
 
 export default router
