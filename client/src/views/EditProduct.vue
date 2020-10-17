@@ -11,18 +11,18 @@
 </template>
 
 <script>
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import EditProductForm from "../components/EditProductForm"
+import Sidebar from '../components/Sidebar'
+import Navbar from '../components/Navbar'
+import EditProductForm from '../components/EditProductForm'
 
 export default {
-  name: "EditProduct",
+  name: 'EditProduct',
   components: {
     Sidebar,
     Navbar,
     EditProductForm
-  },
-};
+  }
+}
 </script>
 
 <style>

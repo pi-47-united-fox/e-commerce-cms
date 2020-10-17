@@ -16,27 +16,27 @@
         <th>Actions</th>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
+        <tr v-for="product in products" :key="product.id">
+          <td>{{product.id}}</td>
           <td>
             <img
               class="image is-64x64"
-              src="https://m.media-amazon.com/images/I/81Mty84-ttL._AC_UL320_.jpg"
-              alt="product-name"
+              :src="product.image_url"
+              :alt="product.name"
             />
           </td>
           <td>
             <strong
-              >Dual USB Table Lamp, Kakanuo Traditional Bedside Lamp</strong
+              >{{product.name}}</strong
             >
           </td>
-          <td>3000000</td>
-          <td>9</td>
+          <td>{{product.price}}</td>
+          <td>{{product.stock}}</td>
           <td>
-            <span class="icon has-text-info">
+            <span @click="editProductForm(product)" class="icon has-text-info">
               <i class="fas fa-edit"></i>
             </span>
-            <span class="icon has-text-danger">
+            <span @click="deleteProduct(product.id)" class="icon has-text-danger">
               <i class="fas fa-trash"></i>
             </span>
           </td>
@@ -48,8 +48,30 @@
 
 <script>
 export default {
-    name: 'ProductList'
-};
+  name: 'ProductList',
+  methods: {
+    fetchProducts () {
+      this.$store.dispatch('fetchProducts')
+    },
+
+    editProductForm (product) {
+      this.$store.dispatch('editProductForm', product)
+    },
+
+    deleteProduct (id) {
+      this.$store.dispatch('deleteProduct', id)
+    }
+  },
+  created () {
+    this.fetchProducts()
+  },
+
+  computed: {
+    products () {
+      return this.$store.state.products
+    }
+  }
+}
 </script>
 
 <style>

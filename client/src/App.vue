@@ -18,6 +18,6 @@
 
 #main-area {
     margin: 20px;
-  
+
 }
 </style>

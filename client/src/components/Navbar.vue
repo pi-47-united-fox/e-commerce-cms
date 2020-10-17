@@ -23,7 +23,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-primary">
+                        <a @click="logout" class="button is-primary">
                             Logout
                         </a>
                     </div>
@@ -36,7 +36,12 @@
 
 <script>
 export default {
-    name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    }
+  }
 
 }
 </script>

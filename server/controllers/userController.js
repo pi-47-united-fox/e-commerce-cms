@@ -13,6 +13,7 @@ class UserController {
     static login(req, res, next) {
         let email = req.body.email
         let password = req.body.password
+        console.log(email, password)
         User.findOne({
             where: {
                 email: email
@@ -37,7 +38,7 @@ class UserController {
                             access_token: signToken({
                                 id: data.id,
                                 email: data.email,
-                                role: data.role
+                                role: data.role,
                             })
                         })
                     }

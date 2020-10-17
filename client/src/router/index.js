@@ -24,10 +24,10 @@ const routes = [
   },
   {
     path: '/edit-product',
-    name: 'AddProduct',
+    name: 'EditProduct',
     component: () => import(/* webpackChunkName: "edit-product" */ '../views/EditProduct.vue')
   }
-  
+
 ]
 
 const router = new VueRouter({
@@ -35,5 +35,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 
 export default router
