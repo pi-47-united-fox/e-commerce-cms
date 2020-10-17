@@ -16,6 +16,9 @@ export default new Vuex.Store({
     },
     SET_DISPLAY_NAME(state, payload) {
       state.display_name = payload;
+    },
+    UPDATE_PRODUCTS(state, payload) {
+      state.products = [];
     }
   },
   actions: {
@@ -26,7 +29,72 @@ export default new Vuex.Store({
         headers: { access_token: localStorage.access_token }
       })
         .then(result => {
-          context.commit("GET_PRODUCTS", result);
+          if (result.status === 200) {
+            context.commit("GET_PRODUCTS", result.data);
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    deleteProduct(context, { id }) {
+      axios({
+        method: "DELETE",
+        url: `http://localhost:3000/products/${id}`,
+        headers: { access_token: localStorage.access_token }
+      })
+        .then(result => {
+          if (result.status === 200) {
+            context.commit("UPDATE_PRODUCTS");
+            context.dispatch("getProducts");
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    addProduct(context, payload) {
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/products",
+        headers: {
+          "Content-type": "application/json",
+          access_token: localStorage.access_token
+        },
+        data: payload
+      })
+        .then(result => {
+          if (result.status === 201) {
+            router.push({ path: "/home" });
+          } else {
+            console.log(result);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    editProduct(context, payload) {
+      axios({
+        method: "PUT",
+        url: `http://localhost:3000/products/${payload.id}`,
+        headers: {
+          "Content-type": "application/json",
+          access_token: localStorage.access_token
+        },
+        data: payload.data
+      })
+        .then(result => {
+          if (result.status === 200) {
+            context.commit("UPDATE_PRODUCTS");
+            context.dispatch("getProducts");
+          } else {
+            console.log(result);
+          }
         })
         .catch(err => {
           console.log(err);

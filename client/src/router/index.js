@@ -4,6 +4,7 @@ import LoginPage from "../views/LoginPage.vue";
 import Home from "../views/Home.vue";
 import AddPage from "../views/AddPage.vue";
 import DisplayAll from "../views/DisplayAll.vue";
+// import EditPage from "../views/EditPage.vue";
 
 Vue.use(VueRouter);
 
@@ -18,7 +19,13 @@ const routes = [
     component: Home,
     children: [
       { path: "", name: "DisplayAll", component: DisplayAll },
-      { path: "add", name: "AddPage", component: AddPage }
+      { path: "add", name: "AddPage", component: AddPage },
+      {
+        path: ":id/edit",
+        name: "EditPage",
+        component: () =>
+          import(/* webpackChunkName: "EditPage" */ "../views/EditPage.vue")
+      }
     ]
   }
 ];

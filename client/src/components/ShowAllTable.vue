@@ -26,8 +26,16 @@
             </td>
             <td>{{ product.category_name }}</td>
             <td>
-              <a class="button is-warning is-small is-rounded">Edit</a>
-              <a class="button is-danger is-small is-rounded">Delete</a>
+              <a
+                class="button is-warning is-small is-rounded"
+                @click.prevent="editItem(product.id)"
+                >Edit</a
+              >
+              <a
+                class="button is-danger is-small is-rounded"
+                @click="deleteItem(product.id)"
+                >Delete</a
+              >
             </td>
           </tr>
         </tbody>
@@ -42,10 +50,16 @@ export default {
     getProducts() {
       this.$store.dispatch("getProducts");
     },
+    deleteItem(id) {
+      this.$store.dispatch("deleteProduct", { id });
+    },
+    editItem(id) {
+      this.$router.push({ path: `/home/${id}/edit` });
+    },
   },
   computed: {
     products() {
-      return this.$store.state.products.data;
+      return this.$store.state.products;
     },
   },
   created() {

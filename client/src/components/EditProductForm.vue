@@ -1,7 +1,7 @@
 <template>
-  <div class="column is-9" id="AddProductForm">
-    <h1 class="title has-text-centered">Add New Product</h1>
-    <form @submit.prevent="addProduct">
+  <div class="column is-9" id="EditProductForm">
+    <h1 class="title has-text-centered">Edit Product</h1>
+    <form @submit.prevent="editProduct">
       <div class="field">
         <label class="label">Product Name</label>
         <div class="control">
@@ -104,15 +104,53 @@ export default {
     };
   },
   methods: {
-    addProduct() {
-      this.$store.dispatch("addProduct", {
+    editProduct() {
+      const updateData = {
         name: this.name,
         price: this.price,
         stock: this.stock,
         CategoryId: this.CategoryId,
         img_url: this.img_url,
+      };
+      this.$store.dispatch("editProduct", {
+        data: updateData,
+        id: this.$route.params.id,
       });
     },
+  },
+  created() {
+    let rawData = this.$store.state.products.filter((el) => {
+      if (el.id === +this.$route.params.id) {
+        return el;
+      }
+    });
+    let data = {};
+    rawData.forEach((el) => {
+      if (el) {
+        data = el;
+      }
+    });
+
+    this.name = data.name;
+    this.price = data.price;
+    this.stock = data.stock;
+    this.img_url = data.img_url;
+
+    //SEMENTARA
+    switch (data.category_name) {
+      case "Fashion":
+        this.CategoryId = 1;
+        break;
+      case "Computer & Laptop":
+        this.CategoryId = 2;
+        break;
+      case "HandPhone & Tablet":
+        this.CategoryId = 3;
+        break;
+      case "Makanan & Minuman":
+        this.CategoryId = 4;
+        break;
+    }
   },
 };
 </script>

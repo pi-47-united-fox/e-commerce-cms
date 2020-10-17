@@ -3,7 +3,7 @@
     <p class="menu-label">General</p>
     <ul class="menu-list">
       <li><router-link to="/home">Dashboard</router-link></li>
-      <li><a>Logout</a></li>
+      <li><a @click.prevent="logout">Logout</a></li>
     </ul>
     <p class="menu-label">Product</p>
     <ul class="menu-list">
@@ -27,7 +27,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push({ path: "/" });
+    },
+  },
+};
 </script>
 
 <style>
