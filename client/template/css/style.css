@@ -1,0 +1,15 @@
+#dashboard-side-menu {
+    background-color: rgb(241, 239, 235);
+    height: 100vh;
+    border-top: 20px solid  rgb(241, 239, 235);
+    border-left: 10px solid  rgb(241, 239, 235);
+}
+
+#dashboard-top-menu {
+    background-color: rgb(236, 229, 220);
+
+}
+
+#main-area {
+    margin-top: 20px;
+}

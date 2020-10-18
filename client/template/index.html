@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+</head>
+
+<body>
+    <!--- NAVIGATION START-->
+    <nav class="navbar" role="navigation" aria-label="main navigation" id="dashboard-top-menu">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Home
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary">
+                            Log in
+                        </a>
+                        <a class="button is-primary">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!---NAVIGATION END-->
+    <div class="columns" #main-dashboard-container>
+        <!---SIDE MENU START-->
+        <div class="column is-2">
+            <aside class="menu" id="dashboard-side-menu">
+                <p class="menu-label">
+                    General
+                </p>
+                <ul class="menu-list">
+                    <li><a><i class="fas fa-store"></i> Dashboard</a></li>
+                    <li><a><i class="fas fa-users"></i> Customers</a></li>
+                </ul>
+                <p class="menu-label">
+                    Product
+                </p>
+                <ul class="menu-list">
+                    <li><a><i class="fas fa-shopping-bag"></i> Show All Products</a></li>
+                    <li><a><i class="fas fa-plus-square"></i> Add a Product</a></li>
+                </ul>
+            </aside>
+        </div>
+        
+        <!--SIDE MENU END-->
+        <!--  MAIN DASHBOARD AREA START-->
+        <div class="column" id="main-area">
+            <button class="button is-primary">
+                <i class="fas fa-plus-circle"> </i>
+                Add a New Product
+            </button>
+            <table class="table">
+                <thead>
+                    <th>No</th>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><img class="image is-64x64"
+                                src="https://m.media-amazon.com/images/I/81Mty84-ttL._AC_UL320_.jpg" alt="product-name">
+                        </td>
+                        <td><strong>Dual USB Table Lamp, Kakanuo Traditional Bedside Lamp</strong></td>
+                        <td>3000000</td>
+                        <td>9</td>
+                        <td>
+                            <span class="icon has-text-info">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="icon has-text-danger">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+    <!---SIGNIN -->
+    <div class="columns">
+        <div class="column is-three-fifths is-offset-one-fifth">
+            <div class="box">
+                <div class="logo-form">
+                    <img src="./img/benban.png" alt="">
+                </div>
+                <h1 class="title">Login</h1>
+                <form>
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input v-model="emailLogin" class="input" type="email" placeholder="Email">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input v-model="passwordLogin" class="input" type="password" placeholder="Password">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a v-on:click="login" class="button is-primary">
+                                Sign In
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- MAIN DASHBOARD AREA END-->
+
+    <!---ADD TASK -->
+    <div class="columns">
+        <div class="column is-three-fifths is-offset-one-fifth">
+            <div class="box">
+                <h1 class="title">Add a New Product</h1>
+                <form>
+                    <div class="field">
+                        <label class="label">Product Name</label>
+                        <p class="control has-icons-left">
+                            <input class="input" type="text" placeholder="Add a SEO friendly product name">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-shopping-bag"></i> 
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Image URL</label>
+                        <p class="control has-icons-left">
+                            <input class="input" type="text" placeholder="Insert an URL of an uploaded image">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-link"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Price</label>
+                        <p class="control has-icons-left">
+                            <input class="input" type="number" placeholder="Be competetive about the price">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-coins"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label">Stock</label>
+                        <p class="control has-icons-left">
+                            <input class="input" type="number" placeholder="How many is left in the store?">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-warehouse"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="button is-primary">
+                                Save
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-light">
+                                Cancel
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
