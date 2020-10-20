@@ -5,7 +5,7 @@
         <router-link to="/footballPlayers">Football players</router-link>
         <router-link to="/login">login</router-link>
       </div>
-      <router-link to="/login"><button class="button text-primary bg-dark" @click="logout">logout</button></router-link>
+      <router-link to="/login"><a href="#" @click="logout">logout</a></router-link>
     </nav>
 </template>
 

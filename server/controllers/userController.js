@@ -17,6 +17,7 @@ class UserController {
             res.status(err)
         }
     }
+
     static async login(req,res,next) {
         const account = {
             email: req.body.email,
@@ -51,7 +52,7 @@ class UserController {
                     id: data.id,
                     email:data.email
                 })
-                res.status(201).json({
+                res.status(200).json({
                     id: data.id,
                     email:data.email,
                     access_token: access_token

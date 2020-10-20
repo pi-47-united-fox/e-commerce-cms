@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-    switch(err.name){
+    switch (err.name) {
         case 'Unauthorized':
             res.status(401).json({
                 name: 'Unauthorized',
@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
         case 'SequelizeValidationError':
             res.status(400).json({
                 name: 'Bad Request',
-                message: [{message: err.message}]
+                message: [{ message: err.message }]
             })
             break
         case 'Forbidden':
@@ -22,6 +22,18 @@ const errorHandler = (err, req, res, next) => {
             res.status(404).json({
                 name: 'Not Found',
                 message: 'File Not Found'
+            })
+            break
+            case 'SequelizeDatabaseError':
+            res.status(400).json({
+                name: err.name,
+                message: err.message
+            })
+            break
+        case 'JsonWebTokenError':
+            res.status(401).json({
+                name: err.name,
+                message: err.message
             })
             break
         default:

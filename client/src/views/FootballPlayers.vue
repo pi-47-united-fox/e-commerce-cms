@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import CardPlayers from "../components/CardPlayers";
+import CardPlayers from '../components/CardPlayers'
 export default {
   components: {
-    CardPlayers,
-  },
-};
+    CardPlayers
+  }
+}
 </script>
 
 <style>

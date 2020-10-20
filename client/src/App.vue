@@ -17,13 +17,13 @@ export default {
   components: {
     Navbar
   },
-  data() {
+  data () {
     return {
       page: 'login'
     }
-  },
+  }
 
-};
+}
 </script>
 
 <style>

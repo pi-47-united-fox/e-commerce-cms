@@ -1,15 +1,20 @@
 <template>
   <form
     class="bg-dark mx-auto text-primary my-5 py-5 px-3"
-    @submit.prevent="editPlayer"
+    @submit.prevent="changeDataPlayer"
   >
+    <img
+      :src="chosenPlayer.image_url"
+      class="card-img-top crop-form"
+      :alt="chosenPlayer.name"
+    />
     <div class="form-group">
-      <label for="name">Player Name</label>
+      <label for="name">Name</label>
       <input
         type="text"
         class="form-control"
         id="name"
-        v-model="name"
+        v-model="chosenPlayer.name"
       />
     </div>
     <div class="form-group">
@@ -17,20 +22,24 @@
       <input
         type="text"
         class="form-control"
-
         id="image_url"
-        v-model="image_url"
+        v-model="chosenPlayer.image_url"
       />
     </div>
     <div class="form-group">
       <label for="price">Price</label>
-      <input type="number" class="form-control" id="price" v-model="price" />
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        v-model="chosenPlayer.price"
+      />
       <label for="category">Position</label>
       <input
         type="text"
         class="form-control"
         id="category"
-        v-model="category"
+        v-model="chosenPlayer.category"
       />
     </div>
     <button type="submit" class="btn btn-primary">Edit Player</button>
@@ -39,29 +48,35 @@
 
 <script>
 export default {
-  name: "editPlayer",
-  data() {
-    return {
-      name: "",
-      image_url: "",
-      price: 0,
-      category: "",
-    };
+  name: 'editPlayer',
+  data () {
+    return {}
   },
   methods: {
-    editPlayer() {
-      let input = {
-        id: this.player.id,
-        name: this.name,
-        image_url: this.image_url,
-        price: this.price,
-        category: this.category,
-      };
-      this.$store.dispatch("editPlayer", input);
-      this.$router.push({ path: "/footballPlayers" });
-    },
+    changeDataPlayer () {
+      const input = {
+        id: this.chosenPlayer.id,
+        name: this.chosenPlayer.name,
+        image_url: this.chosenPlayer.image_url,
+        price: this.chosenPlayer.price,
+        category: this.chosenPlayer.category
+      }
+      this.$store.dispatch('editPlayer', input)
+      this.$router.push({ path: '/footballPlayers' })
+    }
   },
-};
+  computed: {
+    chosenPlayer () {
+      return this.$store.state.chosenPlayer
+    }
+  }
+}
 </script>
 <style>
+.crop-form {
+  padding: 5px;
+  width: 232px;
+  height: 335px;
+  overflow: hidden;
+}
 </style>

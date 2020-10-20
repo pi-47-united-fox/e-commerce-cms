@@ -13,7 +13,7 @@ class ProductController {
             const data = await Product.create(newProduct)
             res.status(201).json(data)
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
@@ -22,15 +22,18 @@ class ProductController {
             const data = await Product.findAll()
             res.status(200).json(data)
         } catch(err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
     static async updateProduct(req, res, next) {
         const idProduct = req.params.id
         const editProduct = {
-            title: req.body.title,
-            category: req.body.category,
+            name: req.body.name,
+            image_url: req.body.image_url,
+            price: +req.body.price,
+            stock: +req.body.stock,
+            category: req.body.category
         }
         try {
             const data = await Product.update(editProduct,{
@@ -41,7 +44,7 @@ class ProductController {
             })
             res.status(201).json(data[1][0])
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
     }
     static async deleteProduct(req, res, next) {
@@ -57,7 +60,7 @@ class ProductController {
                 res.status(404).json({msg: 'Product Not Found'})
             }
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }

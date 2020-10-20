@@ -3,6 +3,7 @@
     class="bg-dark mx-auto text-primary my-5 py-5 px-3"
     @submit.prevent="addPlayer"
   >
+
     <div class="form-group">
       <label for="name">Player Name</label>
       <input type="text" class="form-control" id="name" v-model="name" />
@@ -33,28 +34,28 @@
 
 <script>
 export default {
-  name: "addPlayer",
-  data() {
+  name: 'addPlayer',
+  data () {
     return {
-      name: "",
-      image_url: "",
+      name: '',
+      image_url: '',
       price: null,
-      category: "",
-    };
+      category: ''
+    }
   },
   methods: {
-    addPlayer() {
-      let input = {
+    addPlayer () {
+      const input = {
         name: this.name,
         image_url: this.image_url,
         price: this.price,
-        category: this.category,
-      };
-      this.$store.dispatch("addPlayer", input);
-      this.$router.push({ path: "/footballPlayers" });
-    },
-  },
-};
+        category: this.category
+      }
+      this.$store.dispatch('addPlayer', input)
+      this.$router.push({ path: '/footballPlayers' })
+    }
+  }
+}
 </script>
 
 <style>

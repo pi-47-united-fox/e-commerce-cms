@@ -14,7 +14,7 @@ describe('login test',()=>{
         .set('Accept', 'application/json')
         .then(response=>{
             const {status, body} = response
-            expect(status).toBe(201)
+            expect(status).toBe(200)
             expect(body).toHaveProperty('access_token', expect.any(String))
             done()
         })

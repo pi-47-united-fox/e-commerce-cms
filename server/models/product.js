@@ -17,33 +17,54 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          args: true,
+          msg: 'name must be filled'
+        }
       }
     },
     image_url: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          args: true,
+          msg: 'image must be filled'
+        }
       }
     },
     price: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true,
-        min: 0
+        notEmpty: {
+          args: true,
+          msg: 'price must be filled'
+        },
+        min: {
+          args: [0],
+          msg: 'price must be positive value'
+        },
       }
     },
     stock: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true,
-        min: 0
+        min: {
+          notEmpty: {
+            args: true,
+            msg: 'stock must be filled'
+          },
+          args: [0],
+          msg: 'price must be positive value'
+        },
       }
     },
     category: {
       type: DataTypes.STRING,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          args: true,
+          msg: 'category must be filled'
+        }
       }
     }
   }, {

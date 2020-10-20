@@ -40,12 +40,14 @@ export default {
   },
   methods: {
     login() {
-      let input = {
+      const input = {
         email: this.email,
         password: this.password,
       };
-      this.$store.dispatch("login", input);
-      this.$router.push({ path: "/" });
+      this.$store.dispatch("login", input)
+      .then(data => {
+        this.$router.push({path: "/"})
+      })
     },
   },
 };
