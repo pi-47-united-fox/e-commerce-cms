@@ -1,6 +1,5 @@
 const {User} = require('../models/index')
 const Helper = require('../helper/helper')
-
 class userController {
     static async loginHandler(req, res, next) {
         const obj = {
@@ -26,7 +25,6 @@ class userController {
                     message: "Wrong email/password"
                 })
             }
-
             else {
                 const obj = {
                     id: data.id,
@@ -39,14 +37,10 @@ class userController {
                 })
                 req.headers = access_token
             }
-
-
         }
         catch (err) {
             next(err)
         }
     }
-
 }
-
 module.exports = userController
