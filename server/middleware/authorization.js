@@ -7,7 +7,7 @@ const authorization = (req, res, next) => {
     // console.log(userData,id);
     Product.findByPk(id)
         .then(data => {
-            console.log(data.userEmail);
+            // console.log(data.userEmail);
             // console.log(data, '<-----ini pak polisi');
             if (data && data.UserId === userData) {
                 next()

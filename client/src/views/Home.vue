@@ -4,6 +4,7 @@
       <div class="logo">
         <img src="../assets/zambanlogo.svg" />
       </div>
+      <div class="=btn-lgt-wraper"></div>
       <button class="btn-lgt" @click="logOut">Logout</button>
     </div>
     <div class="content">
@@ -34,6 +35,8 @@
 import Modal from "../components/add-modal";
 import Card from "../components/card";
 import router from "../router";
+import Swal from "sweetalert2";
+
 export default {
   name: "Home",
   props: ["product"],
@@ -43,8 +46,21 @@ export default {
   },
   methods: {
     logOut() {
-      localStorage.clear();
-      router.push({ path: "Login" });
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Sign out this page!",
+        icon: "warning",
+        iconColor: "#ea9292",
+        showCancelButton: true,
+        confirmButtonColor: "#ea9292",
+        cancelButtonColor: " #7453b8;",
+        confirmButtonText: "Yes!!",
+      }).then((data) => {
+        if (data.isConfirmed) {
+          localStorage.clear();
+          router.push({ path: "Login" });
+        }
+      });
     },
   },
   created() {

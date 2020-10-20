@@ -85,12 +85,9 @@ export default {
   methods: {
     checkFormValidity () {
       const valid = this.$refs.form.checkValidity()
-      console.log(valid)
       this.nameState = valid
-      // this.imageurlState = valid
-      // this.priceState = valid
-      // this.stockState = valid
-      // return valid
+      this.imageUrlState = valid
+
     },
 
     resetModal () {
@@ -112,9 +109,9 @@ export default {
     handleSubmit () {
       // console.log(this.name, this.image_eurl, this.price, this.stock)
       // Exit when the form isn't valid
-      // if (!this.checkFormValidity()) {
-      //   return
-      // }
+      if (!this.checkFormValidity()) {
+        return
+      }
       // Push the name to submitted names
       this.$store.dispatch('addData', {
         name: this.name,
@@ -123,7 +120,7 @@ export default {
         stock: this.stock
       })
       this.submittedName.push(this.name)
-      // this.submittedImageurl.push(this.imageurl)
+      this.submittedImageurl.push(this.imageurl)
       // this.submittedPrice.push(this.price)
       // this.submittedStock.push(this.stock)
       // Hide the modal manually

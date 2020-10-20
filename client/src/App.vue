@@ -31,7 +31,6 @@ body {
   background: #f9f9f9;
   overflow-x: hidden;
 }
-
 .back-btn-c {
   background-color: transparent;
   border-width: 0px;
@@ -74,7 +73,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 .cancel-btn {
   background-color: #ea9292;
@@ -120,9 +119,9 @@ body {
   font-size: large;
 }
 .login {
-  margin-top: 80px;
+  margin-top: 2%;
+  display: flex;
   background-color: #5978d5;
-
   display: flex;
   width: 350px;
   height: 500px;
@@ -139,11 +138,19 @@ body {
 .card {
   margin: 20px;
   border-radius: 10px;
+  box-shadow: 10px 14px 36px -4px rgba(184, 184, 184, 1);
 }
 .cardcontent {
   display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
   flex-direction: row;
-  justify-content: space-between;
+  width: 90%;
+  margin-left: 10%;
+  margin-bottom: 50px;
+
+  /* justify-content: space-around; */
+  /* background-color: #373c4d; */
 }
 .sidebar {
   background-color: #5978d5;
@@ -158,8 +165,6 @@ body {
   padding: 30px;
   display: flex;
   justify-content: center;
-  margin-bottom: 300px;
-  height: 50vh;
 }
 .home {
   display: flex;
@@ -177,8 +182,12 @@ body {
   color: white;
   border-width: 0;
 }
+.btn-wraper {
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-around;
+}
 .delete-btn {
-  margin-top: 10px;
   padding: 5px;
   background-color: #ea9292;
   border-radius: 10px;
@@ -194,6 +203,7 @@ body {
   color: white;
   font-size: 14px;
   position: fixed;
+  z-index: 1;
 }
 .card-img-top {
   width: 100%;
@@ -212,19 +222,19 @@ body {
 }
 
 .btn-lgt {
+  margin-top: 90%;
   display: flex;
+  margin-left: 8%;
+  align-items: center;
   justify-content: center;
   height: 40px;
-  width: 100%;
-  background-color: #5978d5;
+  width: 80%;
+  background-color: #ea9292;
   border-width: 0;
-  color:white ;
+  color: white;
+  border-radius: 10px;
 }
 .btn-lgt:hover {
-  background: rgb(245, 245, 244);
-  color: darkgray;
-  font-weight: bold;
-
 }
 
 /* -------SIDEBAR-------- */

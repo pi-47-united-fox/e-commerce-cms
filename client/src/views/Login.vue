@@ -1,11 +1,12 @@
 <template>
   <div>
     <center>
+      <div class="login-wraper"></div>
       <div class="login">
         <div style="margin-top: 20px">
           <img src="../assets/zambanlogo.svg" alt="" />
         </div>
-        <div style="margin-top: 10px">
+        <div style="margin-top: 40px">
           <div class="input">
             <input
               type="email"
