@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === "development") {
 }
 const express = require('express')
 const app = express()
-const port = process.env.port || 3000
+const PORT = process.env.PORT || 3000
 const router = require('./routers/index')
 const errhendler = require('./middleware/errhendler')
 const cors = require('cors')
@@ -17,8 +17,8 @@ app.use(router)
 app.use(errhendler)
 
 
-app.listen(port, () => {
-    console.log(`This app runing at port:${port}`);
+app.listen(PORT, () => {
+    console.log(`This app runing at port:${PORT}`);
 })
 
 
