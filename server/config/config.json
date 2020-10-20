@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": 11223344,
+    "database": "e-commerce",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": 11223344,
+    "database": "e-commerce-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}
