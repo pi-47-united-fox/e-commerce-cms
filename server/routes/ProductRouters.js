@@ -5,9 +5,6 @@ const {Authorization} = require('../middlewares/Authorization')
 const {AuthProduct} = require('../middlewares/AuthProduct')
 
 
-
-
-
 route.get('/', Authentication, ProductController.getProductHandler)
 
 route.post('/', Authentication, Authorization, ProductController.addProductHandler)

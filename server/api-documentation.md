@@ -2,8 +2,8 @@
 `-POST /login`
 `-GET /product`
 `-POST /product`
-`-PUT /product`
-`-DELETE /product`
+`-PUT /product/:id`
+`-DELETE /product/:id`
 
 
 
@@ -203,8 +203,8 @@
 
 ```
 
-## DELETE /tasks/:id
-> Delete tasks
+## DELETE /product/:id
+> Delete product
 ### _Request Header_
 ```
 {
@@ -222,7 +222,7 @@
 ### _Response (200)_
 ```
 {
-   "message":"delete task id = <id> successfully"
+   "message":"delete product id = <id> successfully"
 }
 ```
 ### _Response (401)_
