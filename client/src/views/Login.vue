@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import axios from '../axios/axiosInstance'
 
 export default {
   name: 'Login',
@@ -32,14 +31,12 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        method: 'POST',
-        url: '/users/login',
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      })
+      const payload = {
+        email: this.email,
+        password: this.password
+      }
+      // console.log(payload, '<<<<<<<<payload dari login vue>>>>>>>>')
+      this.$store.dispatch('login', payload)
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
           this.$router.push('/')

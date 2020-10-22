@@ -19,6 +19,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchProduct (context) {
+      console.log(context)
       axios({
         methods: 'GET',
         url: '/products',
@@ -32,6 +33,17 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err.response)
         })
+    },
+    login (context, payload) {
+      // console.log(payload, '<<<<<<<<payload dari store>>>>>>>>')
+      return axios({
+        method: 'POST',
+        url: '/users/login',
+        data: {
+          email: payload.email,
+          password: payload.password
+        }
+      })
     }
   }
   // editProduct (context) {

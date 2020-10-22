@@ -39,7 +39,10 @@ class UserController{
                 }, 
                 process.env.SECRET
                 )
-                res.status(200).json({access_token, message: 'Successfully Login'})
+                res.status(200).json({
+                    access_token,
+                    email: user.email, 
+                    message: 'Successfully Login'})
             } else {
                 res.status(401).json({message: 'Invalid email / password'})
             }

@@ -4,22 +4,22 @@
             <form @submit.prevent="addProduct" class="container mt-4">
                 <div class="form-group">
                     <label for="title">Name:</label><br>
-                    <input v-model="name" type="text" name="title" id="title" placeholder="Enter name here" class="form-control">
+                    <input v-model="name" type="text"  placeholder="Enter name here" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="image_url">Image URL:</label><br>
-                    <input v-model="image_url" type="text" name="image_url" id="image_url" placeholder="Enter image url here" class="form-control">
+                    <input v-model="image_url" type="text" placeholder="Enter image url here" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="price">Price:</label><br>
-                    <input v-model="price" type="number" name="price" id="price" placeholder="Enter Price here" class="form-control">
+                    <input v-model="price" type="number" placeholder="Enter Price here" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="stock">Stock:</label><br>
-                    <input v-model="stock" type="number" name="stock" id="stock" placeholder="Enter Stock here" class="form-control">
+                    <input v-model="stock" type="number" placeholder="Enter Stock here" class="form-control">
                 </div>
                 <div class="form-group text-center">
-                    <button class="btn btn-info float-right" @click="addProduct">Add Product</button>
+                    <button class="btn btn-info float-right">Add Product</button>
                 </div>
             </form>
         </div>
@@ -54,7 +54,7 @@ export default {
         }
       })
         .then(({ data }) => {
-          // console.log(data)
+          // console.log(data, '<<<<<<<<<<<<<<<<< INI DARI CLIENT >>>>>>>>>>>>>>>>>>')
           this.$router.push('/')
         })
         .catch(err => {

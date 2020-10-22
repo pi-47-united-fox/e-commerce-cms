@@ -32,6 +32,7 @@ class ProductController {
             stock: +req.body.stock
         })
         .then(data=>{
+            // console.log('<<<<<<<<<<<<< data ini >>>>>>>>>>>>>>>>')
             res.status(201).json(data) 
         })
         .catch(err=>{

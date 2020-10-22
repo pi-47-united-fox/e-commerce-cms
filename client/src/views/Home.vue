@@ -28,9 +28,9 @@ export default {
     }
   },
   created () {
-    // if (localStorage.getItem('access_token')) {
-    this.$store.dispatch('fetchProduct')
-    // }
+    if (localStorage.getItem('access_token')) {
+      this.$store.dispatch('fetchProduct')
+    }
   }
 }
 </script>
