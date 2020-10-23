@@ -12,18 +12,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // User.hasMany(models.Product)
+      User.belongsToMany(models.Product, { through: models.Cart })
+      User.hasMany(models.Cart)
       User.hasMany(models.Product)
     }
   };
   User.init({
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    role: DataTypes.STRING
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "cutomer"
+    },
   }, {
     sequelize,
     modelName: 'User',
   });
   User.beforeCreate((user) => {
+    user.role = 'customer'
     const salt = bcrypt.genSaltSync(10)
     user.password = bcrypt.hashSync(user.password, salt)
   })

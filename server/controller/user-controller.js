@@ -8,13 +8,14 @@ class UserController {
         let user = {
             email: req.body.email,
             password: req.body.password,
-            role:req.body.role
         }
+        console.log(user);
         User.create(user)
             .then(data => {
                 return res.status(201).json(data)
             })
             .catch(err => {
+                console.log('masuk errornya di controller');
                 return next(err)
             })
     }

@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Product.belongsTo(models.User)
+      Product.belongsToMany(models.User, { through: models.Cart })
+      Product.hasMany(models.Cart)
       Product.belongsTo(models.User)
+
     }
   };
   Product.init({
@@ -38,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "price can't be empty"
         },
         isNumeric: {
-          msg: "price mush be number"
+          msg: "price must a number"
         },
         min: {
           args: [0],
@@ -53,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "stock can't be empty"
         },
         isNumeric: {
-          msg: "stock mush be number"
+          msg: "stock must a number"
         },
         min: {
           args: [0],
@@ -61,8 +65,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    UserId: DataTypes.INTEGER,
     category: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',

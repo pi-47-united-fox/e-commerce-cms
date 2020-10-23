@@ -16,6 +16,7 @@ class ProductCOntroller {
             })
     }
     static listProduct(req, res, next) {
+        // console.log(req.userData);
         Product.findAll()
             .then(data => {
                 return res.status(200).json(data)
@@ -25,6 +26,7 @@ class ProductCOntroller {
             })
     }
     static addProduct(req, res, next) {
+        console.log('ini di add controller??');
         let product = {
             name: req.body.name,
             image_url: req.body.image_url,
@@ -43,6 +45,8 @@ class ProductCOntroller {
             })
     }
     static deleteProduct(req, res, next) {
+        console.log('ini di delete controller??');
+
         Product.destroy({
             where: {
                 id: req.params.id
@@ -72,18 +76,14 @@ class ProductCOntroller {
             category: req.body.category
 
         }
+        console.log(req.params.id);
         Product.update(product, {
             where: {
                 id: req.params.id
             }
         })
-            .then(data => {
-                return res.status(201).json({
-                    message: `Update product successfully`
-                })
-            })
-            .catch(err => {
-                return next(err)
+            .then((data) => {
+                return res.status(201).json({ msg: 'Success update data' })
             })
     }
 

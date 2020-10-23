@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from 'axios'
+import Axios from '../config/axios'
+// import Axios from 'axios'
 import router from '../router'
 import Swal from "sweetalert2";
 
@@ -16,8 +17,8 @@ export default new Vuex.Store({
     FETCH_DATA(state, payload) {
       state.products = payload
     },
-    POLULATE_DATA_EDIT(state,payload){
-      state.dataEdit=payload
+    POLULATE_DATA_EDIT(state, payload) {
+      state.dataEdit = payload
     }
   },
   actions: {
@@ -26,7 +27,7 @@ export default new Vuex.Store({
       // console.log(payload, '<---ini payload login store')
       Axios({
         method: 'POST',
-        url: 'http://localhost:3000/login',
+        url: '/login',
         data: {
           email: email,
           password: password
@@ -46,7 +47,7 @@ export default new Vuex.Store({
       // console.log('ini fetch data')
       Axios({
         method: 'GET',
-        url: 'http://localhost:3000/products',
+        url: '/products',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -63,7 +64,7 @@ export default new Vuex.Store({
       const { name, imageurl, price, stock } = payload
       Axios({
         method: 'POST',
-        url: 'http://localhost:3000/products ',
+        url: '/products ',
         data: {
           name: name,
           image_url: imageurl,
@@ -82,11 +83,12 @@ export default new Vuex.Store({
         })
     },
     editData({ dispatch }, payload) {
-      const { id, name, image_url, price, stock } = payload
-      console.log(image_url);
+      console.log('ini edit client');
+      const { name, image_url, price, stock } = payload
+      // console.log(image_url);
       Axios({
         method: 'PUT',
-        url: `http://localhost:3000/products/${payload.id} `,
+        url: `/products/${payload.id} `,
         data: {
           name: name,
           image_url: image_url,
@@ -110,10 +112,10 @@ export default new Vuex.Store({
         })
     },
     deleteData({ commit, dispatch }, payload) {
-      console.log(payload, '<----ini id di store')
+      console.log(payload, '<----ini delete di store')
       Axios({
         method: 'DELETE',
-        url: `http://localhost:3000/products/${payload} `,
+        url: `/products/${payload} `,
         headers: {
           access_token: localStorage.access_token
         }

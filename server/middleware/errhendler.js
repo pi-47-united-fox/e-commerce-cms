@@ -1,7 +1,7 @@
 
 
 function errHandler(err, req, res, next) {
-    // console.log(err, '<--ini dari error handler')
+    console.log(err, '<--ini dari error handler')
     let statusCode = 500
     let errors = []
 

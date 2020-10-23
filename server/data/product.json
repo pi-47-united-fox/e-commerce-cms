@@ -1,0 +1,102 @@
+[
+    {
+        "id": 27,
+        "name": "Easy Baked Crumbed Tofu Recipe",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2019\/02\/CF3981D7-0C73-468F-9572-AB1896E56926.jpeg",
+        "price": 45000,
+        "stock": 14,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:47:13.779Z",
+        "updatedAt": "2020-10-17T19:47:13.779Z"
+    },
+    {
+        "id": 24,
+        "name": "Vegan Mushroom Meatballs with Vegan Gravy",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2020\/07\/B5BA0781-2444-4C13-9160-59E7A12E04D0.jpeg",
+        "price": 350000,
+        "stock": 5,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:39:18.565Z",
+        "updatedAt": "2020-10-18T04:18:33.877Z"
+    },
+    {
+        "id": 11,
+        "name": "Smoky Bean Brown Rice and Quinoa",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2020\/07\/D22D7685-C238-4118-BEFD-9FEB135146E1.jpeg",
+        "price": 45000,
+        "stock": 14,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T10:21:46.450Z",
+        "updatedAt": "2020-10-20T04:23:56.763Z"
+    },
+    {
+        "id": 25,
+        "name": "Vegan Lentil and Walnut Sausage Rolls",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2020\/05\/F9114E26-BB4F-46DF-84A3-5E22F0899AF0.jpeg",
+        "price": 120000,
+        "stock": 45,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:43:20.750Z",
+        "updatedAt": "2020-10-20T04:37:43.526Z"
+    },
+    {
+        "id": 28,
+        "name": "Easy Vegan Red Lentil Dhal",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2018\/06\/IMG_2254.jpg",
+        "price": 78000,
+        "stock": 67,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:50:34.363Z",
+        "updatedAt": "2020-10-20T04:58:00.920Z"
+    },
+    {
+        "id": 26,
+        "name": "Vegan Avocado Pesto Pasta",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2020\/03\/90B07EC4-B821-4D9C-9318-6217F9135E7E.jpeg",
+        "price": 75000,
+        "stock": 200,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:44:56.967Z",
+        "updatedAt": "2020-10-20T05:18:45.611Z"
+    },
+    {
+        "id": 12,
+        "name": " Lentil and Brown Rice & White Bean & Millet",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2020\/09\/30A916DB-62F7-45E4-9F0B-76127980CEC1.jpeg",
+        "price": 71000,
+        "stock": 100,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T10:21:49.228Z",
+        "updatedAt": "2020-10-20T05:19:05.072Z"
+    },
+    {
+        "id": 30,
+        "name": "Vegan Smoky Mock Tuna",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2018\/06\/IMG_2698.jpg",
+        "price": 88000,
+        "stock": 40,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:52:45.910Z",
+        "updatedAt": "2020-10-20T05:19:32.888Z"
+    },
+    {
+        "id": 9,
+        "name": "Pumpkin & Chickpea Pasta Salad",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2016\/09\/1L2A6823.jpg",
+        "price": 76000,
+        "stock": 37,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T10:21:39.983Z",
+        "updatedAt": "2020-10-20T09:01:28.684Z"
+    },
+    {
+        "id": 29,
+        "name": "Vegan Cheddar Cheese Paste",
+        "image_url": "https:\/\/cdn-5ed6e8f4c1ac19016c37a5b9.closte.com\/wp-content\/uploads\/2016\/09\/1L2A6862.jpg",
+        "price": 20000,
+        "stock": 13,
+        "category": "makanan dan minumam",
+        "createdAt": "2020-10-17T19:51:50.580Z",
+        "updatedAt": "2020-10-20T12:32:29.927Z"
+    }
+]
