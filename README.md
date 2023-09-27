@@ -1,2 +1,4 @@
 # e-commerce-cms
-Membuat dashboard untuk admin dalam me-manage content e-commerce
+Creating an admin dashboard to manage e-commerce content
+
+This is a monolith where we have a web server and a client code in a single repository
